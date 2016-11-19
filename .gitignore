@@ -1,0 +1,4 @@
+*.swp
+obsolete/
+.backup_files/
+.imdone/
