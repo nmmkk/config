@@ -46,6 +46,7 @@ alias view="vim -R"     # CentOS ではデフォルトの view がしょぼい�
 alias where="command -v"
 alias wt="watch -n 1 fssiteinfo"
 alias ssh="ssh -X"
+alias gist="gist --private"
 
 # Copy and paste from/to clipboard
 # (http://qiita.com/catatsuy/items/0fd67f706366b2355e8f)
