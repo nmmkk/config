@@ -1,6 +1,6 @@
 " for GNU GLOBAL (gtags)
 nnoremap [GnuGlobal] <nop>
-nnoremap <Space>g [GnuGlobal]
+nmap <Space>g [GnuGlobal]
 
 """"        ,q     検索結果Windowを閉じる
 "        [GnuGlobal]g     ソースコードの grep

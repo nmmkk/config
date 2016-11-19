@@ -13,7 +13,7 @@ let g:syntastic_check_on_wq = 0
 "--------------------------------------------------------------------------------
 " Key-mapping
 nnoremap [Syntastic] <nop>
-nnoremap <Space>s [Syntastic]
+nmap <Space>s [Syntastic]
 
 nnoremap <silent> [Syntastic]c :SyntasticCheck<CR>
 nnoremap <silent> [Syntastic]t :SyntasticToggleMode<CR>
