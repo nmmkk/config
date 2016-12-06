@@ -26,8 +26,8 @@ zsh-setup: zsh-setup-zshrc zsh-setup-oh-my-zsh
 
 zsh-setup-zshrc:
 	echo 'source '$(CURDIR)'/dotfiles/dot.zshrc' >> $(INSTALL_BASE)/.zshrc
-	echo '"root:     '$(CURDIR) >> $(INSTALL_BASE)/.zshrc
-	echo '"profiles: '$(CURDIR)'/zsh/oh-my-zsh/custom' >> $(INSTALL_BASE)/.zshrc
+	echo '#root:     '$(CURDIR) >> $(INSTALL_BASE)/.zshrc
+	echo '#profiles: '$(CURDIR)'/zsh/oh-my-zsh/custom' >> $(INSTALL_BASE)/.zshrc
 
 zsh-setup-oh-my-zsh:
 	# Clone oh-my-zsh if it does not exist yet
