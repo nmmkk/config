@@ -1,7 +1,7 @@
 " Basic settings for Vim
 
 " Where to store backup files
-set backupdir=$HOME/vimfiles/tmp
+set backupdir=$HOME/.vim/tmp
 
 " Following is listed as a anti-pattern, so it is commented out.
 " Ref: http://rbtnn.hateblo.jp/entry/2014/11/30/174749
