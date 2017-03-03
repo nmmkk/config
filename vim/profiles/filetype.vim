@@ -19,3 +19,7 @@ filetype plugin on
 """"""" " 辞書ファイルを使用する設定に変更
 """"""" set complete+=k
 
+" Lastly, source local settings
+ResourceLocalProfile local_filetype
+
+" vim: foldmethod=marker
