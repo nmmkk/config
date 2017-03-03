@@ -1,0 +1,44 @@
+[alias]
+	# Abbreviations
+	st = status
+	ci = commit
+	co = checkout
+    br = branch
+
+	# Helpful idioms
+    aliases = config --get-regexp alias
+	unstage = reset HEAD --
+	cancel = reset --soft HEAD^
+
+	# Log aliases
+    g = log --graph --date=short --format=\"%C(yellow)%h%C(reset) %C(magenta)[%ad]%C(reset)%C(auto)%d%C(reset) %s %C(cyan)@%an%C(reset)\"
+    # l = log --graph --all --format=format:'%C(bold red)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold blue)― %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative
+    l = log --graph --date=short --abbrev-commit --format=format:'%C(bold red)%h%C(reset) - %C(bold green)[%ad]%C(reset) %C(black)%s%C(reset) %C(bold blue)― %an%C(reset)%C(bold yellow)%d%C(reset)'
+    lg1 = !"git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(cyan)%s%C(reset) %C(dim red)- %an%C(reset)%C(bold yellow)%d%C(reset)' && echo"
+    lg2 = !"git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold yellow)%d%C(reset)%n''          %C(black)%s%C(reset) %C(dim red)- %an%C(reset)' && echo"
+    lg3 = !"git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold yellow)%d%C(reset)%n''          %C(black)%s%C(reset) %C(dim red)- %an%C(reset)%n''============================================================%n''%b' && echo"
+    hist = log --graph --decorate --stat
+    today = log --since=midnight --author='chiyoda' --oneline
+[core]
+    pager =
+    excludesfile = ~/.gitignore
+[merge]
+    # tool = extMerge
+    tool = vimdiff
+[mergetool "extMerge"]
+    cmd = extMerge \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
+[mergetool]
+    trustExitCode = false
+    prompt = false
+[diff]
+    tool = vimdiff
+    guitool = meld
+[difftool]
+    prompt = false
+[credential]
+    helper = cache --timeout 3600
+[init]
+    templatedir = ~/.git_template
+[user]
+	name = nmmkk
+	email = nmmkk00@gmail.com

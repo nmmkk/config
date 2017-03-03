@@ -2,14 +2,16 @@
 
 INSTALL_BASE := ~
 
-.PHONY: default linux misc-setup vim-setup zsh-setup install update clean
+.PHONY: default linux misc-setup tmux-setup git-setup vim-setup zsh-setup install update clean
 
 default: linux
 
 # linux: misc-setup vim-setup vim-make-vimproc-linux vimperatorrc-setup zsh-setup
 linux: misc-setup vim-setup vimperatorrc-setup zsh-setup
 
-misc-setup:
+misc-setup: tmux-setup git-setup
+
+tmux-setup:
 	@# Make tmux.conf if it does not exist yet
 	@if [ ! -f $(INSTALL_BASE)/.tmux.conf ]; then \
 	    echo 'source '$(CURDIR)'/dotfiles/dot.tmux.conf' >> $(INSTALL_BASE)/.tmux.conf; \
@@ -18,6 +20,16 @@ misc-setup:
 	    echo 'tmux.conf already exists. Skip to set it up. ($(INSTALL_BASE)/.tmux.conf)'; \
 	fi
 
+git-setup:
+	@if [ ! -L $(INSTALL_BASE)/.gitconfig ]; then \
+	    if [ -f $(INSTALL_BASE)/.gitconfig ]; then \
+	        mv -v $(INSTALL_BASE)/.gitconfig $(INSTALL_BASE)/.gitconfig-moved$(shell date '+%Y%m%d_%H%M%S'); \
+	    fi; \
+	    ln -s $(CURDIR)/dotfiles/dot.gitconfig $(INSTALL_BASE)/.gitconfig; \
+	    echo 'gitconfig is just created!'; \
+	else \
+	    echo 'gitconfig already exists as a symbolic link. Skip to set it up. ($(INSTALL_BASE)/.gitconfig)'; \
+	fi
 
 #
 # zsh set-up with oh-my-zsh
@@ -64,8 +76,8 @@ vim-setup-vimrc:
 	fi
 
 vim-install-bundle:
-	mkdir -p $(INSTALL_BASE)/.bundle
-	git clone git://github.com/Shougo/neobundle.vim.git $(INSTALL_BASE)/.bundle/neobundle.vim
+	mkdir -p $(INSTALL_BASE)/.vim/bundle
+	git clone git://github.com/Shougo/neobundle.vim.git $(INSTALL_BASE)/.vim/bundle/neobundle.vim
 
 vim-install-dein:
 	mkdir -p $(INSTALL_BASE)/.dein
