@@ -54,9 +54,14 @@ set cinoptions=;0,p0,t0
 set cinwords=if,else,while,do.for.switch,case
 set formatoptions=tcq
 
-set clipboard+=unnamed              " 無名レジスタに入るデータを、*レジスタにも入れる
-" set clipboard+=autoselect         " GUI版でない場合は、こちらの設定を追加する
-" set guioptions+=a                 " GUI版vimエディタで、マウス操作を可能にするならこの設定を有効にする
+" Clipboard"{{{1
+if has('gui_running')
+    set clipboard+=unnamed      " 無名レジスタに入るデータを、*レジスタにも入れる
+    set guioptions+=a           " GUI版vimエディタで、マウス操作を可能にするならこの設定を有効にする
+else
+    set clipboard+=autoselect   " GUI版でない場合は、こちらの設定を追加する
+endif
+"}}}1
 
 " Status line"{{{1
 set laststatus=2
