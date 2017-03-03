@@ -92,7 +92,9 @@ alias sres="xrandr --fb 1024x800_60.00"
 # }}}
 
 # Source local aliases# {{{
-source ~/.rcfiles/zsh/local_aliases.zsh
+if [ -f ~/.rcfiles/zsh/local_aliases.zsh ]; then
+    source ~/.rcfiles/zsh/local_aliases.zsh
+fi
 # }}}
 
 # vim: foldmethod=marker

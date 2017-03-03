@@ -48,6 +48,8 @@ function make-cscope() {  # Generate cscope files {{{1
 } #}}}1
 
 # Source the file for local functions
-source ~/.rcfiles/zsh/local_functions.zsh
+if [ -f ~/.rcfiles/zsh/local_functions.zsh ]; then
+    source ~/.rcfiles/zsh/local_functions.zsh
+fi
 
 # vim: foldmethod=marker

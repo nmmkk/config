@@ -1,7 +1,9 @@
 # This file is to define environment variables okay to be public.
 
 # First, source the local env# {{{1
-source ~/.rcfiles/zsh/local_env.zsh
+if [ -f ~/.rcfiles/zsh/local_env.zsh ]; then
+    source ~/.rcfiles/zsh/local_env.zsh
+fi
 # }}}1
 
 # Generic environment variables# {{{1

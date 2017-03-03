@@ -55,7 +55,10 @@ zstyle ':completion:*:default' menu select=1 ## 補完候補のカーソル選�
 
 ## 補完候補の色づけ
 # eval `dircolors`
-eval `dircolors ~/.dir_colors`
+dircolors >/dev/null 2>&1
+if [ $? -eq 0 ]; then
+    eval $(dircolors ~/.dir_colors)
+fi
 export ZLS_COLORS=$LS_COLORS
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
