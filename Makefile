@@ -88,8 +88,7 @@ vim-make-vimproc-linux:
 	cd $(INSTALL_BASE)/.bundle/vimproc/ && make -f make_gcc.mak
 
 vimperatorrc-setup:
-	echo '$@: NOP for now'
-	# echo 'source '$(CURDIR)'/dotfiles/dot.vimperatorrc' >> $(INSTALL_BASE)/.vimperatorrc
+	echo 'source '$(CURDIR)'/dotfiles/dot.vimperatorrc' >> $(INSTALL_BASE)/.vimperatorrc
 
 
 # install: vim-install-plugins

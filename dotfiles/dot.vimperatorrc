@@ -1,0 +1,103 @@
+"3.16.0 (created: 2017/02/01 00:55:15)
+
+"===========================================================
+" Mappings
+
+" Source the rc file again
+nnoremap g,r :source $HOME/.vimperatorrc<CR>
+
+" Scroll more
+nnoremap j 3<C-e>
+nnoremap k 3<C-y>
+
+" Arrange tabs
+nnoremap <C-h> :tabmove! -1<CR>
+nnoremap <C-l> :tabmove! +1<CR>
+
+" Copy the page title
+" One for markdown
+nnoremap cm :js util.copyToClipboard('['+ buffer.title + ']('+ buffer.URL + ')')<CR>
+" One for JIRA
+nnoremap cj :js util.copyToClipboard('['+ buffer.title + '|'+ buffer.URL + ']')<CR>
+nnoremap ct :js util.copyToClipboard(buffer.title)<CR>
+nnoremap cu :js util.copyToClipboard(buffer.URL)<CR>
+
+"===========================================================
+" Options
+
+" Browser title
+set titlestring="Firefox"
+
+" Beep
+set visualbell
+
+" Enable hightlight
+set hlsearch
+
+"===========================================================
+" Color
+
+" Hint
+""" " [突然だけどVimperatorrcを晒してみる - そのねこが学ぶとき](http://chroju89.hatenablog.jp/entry/2014/02/09/102914)
+""" hi Hint font-family: Arial; font-size 21px; font-weight: bold; text-shadow: -1px -1px 2px black, 1px -1px 2px black, -1px 1px 2px black, 1px 1px 2px black; color: #33cccc;
+""" hi HintElem color: gray; background-color: #a1e4e6;
+""" hi HintActive color: black; background-color: #ff8700;
+
+" [dotfiles/.vimperatorrc at master · rcmdnk/dotfiles · GitHub](https://github.com/rcmdnk/dotfiles/blob/master/.vimperatorrc)
+" color scheme {{{
+hi Hint font-family: monospace; font-size: 15px; font-weight: normal; color: lightyellow; background-color: black; border-color: ButtonShadow; border-width: 0px; border-style: solid; padding: 0px 5px 0px 5px; text-transform: uppercase;
+hi HintElem background-color: LightSkyBlue; color: black;
+hi HintActive background-color: DeepSkyBlue; color: white;
+
+"" shadow, please comment out if it doesn't work smoothly
+hi -append Hint background-color: rgba(28, 28, 28, 0.7); border: 1px solid #1c1c1c; -moz-border-radius: 4px; -moz-box-shadow: 0px 0px 1px black; text-shadow: 1px 1px 2px black;
+hi -append HintElem text-decoration: none; -moz-border-radius: 4px; -moz-box-shadow: 0 0 2px #0c0c0c;
+hi -append HintActive text-decoration: none; -moz-border-radius: 4px; -moz-box-shadow: 0 0 2px #0c0c0c;
+
+"hi StatusLine color: CornflowerBlue; background: #000; font-weight: normal; font-size: 12pt;
+"hi StatusLineBroken color: black; background: #ffa0a0; font-weight: normal; font-size: 12pt;
+"hi StatusLineExtended color: black; background: #a0ffa0; font-weight: normal; font-size: 12pt;
+"hi StatusLineSecure color: black; background: #a0a0ff; font-weight: normal; font-size: 12pt;
+
+hi Normal color: LightYellow; background: Black; font-size: 12pt; opacity: 0.7;
+hi CmdLine color: LightYellow; background: Black; font-size: 14pt;
+
+hi InfoMsg color: LightYellow; background: Black; font-size: 12pt;
+hi ModeMsg color: LightYellow; background: Black; font-size: 12pt;
+hi MoreMsg color: LimeGreen; background: Black;
+hi WarningMsg color: DeepPink; background: Black; font-size: 12pt;
+hi ErrorMsg color: white; background: red; font-size: 12pt;
+
+hi LineNr color: DeepPink; background: Black; font-size: 12pt;
+hi Question color: Yellow; background: Black; font-size: 12pt;
+
+hi NonText background: #000;
+hi Null color: CornflowerBlue;
+hi Tag color: CornflowerBlue;
+hi Number color: CornflowerBlue;
+
+hi CompTitle background: DarkBlue;
+hi CompTitle>* color: white; border-bottom: 1px solid #3c3c3f; padding: 1px 0.5ex; text-shadow: 1px 1px 0px #0c0c0c;
+hi CompItem[selected] color: cyan; background: #333;
+hi CompDesc color: Pink;
+
+hi Title color: white;
+hi Indicator color: DodgerBlue;
+hi String color: Orchid;
+hi Number color: Orchid;
+hi Object color: Khaki;
+hi Function color: SkyBlue;
+hi URL color: LightGreen;
+" }}}
+
+"===========================================================
+" Last tasks
+
+" Source local file if exists
+
+source! $HOME/.vimperatorrc.local
+
+" Lastly, print out that I am sourced
+echo "My vimperatorrc file is just sourced!"
+
+" vim: set ft=vimperator:
