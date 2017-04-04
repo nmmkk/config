@@ -58,6 +58,7 @@ NeoBundle 'itchyny/lightline.vim' " A light and configurable statusline/tabline 
 NeoBundle 'bronson/vim-trailing-whitespace' " Highlights trailing whitespace in red and provides :FixWhitespace to fix it.
 NeoBundle 'Yggdroot/indentLine' " A vim plugin to display the indention levels with thin vertical lines
 NeoBundle 'vim-scripts/ag.vim' " Use ag, the_silver_searcher (better than ack, which is better than grep)
+NeoBundle 'vimperator/vimperator.vim' " ''
 
 NeoBundle 'unimpaired.vim'
 
