@@ -46,7 +46,8 @@ ZSH_THEME="nmmkk_01"
 
 # DIRNAME=$(cd $(dirname ${BASH_SOURCE:-${(%):-%N}}); pwd)
 zsh_custom_relative=${0:h}/../zsh/oh-my-zsh/custom
-ZSH_CUSTOM=${zsh_custom_relative:A}
+# ZSH_CUSTOM=${zsh_custom_relative:A}  # This does not work on old zsh (e.g. zsh 4.2.6 on CentOS 5.6)
+ZSH_CUSTOM=$(readlink -f ${zsh_custom_relative})
 unset zsh_custom_relative
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
