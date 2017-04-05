@@ -47,6 +47,56 @@ function make-cscope() {  # Generate cscope files {{{1
     ctags -R --exclude=Output
 } #}}}1
 
+function extract_rpm_scripts() { # {{{1
+    local rpm_basename="${1##*/}"
+    local rpm_dirname="${1%/*}"
+    local extract_to_here="${HOME}/work/rpm-scripts/${rpm_basename}"
+
+    if [ ! -e "${rpm_dirname}/${rpm_basename}" ]; then
+        echo "ERROR: Given RPM file does not exist." 1>&2
+        return 1
+    fi
+    if [ ! -f "${rpm_dirname}/${rpm_basename}" ]; then
+        echo "ERROR: Given RPM name is not of a file." 1>&2
+        return 2
+    fi
+
+    mkdir -p "${extract_to_here%/*}"
+    rpm -qp --scripts "${rpm_dirname}/${rpm_basename}" > "${extract_to_here}"
+    if [ $? -ne 0 ]; then
+        echo "ERROR: Failed in rpm command: rpm -qp --scripts \"${rpm_dirname}/${rpm_basename}\"" 1>&2
+        return 3
+    fi
+
+    echo "RPM scripts are just extracted to ${extract_to_here}"
+} #}}}1
+
+function extract_rpm_files() { # {{{1
+    local rpm_basename="${1##*/}"
+    local rpm_dirname="${1%/*}"
+    local extract_to_here="${HOME}/work/rpm-files/${rpm_basename}"
+
+    if [ ! -e "${rpm_dirname}/${rpm_basename}" ]; then
+        echo "ERROR: Given RPM file does not exist." 1>&2
+        return 1
+    fi
+    if [ ! -f "${rpm_dirname}/${rpm_basename}" ]; then
+        echo "ERROR: Given RPM name is not of a file." 1>&2
+        return 2
+    fi
+
+    mkdir -p "${extract_to_here}"
+    cd "${extract_to_here}" || return $?
+    rpm2cpio ${rpm_dirname}/${rpm_basename} | cpio -idmv
+    if [ $? -ne 0 ]; then
+        echo "ERROR: Failed in rpm command: rpm2cpio \"${rpm_dirname}/${rpm_basename}\" | cpio -idmv" 1>&2
+        return 3
+    fi
+    cd - >/dev/null
+
+    echo "RPM files are just extracted to ${extract_to_here}"
+} #}}}1
+
 # Source the file for local functions
 if [ -f ~/.rcfiles/zsh/local_functions.zsh ]; then
     source ~/.rcfiles/zsh/local_functions.zsh
