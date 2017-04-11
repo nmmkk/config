@@ -47,7 +47,11 @@ ZSH_THEME="nmmkk_01"
 # DIRNAME=$(cd $(dirname ${BASH_SOURCE:-${(%):-%N}}); pwd)
 zsh_custom_relative=${0:h}/../zsh/oh-my-zsh/custom
 # ZSH_CUSTOM=${zsh_custom_relative:A}  # This does not work on old zsh (e.g. zsh 4.2.6 on CentOS 5.6)
-ZSH_CUSTOM=$(readlink -f ${zsh_custom_relative})
+tool_readlink=readlink
+# If mac, greadlink should be used because -f option is not supported by the original readlink
+which greadlink >/dev/null 2>&1 && tool_readlink=greadlink
+ZSH_CUSTOM=$(${tool_readlink} -f ${zsh_custom_relative})
+unset tool_readlink
 unset zsh_custom_relative
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
