@@ -59,6 +59,9 @@ NeoBundle 'bronson/vim-trailing-whitespace' " Highlights trailing whitespace in 
 NeoBundle 'Yggdroot/indentLine' " A vim plugin to display the indention levels with thin vertical lines
 NeoBundle 'vim-scripts/ag.vim' " Use ag, the_silver_searcher (better than ack, which is better than grep)
 NeoBundle 'vimperator/vimperator.vim' " ''
+NeoBundle 'freitass/todo.txt-vim' " Vim plugin for Todo.txt
+NeoBundle 'majutsushi/tagbar' " Vim plugin that displays tags in a window, ordered by scope
+NeoBundle 'szw/vim-tags' " Ctags generator for Vim
 
 NeoBundle 'unimpaired.vim'
 

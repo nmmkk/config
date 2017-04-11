@@ -47,6 +47,7 @@ let s:profile_names = [
 \   'align',
 \   'ctrlp',
 \   'color',
+\   'todo.txt',
 \]
 "}}}3
 
