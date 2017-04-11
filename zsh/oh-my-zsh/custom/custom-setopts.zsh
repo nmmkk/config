@@ -52,6 +52,7 @@ setopt magic_equal_subst    ## --prefix=/usr などの = 以降も補完
 setopt numeric_glob_sort    ## ファイル名の展開で辞書順ではなく数値的にソート
 setopt print_eight_bit      ## 出力時8ビットを通す
 zstyle ':completion:*:default' menu select=1 ## 補完候補のカーソル選択を有効に
+setopt no_complete_aliases  ## Enable completion for aliases
 
 ## 補完候補の色づけ
 # eval `dircolors`
