@@ -47,4 +47,14 @@ WORDCHARS='*?_-.~=&[](){}<>'
 unset LC_CTYPE
 # }}}1
 
+# todo.txt-cli #{{{1
+# * [Tips and Tricks](https://github.com/ginatrapani/todo.txt-cli/wiki/Tips-and-Tricks)
+
+# Allow t to list outstanding tasks
+export TODOTXT_DEFAULT_ACTION=ls
+
+# Sort your output by priority, then by number
+export TODOTXT_SORT_COMMAND='env LC_COLLATE=C sort -k 2,2 -k 1,1n'
+# }}}1
+
 # vim: foldmethod=marker
