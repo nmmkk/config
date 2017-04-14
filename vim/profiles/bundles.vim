@@ -62,6 +62,8 @@ NeoBundle 'vimperator/vimperator.vim' " ''
 NeoBundle 'freitass/todo.txt-vim' " Vim plugin for Todo.txt
 NeoBundle 'majutsushi/tagbar' " Vim plugin that displays tags in a window, ordered by scope
 NeoBundle 'szw/vim-tags' " Ctags generator for Vim
+NeoBundle 'tpope/vim-surround' " surround.vim: quoting/parenthesizing made simple
+NeoBundle 'tpope/vim-repeat' " repeat.vim: enable repeating supported plugin maps with .
 
 NeoBundle 'unimpaired.vim'
 
