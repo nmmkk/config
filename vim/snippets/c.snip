@@ -1,0 +1,143 @@
+#
+# Shigeo's fucntions
+#
+snippet     doc_func
+abbr        /** @brief ... */
+options     head
+	/**
+	 * @brief ${0:Brief}
+	 * @param[in,out] ${1:Param1} ${2:Description}
+	 * @return ${3:Return}
+	 */
+
+snippet     doc_var
+abbr        /** @brief ... */
+options     head
+	/** @brief ${0:Brief} */
+
+snippet     doc_file
+abbr        /** @file ... */
+options     head
+	/**
+	 * @file    ${0:File name}
+	 * @brief   ${1:Brief}
+	 * @date    ${2:Date}
+	 * @author  ${3:Name}
+	 *
+	 * @par     Copyright
+	 * 2017 ${5:Organization} All rights reserved.
+	 *
+	 * @par     History
+	 * - ${4:Date} ${3:Name}
+	 *   -# Initial version
+	 */
+
+snippet     doc_todo
+abbr        /** @todo ... */
+options     head
+	/** @todo ${0:TODO} */
+
+snippet     doc_brief
+abbr        @brief ...
+options     head
+	@brief ${0:Brief}
+
+snippet     doc_code
+abbr        @code ...
+options     head
+	@code
+	    ${0:Code}
+
+snippet     doc_enum
+abbr        /** @enum ... */
+options     head
+	/**
+	 * @enum ${0:enum}
+	 * ${1:Description of the enum}
+	 */
+
+snippet     doc_enum_value
+abbr        /**< ... */
+options     word
+	/**< ${0:Description of the enum value} */
+
+snippet     doc_retval
+abbr        @retval ...
+options     word
+	@retval ${0:Value name} ${1:Description}
+
+snippet     doc_param
+abbr        @param[in,out] ...
+options     word
+	@param[in,out] ${0:Parameter name} ${1:Description}
+
+snippet     parse_args
+abbr        getopt() ...
+options     head
+	#include <limits.h> /* PATH_MAX */
+	#include <unistd.h> /* getopt, opterr */
+	#include <string.h> /* strcpy */
+	
+	static const char prog_name[] = "${1:Program name}";
+	static const char prog_ver[] = "1.0";
+	
+	struct prog_params_t{
+	    char arg1[PATH_MAX];
+	    size_t arg2;
+	    size_t arg3;
+	};
+	
+	void show_usage(void)
+	{
+	    printf("Usage: %s <arg1> <arg2> <arg3>\n", prog_name);
+	    printf("\n");
+	    printf("  This program is to ${2:Brief}.\n");
+	    printf("\n");
+	    printf("    <arg1>: \n");
+	    printf("    <arg2>: \n");
+	    printf("    <arg3>: \n");
+	    return;
+	}
+	
+	#define ARG_COUNT   (3)
+	int parse_args(int argc, char *argv[], struct prog_params_t *prog_params)
+	{
+	    int c;
+	    int debug;
+	
+	    opterr = 0;     /* don't want getopt() writing to stderr */
+	
+	    /* Optional arguments */
+	    while ((c = getopt(argc, argv, "hd")) != EOF) {
+	        switch (c) {
+	            case 'h':
+	                show_usage();
+	                exit(0);
+	                break;
+	            case 'd':       /* debug */
+	                debug = 1;
+	                break;
+	            case '?':
+	                fprintf(stderr, "unrecognized option: -%c", optopt);
+	                exit(1);
+	                break;
+	        }
+	    }
+	
+	    /* Positional arguments */
+	    if (argc < ARG_COUNT) {
+	        fprintf(stderr, "Too few arguments\n");
+	        show_usage();
+	        exit(1);
+	    }
+	
+	    strcpy(prog_params->arg1, argv[optind]);
+	    prog_params->arg2 = strtoul(argv[optind + 1], NULL, 10);
+	    prog_params->arg3 = strtoul(argv[optind + 2], NULL, 10);
+	
+	    return 0;
+	}
+	
+	struct prog_params_t prog_params;
+	parse_args(argc, argv, &prog_params);
+

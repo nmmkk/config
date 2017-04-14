@@ -1,0 +1,447 @@
+snippet #!
+abbr    #!/bin/sh
+alias   shebang
+options head
+	#!/bin/${1:sh}
+	${0}
+
+
+# snippet     shebang
+# options     head
+# 	#!/bin/bash
+# 	
+# 	${1}
+
+snippet if
+	if [ ${1:#:condition} ]; then
+		${0:TARGET}
+	fi
+
+
+snippet el
+	else
+		${0:TARGET}
+
+
+snippet elif
+	elif [ ${1:#:condition} ]; then
+		${0:TARGET}
+
+
+snippet for
+	for ${1:i} in ${2:#:words}; do
+		${0:TARGET}
+	done
+
+snippet while
+alias wh
+	while ${1:#:condition} ; do
+		${0:TARGET}
+	done
+
+
+snippet until
+	until ${1:#:condition} ; do
+		${0:TARGET}
+	done
+
+
+snippet heredoc
+alias   h <<
+	<< ${1:EOF}
+		${0:#:TARGET}
+	$1
+
+snippet env
+	#!/usr/bin/env ${1}
+
+
+snippet tmp
+	${1:TMPFILE}=$(mktemp ${2:XXX})
+	trap "rm -f '${$1}'" 0               # EXIT
+	trap "rm -f '${$1}'; exit 1" 2       # INT
+	trap "rm -f '${$1}'; exit 1" 1 15    # HUP TERM
+	${0}
+
+snippet function
+alias func
+	${1:#:name}()
+	{
+		${0:TARGET}
+	}
+
+snippet     match-regexp
+abbr        =~
+options     head
+	if [[ $${1:string} =~ ${2:^regexp.*} ]]; then
+		${0}
+	fi
+
+snippet     assign
+abbr        var-assign
+options     head
+	${1:name}="${2:something}"
+
+snippet     case
+options     head
+	case "$${1:{name\}}" in
+		${2:pattern*})
+			${0}
+			;;
+		*)
+			${3:echo "$$1 Didn't match anything"}
+	esac
+
+snippet     warn
+options     head
+	echo "${0:TARGET}" 1>&2
+
+snippet     abort
+options     head
+	echo "${0:TARGET}" 1>&2
+	exit 1
+
+snippet     copyright
+options     head
+	#
+	#   Copyright (c) ${0:Year} ${1:Organization}
+	#     All rights reserved.
+	#
+
+#
+# Definitions
+#
+snippet     myname
+options     head
+	SCRIPT_NAME="$(basename "${BASH_SOURCE:-${(%):-%N}}")"
+	SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE:-${(%):-%N}}")"; pwd)"
+
+#
+# Handy functions
+#
+snippet     show_help
+options     head
+	show_help()
+	{
+	    cat <<__EOT__
+	Usage:
+	  ${SCRIPT_NAME} <arg1>
+	    - TBD
+	
+	Options:
+	  -h,--help        Display this help and exit.
+	  -v               Verbose mode. Can be used multiple times for
+	                    increased verbosity.
+	  -V               Show version.
+	__EOT__
+	}
+
+snippet     isnum
+abbr        is_numeric()
+options     head
+	### @fn is_numeric value
+	### @brief Check if the given argument is a number or not.
+	### @param value a value to be tested if a number of not.
+	### @return 0 if it is a number, 1 if something else.
+	is_numeric()
+	{
+	    # "'a" should be judged as not a number
+	    local num=$(printf '%s' "$1" | sed "s/'/^/")
+	    test "${num}" && printf "%x" "${num}" > /dev/null 2>&1
+	    if [ $? -eq 0 ]; then
+	        return 0
+	    else
+	        return 1
+	    fi
+	}
+
+# The following old logic does not handle a hex value starting with "0x"
+# 	is_numeric()
+# 	    case "$@" in
+# 	        ''|*[!0-9]*) return 1;;
+# 	        *) return 0;;
+# 	    esac
+# 	}
+
+snippet     isdecimal
+abbr        is_decimal()
+options     head
+	is_decimal()
+	{
+	    case "$@" in
+	        ''|*[!0-9]*) return 0;;
+	        *) return 1;;
+	    esac
+	}
+
+snippet     parse_args
+options     head
+	parse_args()
+	{
+	    local all_args="$@"
+	    local args=""  # set after all the options are parsed.
+	
+	    # Initialize our own variables:
+	    VERBOSITY=0
+	
+	    # Parse options
+	    OPTIND=1 # Reset is necessary if getopts was used previously in the script.
+	             # It is a good idea to make this local in a function.
+	    while getopts "fhvV" opt; do
+	        case "${opt}" in
+	            f)
+	                OPT_FORCE=1
+	                ;;
+	            h)
+	                show_help
+	                exit 0
+	                ;;
+	            v)
+	                VERBOSITY=$((VERBOSITY+1))
+	                ;;
+	            V)
+	                show_version
+	                exit 0
+	                ;;
+	            '?')
+	                show_help >&2
+	                exit 1
+	                ;;
+	        esac
+	    done
+	    shift "$((OPTIND-1))" # Shift off the options and optional --.
+	
+	    info 1 "VERBOSITY=${VERBOSITY}"
+	
+	    # Parse arguments
+	    info 1 "all_args=${all_args}"
+	    args="$@"
+	    info 1 "args=${args}"
+	
+	    CI_LIST_OF_CONTENTS=\$1
+	    [ x"${CI_LIST_OF_CONTENTS}" = x"" ] && { err "ERROR: No file name is specified."; show_help >&2; exit 1; }
+	    [ -e ${CI_LIST_OF_CONTENTS} ] || { err "ERROR: Given name of file does not exist (${CI_LIST_OF_CONTENTS})"; exit 1; }
+	    [ -r ${CI_LIST_OF_CONTENTS} ] || { err "ERROR: Given name of file is not readable (${CI_LIST_OF_CONTENTS})"; exit 1; }
+	
+	}
+	
+	parse_args "$@"
+
+snippet     initme
+options     head
+	#!/bin/bash
+	#
+	#
+	
+	#============================================================
+	# Definitions
+	#============================================================
+	SCRIPT_NAME="$(basename "${BASH_SOURCE:-${(%):-%N}}")"
+	SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE:-${(%):-%N}}")"; pwd)"
+	PROG_VERSION=0.0.1
+	
+	VERBOSITY=0
+	
+	LOG_DIR_BASE=${HOME}/logs/${SCRIPT_NAME}
+	LOG_FILE=    # set by init_me()
+	
+	OPT_FORCE=0  # 1: forcibly run  0: ask the user if TBD
+	
+	#============================================================
+	# Sub routines
+	#============================================================
+	today()
+	{
+	    date '+%Y%m%d'
+	}
+	
+	now()
+	{
+	    date --rfc-3339=ns
+	}
+	
+	log()
+	{
+	    [ -w ${LOG_FILE} ] && echo "$@" >> ${LOG_FILE}
+	}
+	
+	err()
+	{
+	    msg="$@"
+	    v_now=$(now)
+	
+	    echo "${msg}" 1>&2
+	    log "[${v_now}]: ${msg}"
+	}
+	
+	is_decimal()
+	{
+	    case "$@" in
+	        ''|*[!0-9]*) return 0;;
+	        *) return 1;;
+	    esac
+	}
+	
+	info()
+	{
+	    level=\$1
+	    shift
+	    msg="$@"
+	    v_now=$(now)
+	
+	    is_decimal ${level}
+	    if [ $? -eq 0 ]; then
+	        # Oops, no number is given in the arguments. Restore the 1st argument in ${msg}
+	        msg="${level} ${msg}"
+	        # set default value: it will be output by default
+	        level=0
+	    fi
+	
+	    if [ ${level} -le ${VERBOSITY} ]; then
+	        echo "${msg}"
+	    fi
+	
+	    # All messages are saved into the log file even any verbosity is given.
+	    log "[${v_now}]: ${msg}"
+	}
+	
+	init_me()
+	{
+	    local now=$(date '+%Y%m%d_%H%M%S')
+	
+	    [ x"${LOG_DIR_BASE}" = x"" ] && err "INTERNAL ERROR: LOG_DIR_BASE is not set yet in init_me(), so stopped"
+	    mkdir --mode=777 -p ${LOG_DIR_BASE}
+	
+	    LOG_FILE=${LOG_DIR_BASE}/$(basename \$0 .sh)_$(hostname)_${now}.txt
+	    touch ${LOG_FILE} || {
+	        err "INTERNAL ERROR: init_me() failed to create log file at ${LOG_FILE}"
+	        exit 1
+	    }
+	    info 0 "Log file is at ${LOG_FILE}"
+	
+	    info 1 "Done: init_me()"
+	}
+	
+	show_help()
+	{
+	    cat <<__EOT__
+	Usage:
+	  ${SCRIPT_NAME} <arg1>
+	    - TBD
+	
+	Options:
+	  -h,--help        Display this help and exit.
+	  -v               Verbose mode. Can be used multiple times for
+	                    increased verbosity.
+	  -V               Show version.
+	__EOT__
+	}
+	
+	show_version()
+	{
+	    echo "${SCRIPT_NAME}: version ${CI_SCRIPT_VERSION}"
+	}
+	
+	parse_args()
+	{
+	    local all_args="$@"
+	    local args=""  # set after all the options are parsed.
+	
+	    # Initialize our own variables:
+	    VERBOSITY=0
+	
+	    # Parse options
+	    OPTIND=1 # Reset is necessary if getopts was used previously in the script.
+	             # It is a good idea to make this local in a function.
+	    while getopts "fhvV" opt; do
+	        case "${opt}" in
+	            f)
+	                OPT_FORCE=1
+	                ;;
+	            h)
+	                show_help
+	                exit 0
+	                ;;
+	            v)
+	                VERBOSITY=$((VERBOSITY+1))
+	                ;;
+	            V)
+	                show_version
+	                exit 0
+	                ;;
+	            '?')
+	                show_help >&2
+	                exit 1
+	                ;;
+	        esac
+	    done
+	    shift "$((OPTIND-1))" # Shift off the options and optional --.
+	
+	    info 1 "VERBOSITY=${VERBOSITY}"
+
+	    # Parse arguments
+	    info 1 "all_args=${all_args}"
+	    args="$@"
+	    info 1 "args=${args}"
+	
+	    CI_LIST_OF_CONTENTS=\$1
+	    [ x"${CI_LIST_OF_CONTENTS}" = x"" ] && { err "ERROR: No file name is specified."; show_help >&2; exit 1; }
+	    [ -e ${CI_LIST_OF_CONTENTS} ] || { err "ERROR: Given name of file does not exist (${CI_LIST_OF_CONTENTS})"; exit 1; }
+	    [ -r ${CI_LIST_OF_CONTENTS} ] || { err "ERROR: Given name of file is not readable (${CI_LIST_OF_CONTENTS})"; exit 1; }
+	
+	}
+	
+	clean_up()
+	{
+	    local verbose=
+	
+	    [ ${VERBOSITY} -ge 3 ] && verbose="-v"
+	    rm -rf ${verbose} ${CI_WORK_DIR_BASE}
+	
+	    info 0 "Log file of this script is at ${LOG_FILE}"
+	    info 0 ""
+	}
+	
+	check_if_root()
+	{
+	    [ $(id -u) -eq 0 ] || err "ERROR: You need to be root to perform this program."
+	}
+	
+	check_prerequisites()
+	{
+	    check_if_root
+	}
+	
+	#============================================================
+	# Main routine
+	#============================================================
+	
+	umask 000 # so that normal user can delete log files and ${SCRIPT_NAME} directory that this program creates.
+	
+	init_me
+	parse_args "$@"
+	check_prerequisites
+	
+	trap clean_up EXIT
+	
+	### Main stuffs are here...
+	
+	info 0 ""
+	info 0 "Done!"
+	info 0 ""
+	
+	# then clean_up() is executed automatically.
+	
+
+snippet     err
+options     head
+	err()
+	{
+	    msg="$@"
+	    v_now=$(now)
+	
+	    echo "${msg}" 1>&2
+	    log "[${v_now}]: ${msg}"
+	}
+
+# vim: set noexpandtab :

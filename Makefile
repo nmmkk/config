@@ -55,7 +55,7 @@ zsh-setup-oh-my-zsh:
 vim-setup: vim-setup-vimrc vim-install-bundle vim-install-plugins
 #vim-setup: vim-setup-vimrc vim-install-dein
 
-vim-setup-vimrc:
+vim-setup-vimrc: vim-locate-snippets
 	@# Make vimrc if it does not exist yet
 	@if [ ! -f $(INSTALL_BASE)/.vimrc ]; then \
 	    echo 'source '$(CURDIR)'/dotfiles/dot.vimrc' >> $(INSTALL_BASE)/.vimrc; \
@@ -73,6 +73,12 @@ vim-setup-vimrc:
 	    echo '".vim:     '$(CURDIR)'/vim/dot.vim' >> $(INSTALL_BASE)/.gvimrc; \
 	else \
 	    echo 'gvimrc already exists. Skip to set it up. ($(INSTALL_BASE)/.gvimrc)'; \
+	fi
+
+vim-locate-snippets:
+	@if [ ! -e $(INSTALL_BASE)/Documents/vim/snippets ]; then \
+		mkdir -pv $(INSTALL_BASE)/Documents/vim/; \
+		ln -sfv $(CURDIR)/vim/snippets $(INSTALL_BASE)/Documents/vim/; \
 	fi
 
 vim-install-bundle:

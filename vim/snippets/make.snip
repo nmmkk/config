@@ -1,0 +1,21 @@
+snippet     CC
+options     head
+  CC=gcc
+
+snippet     BIN
+options     head
+  $(BIN): $(OBJS)
+    $(CC) $(CFLAGS) -o $(BIN) $(OBJS)
+
+snippet     initme
+options     head
+    CFLAGS := -m32 -O2 -Wall
+    BINS := ${0}
+
+    .PHONY : all clean
+
+    all: $(BINS)
+
+    clean:
+      $(RM) $(BINS)
+
