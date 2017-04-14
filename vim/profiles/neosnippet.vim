@@ -19,6 +19,6 @@ if has('conceal')
 endif
 
 " The location of my snippets
-let s:my_snippet = '~/rc/vim/snippet/'
+let s:my_snippet = '~/Documents/vim/snippets/'
 let g:neosnippet#snippets_directory = s:my_snippet
 
