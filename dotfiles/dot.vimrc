@@ -48,6 +48,7 @@ let s:profile_names = [
 \   'ctrlp',
 \   'color',
 \   'todo.txt',
+\   'binary_mode',
 \]
 "}}}3
 
