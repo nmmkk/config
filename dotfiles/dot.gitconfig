@@ -42,3 +42,5 @@
 [user]
 	name = nmmkk
 	email = nmmkk00@gmail.com
+[cola]
+	spellcheck = false
