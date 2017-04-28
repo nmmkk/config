@@ -66,6 +66,7 @@ NeoBundle 'tpope/vim-surround' " surround.vim: quoting/parenthesizing made simpl
 NeoBundle 'tpope/vim-repeat' " repeat.vim: enable repeating supported plugin maps with .
 NeoBundle 'dag/vim-fish' " Vim support for editing fish scripts
 NeoBundle 'davidhalter/jedi-vim' " Using the jedi autocompletion library for VIM.
+NeoBundle 'dracula/vim' " :scream: A dark theme for Vim
 
 NeoBundle 'unimpaired.vim'
 

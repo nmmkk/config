@@ -17,7 +17,8 @@
 " colorscheme gruvbox
 " colorscheme Tomorrow-Night
 " colorscheme Tomorrow-Night-Eighties
-colorscheme molokai
+" colorscheme molokai
+colorscheme dracula
 set background=dark
 
 """ set background=light
