@@ -65,6 +65,7 @@ NeoBundle 'szw/vim-tags' " Ctags generator for Vim
 NeoBundle 'tpope/vim-surround' " surround.vim: quoting/parenthesizing made simple
 NeoBundle 'tpope/vim-repeat' " repeat.vim: enable repeating supported plugin maps with .
 NeoBundle 'dag/vim-fish' " Vim support for editing fish scripts
+NeoBundle 'davidhalter/jedi-vim' " Using the jedi autocompletion library for VIM.
 
 NeoBundle 'unimpaired.vim'
 
