@@ -25,6 +25,14 @@ case Linux
     set ORIG_MANPATH $MANPATH
     set ORIG_INFOPATH $INFOPATH
 
+    # Make empty directories silently to prevent errors in enable_linuxbrew()
+    # on a Linux machine that does not have linuxbrew installed.
+    mkdir -p \
+        $HOME/.linuxbrew/sbin \
+        $HOME/.linuxbrew/bin \
+        $HOME/.linuxbrew/share/man \
+        $HOME/.linuxbrew/share/info
+
     # Ones with linuxbrew enabled
     set LB_PATH  $HOME/.linuxbrew/sbin $HOME/.linuxbrew/bin $PATH
     set LB_MANPATH  $HOME/.linuxbrew/share/man $MANPATH
