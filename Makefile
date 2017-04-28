@@ -7,7 +7,7 @@ INSTALL_BASE := ~
 default: linux
 
 # linux: misc-setup vim-setup vim-make-vimproc-linux vimperatorrc-setup zsh-setup
-linux: misc-setup vim-setup vimperatorrc-setup zsh-setup
+linux: misc-setup vim-setup vimperatorrc-setup zsh-setup fish-setup
 
 misc-setup: tmux-setup git-setup
 
@@ -46,6 +46,24 @@ zsh-setup-oh-my-zsh:
 	@if [ ! -d $(INSTALL_BASE)/.oh-my-zsh ]; then \
 	    mkdir -p $(INSTALL_BASE)/.oh-my-zsh; \
 	    git clone git://github.com/robbyrussell/oh-my-zsh.git $(INSTALL_BASE)/.oh-my-zsh; \
+	fi
+
+
+#
+# fish set-up
+#
+fish-setup: fish-setup-fishrc
+
+fish-setup-fishrc:
+	@if [ ! -d $(INSTALL_BASE)/.config/fish ]; then \
+	    mkdir -p $(INSTALL_BASE)/.config/fish; \
+	fi
+	@if [ ! -f $(INSTALL_BASE)/.config/fish/config.fish ]; then \
+	    echo 'source '$(CURDIR)'/fish/config.fish' >> $(INSTALL_BASE)/.config/fish/config.fish; \
+	    echo '#root:     '$(CURDIR) >> $(INSTALL_BASE)/.config/fish/config.fish; \
+	    echo '#profiles: '$(CURDIR)'/fish' >> $(INSTALL_BASE)/.config/fish/config.fish; \
+	else \
+	    echo 'config.fish already exists. Skip to set it up. ($(INSTALL_BASE)/.config/fish/config.fish)'; \
 	fi
 
 
