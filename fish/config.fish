@@ -1,8 +1,62 @@
 # config.fish
 
 #
+# Determine machine type
+#
+switch (uname)
+case Linux
+    set os "Linux"
+case Darwin
+    set os "macOS"
+case FreeBSD NetBSD DragonFly
+    set os "BSD"
+case '*'
+    set os "Undetermined"
+end
+
+#
+# PATH
+#
+
+switch $os
+case Linux
+    # Originals so that we can restore it later
+    set ORIG_PATH $PATH
+    set ORIG_MANPATH $MANPATH
+    set ORIG_INFOPATH $INFOPATH
+
+    # Ones with linuxbrew enabled
+    set LB_PATH  $HOME/.linuxbrew/sbin $HOME/.linuxbrew/bin $PATH
+    set LB_MANPATH  $HOME/.linuxbrew/share/man $MANPATH
+    set LB_INFOPATH  $HOME/.linuxbrew/share/info $INFOPATH
+end
+
+
+#
 # Functions
 #
+
+function enable_linuxbrew
+    if [ $os != "Linux" ]
+        echo "You are not on a Linux"
+        return 0
+    end
+
+    set PATH $LB_PATH
+    set MANPATH $LB_MANPATH
+    set INFOPATH $LB_INFOPATH
+end
+
+function disable_linuxbrew
+    if [ $os != "Linux" ]
+        echo "You are not on a Linux"
+        return 0
+    end
+
+    set PATH $ORIG_PATH
+    set MANPATH $ORIG_MANPATH
+    set INFOPATH $ORIG_INFOPATH
+end
 
 # [bashで言うところの!$はfishではどうすればよいか - Qiita](http://qiita.com/ymko/items/d7c5c4d0cc6174d5fc86)
 function bind_bang
