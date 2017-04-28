@@ -5,8 +5,19 @@ let mapleader = ","
 " Swap "\" and ",".
 noremap \ ,
 
-"### perl実行 ###"
+
+" The following maps to run the program currently edited can be done by QuickRun.
+""" "### perl実行 ###"
 """ nnoremap <F2> ;w <Enter>;!perl % <Enter>
+
+""" " Run the script you are currently editing.
+""" autocmd VimrcAutoCmd BufNewFile,BufRead *.sh nnoremap <F2> :!bash %<CR>
+""" autocmd VimrcAutoCmd BufNewFile,BufRead *.rb nnoremap <F2> :!ruby %<CR>
+""" autocmd VimrcAutoCmd BufNewFile,BufRead *.py nnoremap <F2> :!python %<CR>
+""" autocmd VimrcAutoCmd BufNewFile,BufRead *.pl nnoremap <F2> :!perl %<CR>
+
+
+
 
 "### ファイル移動 ###"
 nnoremap <F7> :ar<CR>
