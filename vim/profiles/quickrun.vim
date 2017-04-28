@@ -830,7 +830,7 @@ if exists("quickrun_running") || !exists("g:quickrun_config")
     let g:quickrun_config = {}
 endif
 
-function! g:set_quickrun_config(name, base, config)
+function! s:set_quickrun_config(name, base, config)
     let base = type(a:base) == type("") ? g:quickrun_config[a:base] : a:base
     let result = deepcopy(base)
     call extend(result, a:config, "force")
