@@ -115,5 +115,7 @@ end
 
 if type todo.sh >/dev/null ^/dev/null
     balias t todo.sh
+    set TODOTXT_DEFAULT_ACTION list
+    set TODOTXT_SORT_COMMAND 'env LC_COLLATE=C sort -k 2,2 -k 1,1n'
 end
 
