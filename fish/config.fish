@@ -104,12 +104,16 @@ end
 
 
 
-
-
 #
 # Aliases/Baliases
 #
 # For balias, make sure balias plugin is installed:
 #   `fisher oh-my-fish/plugin-balias`
-balias g git
+if type git >/dev/null ^/dev/null
+    balias g git
+end
+
+if type todo.sh >/dev/null ^/dev/null
+    balias t todo.sh
+end
 
