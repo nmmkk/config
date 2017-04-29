@@ -1,5 +1,7 @@
 # Makefile
 
+INSTALL := install
+
 INSTALL_BASE := ~
 
 .PHONY: default linux misc-setup tmux-setup git-setup vim-setup zsh-setup install update clean
@@ -52,7 +54,7 @@ zsh-setup-oh-my-zsh:
 #
 # fish set-up
 #
-fish-setup: fish-setup-fishrc
+fish-setup: fish-setup-fishrc fish-setup-completions
 
 fish-setup-fishrc:
 	@if [ ! -d $(INSTALL_BASE)/.config/fish ]; then \
@@ -64,6 +66,15 @@ fish-setup-fishrc:
 	    echo '#profiles: '$(CURDIR)'/fish' >> $(INSTALL_BASE)/.config/fish/config.fish; \
 	else \
 	    echo 'config.fish already exists. Skip to set it up. ($(INSTALL_BASE)/.config/fish/config.fish)'; \
+	fi
+
+fish-setup-completions:
+	@if [ ! -d $(INSTALL_BASE)/.config/fish/completions ]; then \
+	    mkdir -p $(INSTALL_BASE)/.config/fish/completions; \
+	fi
+	@if [ ! -f $(INSTALL_BASE)/.config/fish//completions/todo.sh.fish ]; then \
+		echo "Performing: $(INSTALL) --mode=644 $(CURDIR)/fish/completions/todo.sh.fish $(INSTALL_BASE)/.config/fish/completions/"; \
+	    $(INSTALL) --mode=644 $(CURDIR)/fish/completions/todo.sh.fish $(INSTALL_BASE)/.config/fish/completions/; \
 	fi
 
 
