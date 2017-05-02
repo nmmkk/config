@@ -1,6 +1,7 @@
 # Makefile
 
 INSTALL := install
+SYMLINK := ln -s
 
 INSTALL_BASE := ~
 
@@ -54,7 +55,7 @@ zsh-setup-oh-my-zsh:
 #
 # fish set-up
 #
-fish-setup: fish-setup-fishrc fish-setup-completions
+fish-setup: fish-setup-fishrc fish-setup-completions fish-setup-functions
 
 fish-setup-fishrc:
 	@if [ ! -d $(INSTALL_BASE)/.config/fish ]; then \
@@ -76,6 +77,18 @@ fish-setup-completions:
 		echo "Performing: $(INSTALL) --mode=644 $(CURDIR)/fish/completions/todo.sh.fish $(INSTALL_BASE)/.config/fish/completions/"; \
 	    $(INSTALL) --mode=644 $(CURDIR)/fish/completions/todo.sh.fish $(INSTALL_BASE)/.config/fish/completions/; \
 	fi
+
+fish-setup-functions:
+	@if [ ! -d $(INSTALL_BASE)/.config/fish/functions ]; then \
+	    mkdir -p $(INSTALL_BASE)/.config/fish/functions; \
+	fi
+	@for func_full_path in $(CURDIR)/fish/functions/*; do \
+		func=$$(basename $${func_full_path}); \
+	    if [ ! -f $(INSTALL_BASE)/.config/fish//functions/$${func} ]; then \
+			echo "Performing: $(SYMLINK) $(CURDIR)/fish/functions/$${func} $(INSTALL_BASE)/.config/fish/functions/$${func}"; \
+	        $(SYMLINK) $(CURDIR)/fish/functions/$${func} $(INSTALL_BASE)/.config/fish/functions/$${func}; \
+	    fi \
+	done
 
 
 #
