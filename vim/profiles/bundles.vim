@@ -67,6 +67,7 @@ NeoBundle 'tpope/vim-repeat' " repeat.vim: enable repeating supported plugin map
 NeoBundle 'dag/vim-fish' " Vim support for editing fish scripts
 NeoBundle 'davidhalter/jedi-vim' " Using the jedi autocompletion library for VIM.
 NeoBundle 'dracula/vim' " :scream: A dark theme for Vim
+NeoBundle 'ujihisa/unite-colorscheme' " A unite.vim plugin
 
 NeoBundle 'unimpaired.vim'
 
