@@ -97,6 +97,37 @@ function extract_rpm_files() { # {{{1
     echo "RPM files are just extracted to ${extract_to_here}"
 } #}}}1
 
+function is_os() { # {{{1
+    local this="$1"
+    local os=$(uname -o)
+
+    case "${os}" in
+        "${this}" )
+            return 0
+            ;;
+        * )
+            echo "You are not on ${this}" 1>&2
+            return 1
+            ;;
+    esac
+} #}}}1
+
+function enable_linuxbrew() { # {{{1
+    is_os "GNU/Linux" || return 0
+
+    PATH=${LB_PATH}
+    MANPATH=${LB_MANPATH}
+    INFOPATH=${LB_INFOPATH}
+} #}}}1
+
+function disable_linuxbrew() { # {{{1
+    is_os "GNU/Linux" || return 0
+
+    PATH=${ORIG_PATH}
+    MANPATH=${ORIG_MANPATH}
+    INFOPATH=${ORIG_INFOPATH}
+} #}}}1
+
 # Source the file for local functions
 if [ -f ~/.rcfiles/zsh/local_functions.zsh ]; then
     source ~/.rcfiles/zsh/local_functions.zsh

@@ -18,17 +18,16 @@ export PATH=$PATH:${HOME}/tools
 # }}}1
 
 # Linuxbrew # {{{1
-## Some comands installed by linuxbrew did not seem working fine. It caused build errors in our software product. Enable the followings only as needed.
-######### export PATH="${HOME}/.linuxbrew/bin:${PATH}"
-######### export MANPATH="${HOME}/.linuxbrew/share/man:${MANPATH}"
-######### export INFOPATH="${HOME}/.linuxbrew/share/info:${INFOPATH}"
-######### export PATH="${HOME}/.linuxbrew/sbin:${PATH}"
 
-## Use the followings as needed.
-## e.g.) export PATH="${LB_PATH}" && export MANPATH="${LB_MANPATH}" && export INFOPATH="${LB_INFOPATH}"
-export LB_PATH="${HOME}/.linuxbrew/sbin:${HOME}/.linuxbrew/bin:${PATH}"
-export LB_MANPATH="${HOME}/.linuxbrew/share/man:${MANPATH}"
-export LB_INFOPATH="${HOME}/.linuxbrew/share/info:${INFOPATH}"
+# enable_linuxbrew() and disable_linuxbrew() set the following sets of
+# environment variables.
+LB_PATH="${HOME}/.linuxbrew/sbin:${HOME}/.linuxbrew/bin:${PATH}"
+LB_MANPATH="${HOME}/.linuxbrew/share/man:${MANPATH}"
+LB_INFOPATH="${HOME}/.linuxbrew/share/info:${INFOPATH}"
+
+ORIG_PATH="${PATH}"
+ORIG_MANPATH="${MANPATH}"
+ORIG_INFOPATH="${INFOPATH}"
 # }}}1
 
 # GNU Global# {{{1
