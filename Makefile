@@ -1,6 +1,5 @@
 # Makefile
 
-INSTALL := install
 SYMLINK := ln -s
 
 INSTALL_BASE := ~
@@ -62,6 +61,7 @@ fish-setup-fishrc:
 	    mkdir -p $(INSTALL_BASE)/.config/fish; \
 	fi
 	@if [ ! -f $(INSTALL_BASE)/.config/fish/config.fish ]; then \
+	    echo 'Creating config.fish ($(INSTALL_BASE)/.config/fish/config.fish)'; \
 	    echo 'source '$(CURDIR)'/fish/config.fish' >> $(INSTALL_BASE)/.config/fish/config.fish; \
 	    echo '#root:     '$(CURDIR) >> $(INSTALL_BASE)/.config/fish/config.fish; \
 	    echo '#profiles: '$(CURDIR)'/fish' >> $(INSTALL_BASE)/.config/fish/config.fish; \
@@ -73,10 +73,13 @@ fish-setup-completions:
 	@if [ ! -d $(INSTALL_BASE)/.config/fish/completions ]; then \
 	    mkdir -p $(INSTALL_BASE)/.config/fish/completions; \
 	fi
-	@if [ ! -f $(INSTALL_BASE)/.config/fish//completions/todo.sh.fish ]; then \
-		echo "Performing: $(INSTALL) --mode=644 $(CURDIR)/fish/completions/todo.sh.fish $(INSTALL_BASE)/.config/fish/completions/"; \
-	    $(INSTALL) --mode=644 $(CURDIR)/fish/completions/todo.sh.fish $(INSTALL_BASE)/.config/fish/completions/; \
-	fi
+	@for comp_full_path in $(CURDIR)/fish/completions/*; do \
+		comp=$$(basename $${comp_full_path}); \
+		if [ ! -f $(INSTALL_BASE)/.config/fish/completions/$${comp} ]; then \
+			echo "Performing: $(SYMLINK) $(CURDIR)/fish/completions/$${comp} $(INSTALL_BASE)/.config/fish/completions/$${comp}"; \
+			$(SYMLINK) $(CURDIR)/fish/completions/$${comp} $(INSTALL_BASE)/.config/fish/completions/$${comp}; \
+		fi \
+	done
 
 fish-setup-functions:
 	@if [ ! -d $(INSTALL_BASE)/.config/fish/functions ]; then \
@@ -84,7 +87,7 @@ fish-setup-functions:
 	fi
 	@for func_full_path in $(CURDIR)/fish/functions/*; do \
 		func=$$(basename $${func_full_path}); \
-	    if [ ! -f $(INSTALL_BASE)/.config/fish//functions/$${func} ]; then \
+	    if [ ! -f $(INSTALL_BASE)/.config/fish/functions/$${func} ]; then \
 			echo "Performing: $(SYMLINK) $(CURDIR)/fish/functions/$${func} $(INSTALL_BASE)/.config/fish/functions/$${func}"; \
 	        $(SYMLINK) $(CURDIR)/fish/functions/$${func} $(INSTALL_BASE)/.config/fish/functions/$${func}; \
 	    fi \
