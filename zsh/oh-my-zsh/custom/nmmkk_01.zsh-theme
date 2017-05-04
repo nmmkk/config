@@ -30,7 +30,7 @@ function my_git_status() {# {{{
 }
 # }}}
 
-if [ x = x ]; then
+if [ x = xy ]; then
     # Good for light background# {{{
     DATE_TIME=$(str_with_color red '%D{%Y-%m-%dT%K:%M:%S}')
     PROMPT_PREFIX=$(str_with_color grey '#')
@@ -44,6 +44,7 @@ if [ x = x ]; then
     PROMPT='${PROMPT_PREFIX}${DATE_TIME}${SEPARATOR1}${USER_NAME}${SEPARATOR2}${HOST_NAME}${SEPARATOR3}${CURRENT_DIRECTORY} $(my_git_status)
 $PROMPT_CHAR'
     PROMPT2=$(str_with_color grey '> ')
+    SSH_REMOTE_HOST=$(str_with_color black '(ssh from ${SSH_CLIENT%%" "*})')
     # }}}
 else
     # Good for dark background# {{{
@@ -59,11 +60,11 @@ else
     PROMPT='${PROMPT_PREFIX}${DATE_TIME}${SEPARATOR1}${USER_NAME}${SEPARATOR2}${HOST_NAME}${SEPARATOR3}${CURRENT_DIRECTORY} $(my_git_status)
 $PROMPT_CHAR'
     PROMPT2=$(str_with_color grey '> ')
+    SSH_REMOTE_HOST=$(str_with_color white '(ssh from ${SSH_CLIENT%%" "*})')
     # }}}
 fi
 
 # Display the ssh client IP address at the head of PROMPT# {{{
-SSH_REMOTE_HOST=$(str_with_color black '(ssh from ${SSH_CLIENT%%" "*})')
 if [ -n "${SSH_CONNECTION}" ]; then
     PROMPT="${SSH_REMOTE_HOST} ${PROMPT}"
 fi
