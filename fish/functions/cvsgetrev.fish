@@ -1,15 +1,18 @@
 if type cvs >/dev/null ^/dev/null
     function cvsgetrev --description 'Obtain the specified version of file from the CVS'
-        set -l filename $argv[1]
-        set -l rev $argv[2]
+        set -l usage "Usage: cvsgetrev <filename> <rev>"
 
-        if test x"$filename" = x""
-            echo "A target file name needs to be specified" >/dev/stderr
+        if test (count $argv) -lt 2
+            echo "$usage" >/dev/stderr
             return 1
         end
 
-        if test x"$rev" = x""
-            echo "A target CVS revision needs to be specified" >/dev/stderr
+        set -l filename $argv[1]
+        set -l rev $argv[2]
+
+        if test ! -e "$filename"
+            echo "The given target file does not exist" >/dev/stderr
+            echo "$usage" >/dev/stderr
             return 2
         end
 
