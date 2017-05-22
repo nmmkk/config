@@ -11,7 +11,7 @@ default: linux
 # linux: misc-setup vim-setup vim-make-vimproc-linux vimperatorrc-setup zsh-setup
 linux: misc-setup vim-setup vimperatorrc-setup zsh-setup fish-setup
 
-misc-setup: tmux-setup git-setup
+misc-setup: tmux-setup git-setup ag-setup
 
 tmux-setup:
 	@# Make tmux.conf if it does not exist yet
@@ -31,6 +31,15 @@ git-setup:
 	    echo 'gitconfig is just created!'; \
 	else \
 	    echo 'gitconfig already exists as a symbolic link. Skip to set it up. ($(INSTALL_BASE)/.gitconfig)'; \
+	fi
+
+ag-setup:
+	@# Make .agignore if it does not exist yet
+	@if [ ! -f $(INSTALL_BASE)/.agignore ]; then \
+	    echo 'source '$(CURDIR)'/dotfiles/dot.agignore' >> $(INSTALL_BASE)/.agignore; \
+	    echo 'agignore is just created!'; \
+	else \
+	    echo 'agignore already exists. Skip to set it up. ($(INSTALL_BASE)/.agignore)'; \
 	fi
 
 #
