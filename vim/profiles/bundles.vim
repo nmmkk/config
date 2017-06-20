@@ -17,24 +17,24 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 "   NOTE: How to search a new plugin: Use Unite as below.
 "           :Unite neobundle/search
 "         See ":help :NeoBundle-examples" for more details.
-NeoBundle 'Shougo/neosnippet.vim'
-NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'Shougo/neosnippet.vim' " neo-snippet plugin contains neocomplcache snippets source
+NeoBundle 'Shougo/neosnippet-snippets' " The standard snippets repository for neosnippet
 NeoBundle 'tpope/vim-fugitive' " fugitive.vim: a Git wrapper so awesome, it should be illegal
-NeoBundle 'kien/ctrlp.vim'
-NeoBundle 'flazz/vim-colorschemes'
+NeoBundle 'kien/ctrlp.vim' " Fuzzy file, buffer, mru, tag, etc finder.
+NeoBundle 'flazz/vim-colorschemes' " one colorscheme pack to rule them all!
 
-NeoBundle 'gtags.vim'
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/neocomplcache.vim'
+NeoBundle 'vim-scripts/gtags.vim' " Integrates GNU GLOBAL source code tag system with VIM.
+NeoBundle 'Shougo/unite.vim' " :dragon: Unite and create user interfaces
+NeoBundle 'Shougo/neocomplcache.vim' " Ultimate auto-completion system for Vim.
 " NeoBundle 'Shougo/neocomplete.vim'
-NeoBundle 'Shougo/vimshell'
-NeoBundle 'Shougo/vimproc'
+NeoBundle 'Shougo/vimshell.vim' " :shell: Powerful shell implemented by vim.
+NeoBundle 'Shougo/vimproc.vim' " Interactive command execution in Vim.
 NeoBundle 'mark'
-NeoBundle 'cecutil'
-NeoBundle 'Align'
-NeoBundle 'vcscommand.vim'
-NeoBundle 'linuxsty.vim'
-NeoBundle 'taglist.vim'
+NeoBundle 'cecutil' " 14    Some utilities used by several of my scripts (window positioning, mark handling)
+NeoBundle 'vim-scripts/Align' " Help folks to align text, eqns, declarations, tables, etc
+NeoBundle 'vim-scripts/vcscommand.vim' " CVS/SVN/SVK/git/hg/bzr integration plugin
+NeoBundle 'vim-scripts/linuxsty.vim' " Vim plugin to respect the Linux kernel coding style
+NeoBundle 'vim-scripts/taglist.vim' " Source code browser (supports C/C++, java, perl, python, tcl, sql, php, etc)
 NeoBundle 'indentpython.vim' " 0.1   An alternative indentation script for python
 NeoBundle 'harveyzh/google_python_style' " google python style indent file for vim
 NeoBundle 'fuenor/qfixhowm' " This is a test version of QFixHowm.
@@ -51,8 +51,8 @@ NeoBundle 'xolox/vim-misc' " Miscellaneous auto-load Vim scripts
 NeoBundle 'xolox/vim-colorscheme-switcher' " Makes it easy to quickly switch between color schemes in Vim
 NeoBundle 'thinca/vim-quickrun' " Run commands quickly.
 NeoBundle 'scrooloose/syntastic' " Syntax checking hacks for vim
-NeoBundle 'osyo-manga/unite-quickfix'
-NeoBundle 'osyo-manga/shabadou.vim'
+NeoBundle 'osyo-manga/unite-quickfix' " ''
+NeoBundle 'osyo-manga/shabadou.vim' " ''
 NeoBundle 'moznion/shabadou.vim-animation' " A progress animation plug-in for shabadou.vim
 NeoBundle 'itchyny/lightline.vim' " A light and configurable statusline/tabline for Vim
 NeoBundle 'bronson/vim-trailing-whitespace' " Highlights trailing whitespace in red and provides :FixWhitespace to fix it.
@@ -69,7 +69,7 @@ NeoBundle 'davidhalter/jedi-vim' " Using the jedi autocompletion library for VIM
 NeoBundle 'dracula/vim' " :scream: A dark theme for Vim
 NeoBundle 'ujihisa/unite-colorscheme' " A unite.vim plugin
 
-NeoBundle 'unimpaired.vim'
+NeoBundle 'tpope/vim-unimpaired' " unimpaired.vim: pairs of handy bracket mappings
 
 " You can specify revision/branch/tag.
 " NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
