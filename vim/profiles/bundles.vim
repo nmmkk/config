@@ -68,6 +68,7 @@ NeoBundle 'dag/vim-fish' " Vim support for editing fish scripts
 NeoBundle 'davidhalter/jedi-vim' " Using the jedi autocompletion library for VIM.
 NeoBundle 'dracula/vim' " :scream: A dark theme for Vim
 NeoBundle 'ujihisa/unite-colorscheme' " A unite.vim plugin
+NeoBundle 'KabbAmine/zeavim.vim' " Zeal for Vim
 
 NeoBundle 'tpope/vim-unimpaired' " unimpaired.vim: pairs of handy bracket mappings
 
