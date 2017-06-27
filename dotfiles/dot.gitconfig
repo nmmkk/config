@@ -22,6 +22,7 @@
 [core]
     pager =
     excludesfile = ~/.gitignore
+    editor = vim -f
 [merge]
     # tool = extMerge
     tool = vimdiff
