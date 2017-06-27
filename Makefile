@@ -60,3 +60,8 @@ git-update:
 
 vim-clean-plugins:
 	vim -u $(CURDIR)/vim/profiles/bundles.vim +NeoBundleClean +q
+
+topydo-setup:
+	make -C topydo/
+	@echo
+
