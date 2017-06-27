@@ -1,11 +1,5 @@
 # This file is to define environment variables okay to be public.
 
-# First, source the local env# {{{1
-if [ -f ~/.rcfiles/zsh/local_env.zsh ]; then
-    source ~/.rcfiles/zsh/local_env.zsh
-fi
-# }}}1
-
 # Generic environment variables# {{{1
 # export LANG=ja_JP.UTF-8
 # export LANG=ja_JP.eucJP
@@ -54,6 +48,12 @@ export TODOTXT_DEFAULT_ACTION=ls
 
 # Sort your output by priority, then by number
 export TODOTXT_SORT_COMMAND='env LC_COLLATE=C sort -k 2,2 -k 1,1n'
+# }}}1
+
+# Lastly, source the local env# {{{1
+if [ -f ~/.rcfiles/zsh/local_env.zsh ]; then
+    source ~/.rcfiles/zsh/local_env.zsh
+fi
 # }}}1
 
 # vim: foldmethod=marker
