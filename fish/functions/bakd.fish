@@ -1,5 +1,5 @@
 function bakd
-    set -l directory {$PWD}/backup_files
+    set -l directory {$PWD}/.backup_files
     set -l timestamp
 
     mkdir -p {$directory}
