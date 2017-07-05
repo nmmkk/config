@@ -1,0 +1,136 @@
+# GNU screen configuration file
+
+# コマンドキーをに変更する。
+# を入力したい時は、2回続けてを入力する。
+escape 
+
+# 標準出力ログの保存先
+logfile "$HOME/log/screen/screen_%n_%Y%m%d_%c:%s.log"
+
+# screen が起動したらlogをとり始める
+log on
+deflog on
+
+# 自動でデタッチする
+autodetach on
+
+# 起動時のライセンス画面を表示しない
+startup_message off
+
+# スクロールバックできる行数
+defscrollback 20000
+
+# ステータス行に表示するメッセージを10秒間表示する
+# msgwait 10
+
+# caption, hardstatus, sorendition の設定。
+# 以下のサイトのものをそのまま持ってきた。
+#   * [最新版GNU Screenで縦分割（その３〜captionとhardstatusについて〜） | blog.remora.cx](http://blog.remora.cx/2010/02/gnu-screen-2.html)
+caption always "%{= Rk} %?%F%{b kr}%? %?%h%:%t (screen #%n)%? %{-}"
+#   * If in copy/paste mode, then displays as so (http://yskwkzhr.blogspot.com/2011/12/master-copy-and-paste-of-gnu-screen.html)
+caption always '%?%F%{= gw}%:%{= kK}%?%2n%f%07=%t%?%P *** copy/paste mode ***%:%?%='
+hardstatus alwayslastline "%{= Gk} %-Lw%40L>%{b kg} %n %t %{-}%+Lw%-040=%{b km} %l %{.b} %Y/%m/%d %C:%s %A "
+sorendition "= Rk"
+# # 昔使っていた、hardstatus のフォーマット
+# hardstatus alwayslastline " %-w%{=b bw}%n %t%{-}%+w [%y/%m/%d %c:%s]"
+
+# screen 起動時のシェル
+shell fish
+
+# ハードコピーしたファイルの保存先ディレクトリ
+hardcopydir "$HOME/log/screenCopy"
+
+# ハードコピーの書き出しを追記モードでおこなう
+hardcopy_append on
+
+# Encoding of screen window
+########## defencoding eucjp
+
+# Bash でベル文字入力時に不要な文字を表示させないようにするため、ビジュアルベルをやめる。
+vbell off
+
+### # As of 7/3/2017, my terminals have a problem with color in screen.
+### # It does not support 256 colors.
+### # The followings were supposed to fix the color issue, but did not work.
+### # I gave up to fix the issue and switched back to tmux.
+###
+### # Term
+### ### term "screen-256color"
+### term xterm-256color
+###
+### # Remove background color
+### defbce on
+###
+### # Use bright color for the characters
+### attrcolor b ".I"
+###
+### # Truecolor
+### ### truecolor on
+###
+### attrcolor b ".I"    # allow bold colors - necessary for some reason
+### termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'   # tell screen how to set colors. AB = background, AF=foreground
+### defbce on    # use current bg color for erased chars
+
+#==================================================
+# Key binding
+#==================================================
+
+# Reload the configuration file
+bind r eval 'source ~/.screenrc' 'echo "Just reloaded ~/.screenrc"'
+
+# Split
+bind - eval 'split' 'focus' 'select 0'
+bind | eval 'split -v' 'focus' 'select 0'
+
+### Create a new window, then launch zsh on the window
+# bind screen -t "new term" zsh
+
+### コピーモードでヤンクした内容を、Xのクリップボードにもコピーする
+### Yanked contents copied in "copy mode" are also mirrored to X's clip board.
+# bindkey -m ' ' eval 'msgwait 0' 'stuff \040' writebuf 'exec !!! xclip /tmp/screen-exchange' 'msgwait 2'
+# bindkey -m Y eval 'msgwait 0' 'stuff Y' writebuf 'exec !!! xclip /tmp/screen-exchange' 'msgwait 2'
+# bindkey -m y eval 'msgwait 0' 'stuff y' writebuf 'exec !!! xclip /tmp/screen-exchange' 'msgwait 2'
+# bindkey -m W eval 'msgwait 0' 'stuff W' writebuf 'exec !!! xclip /tmp/screen-exchange' 'msgwait 2'
+
+
+##########################################
+# to switch window encoding, and set the relevant environment variables.(for b-shell)
+#   Ref URL: http://yskwkzhr.blogspot.com/2011/12/quickly-switch-gnu-screen-encoding.html
+#            http://bogytech.blogspot.com/2011/06/gnu-screen.html
+##########################################
+bind ^E eval 'command -c sencoding' 'echo "switch window encoding to: [u]tf8 [e]ucjp [s]jis / with env [U]tf8 [E]ucjp [S]jis"'
+bind -c sencoding ^U eval 'encoding utf8'  'info'
+bind -c sencoding u  eval 'encoding utf8'  'info'
+# bind -c sencoding ^E eval 'encoding eucjp' 'info' # Doesn't work on z400-16 Apr/17/2014
+# bind -c sencoding e  eval 'encoding eucjp' 'info' # Doesn't work on z400-16 Apr/17/2014
+bind -c sencoding ^E eval 'encoding eucjp eucjp' 'info' # http://bogytech.blogspot.com/2011/06/gnu-screen.html
+bind -c sencoding e  eval 'encoding eucjp eucjp' 'info' # http://bogytech.blogspot.com/2011/06/gnu-screen.html
+bind -c sencoding ^S eval 'encoding sjis'  'info'
+bind -c sencoding s  eval 'encoding sjis'  'info'
+bind -c sencoding U  eval 'encoding utf8'  '!!!echo "LANG=ja_JP.UTF-8; export LANG"' 'info'
+bind -c sencoding E  eval 'encoding eucjp' '!!!echo "LANG=ja_JP.eucJP; export LANG"' 'info'
+bind -c sencoding S  eval 'encoding sjis'  '!!!echo "LANG=ja_JP.sjis; export LANG"'  'info'
+
+# Resize window
+# * GNU screenでのレイアウトの整理](https://rcmdnk.com/blog/2014/02/18/computer-screen-3/)
+bind e eval 'command -c resize' 'echo "Now you are in window-resize mode. Type (h/j/k/l) to resize."'
+bind ^e eval 'command -c resize' 'echo "Now you are in window-resize mode. Type (h/j/k/l) to resize."'
+bind -c resize h eval 'command -c resize' 'resize -h -1'
+bind -c resize l eval 'command -c resize' 'resize -h +1'
+bind -c resize j eval 'command -c resize' 'resize -v +1'
+bind -c resize k eval 'command -c resize' 'resize -v -1'
+bind -c resize ^h eval 'command -c resize' 'resize -h -1'
+bind -c resize ^l eval 'command -c resize' 'resize -h +1'
+bind -c resize ^j eval 'command -c resize' 'resize -v +1'
+bind -c resize ^k eval 'command -c resize' 'resize -v -1'
+
+# Move current window
+bind j focus down
+bind ^j focus down
+bind k focus up   # Use 'K' to execute "kill", which is assigned to 'k' by default
+bind ^k focus up
+bind h focus left
+bind ^h focus left
+bind l focus right
+bind ^l focus right
+

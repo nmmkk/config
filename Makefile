@@ -2,17 +2,26 @@
 
 include $(CURDIR)/build/make-defs.mk
 
-.PHONY: default all linux misc-setup tmux-setup git-setup vim-setup zsh-setup install update clean
+.PHONY: default all linux misc-setup tmux-setup screen-setup screen-clean \
+        git-setup vim-setup zsh-setup install update clean
 
 default: linux
 
 # linux: misc-setup vim-setup vim-make-vimproc-linux vimperatorrc-setup zsh-setup
 linux: misc-setup vim-setup vimperatorrc-setup zsh-setup fish-setup
 
-misc-setup: tmux-setup git-setup ag-setup
+misc-setup: tmux-setup screen-setup git-setup ag-setup
 
 tmux-setup:
 	make -C tmux/
+	@echo
+
+screen-setup:
+	make -C screen/
+	@echo
+
+screen-clean:
+	make -C screen/ clean
 	@echo
 
 git-setup:
