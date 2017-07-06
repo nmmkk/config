@@ -45,6 +45,9 @@ repo = 'tpope/vim-unimpaired'
 [[plugins]] # repeat.vim: enable repeating supported plugin maps with .
 repo = 'tpope/vim-repeat'
 
+[[plugins]] # easy to use, file-type sensible comments for Vim. It can handle embedded syntax.
+repo = 'tomtom/tcomment_vim'
+
 #==================================================
 # Colors
 #==================================================
