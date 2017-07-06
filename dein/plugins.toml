@@ -33,6 +33,15 @@ repo = 'KabbAmine/zeavim.vim'
 [[plugins]]
 repo = 'tpope/vim-fugitive'
 
+[[plugins]] # surround.vim: quoting/parenthesizing made simple
+repo = 'tpope/vim-surround'
+
+[[plugins]] # unimpaired.vim: pairs of handy bracket mappings
+repo = 'tpope/vim-unimpaired'
+
+[[plugins]] # repeat.vim: enable repeating supported plugin maps with .
+repo = 'tpope/vim-repeat'
+
 #==================================================
 # Colors
 #==================================================

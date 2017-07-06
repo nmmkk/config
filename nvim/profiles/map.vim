@@ -19,10 +19,11 @@ noremap \ ,
 
 
 
-"### ファイル移動 ###"
-nnoremap <F7> :ar<CR>
-nnoremap <F6> :N<CR>
-nnoremap <F8> :n<CR>
+""" " For :n and :N, use unimpaired keys instead.
+""" "### ファイル移動 ###"
+""" nnoremap <F7> :ar<CR>   " ==> No replacement, but it is not used
+""" nnoremap <F6> :N<CR>    " ==> Use '[a'
+""" nnoremap <F8> :n<CR>    " ==> Use ']a'
 
 """"""""""""" " Use s as prefix of various commands. (BTW, Default s behavior is achived by cl.)
 """"""""""""" nnoremap s <Nop>
@@ -42,9 +43,13 @@ nnoremap <F8> :n<CR>
 """ map <C-F11> ;se paste<Enter>;echo "INFO: Entering paste mode"<Enter>
 """ map <C-F12> ;se nopaste<Enter>;echo "INFO: Entering nopaste mode"<Enter>
 
-""" I just noticed that the following 2 mappings do not work within tmux.
-" set pastetoggle=<F12> "This also works, but I wanted to print something when it is toggled.
-nnoremap <F12> :se invpaste <CR>:echo "INFO: Just executed invpaste"<CR>
+""" Use unimpaired keys instead; unimpaired does not provide a toggle for
+""" 'paste' on purpose, and it suggests to use 'yo' or 'yO' when pasting.
+""" Those commmands enter insert-mode with 'nopaste' set, and leave from
+""" intert-mode with 'nopaste' set back automatically.
+""" """ I just noticed that the following 2 mappings do not work within tmux.
+""" " set pastetoggle=<F12> "This also works, but I wanted to print something when it is toggled.
+""" nnoremap <F12> :se invpaste <CR>:echo "INFO: Just executed invpaste"<CR>
 
 "### カーソル移動 ###"
 nnoremap j gj
@@ -119,8 +124,9 @@ vnoremap v $h
 nnoremap <C-h> :<C-u>help<Space>
 nnoremap <C-h><C-h> :<C-u>help<Space><C-r><C-w><Enter>
 
-" toggle <s>pell   URL: http://d.hatena.ne.jp/h1mesuke/20100803/p1
-nnoremap <silent> <Leader>s :<C-u>setlocal spell! spelllang=en_us<CR>:setlocal spell?<CR>
+""" " Use unimpaired keys instead.
+""" " toggle <s>pell   URL: http://d.hatena.ne.jp/h1mesuke/20100803/p1
+""" nnoremap <silent> <Leader>s :<C-u>setlocal spell! spelllang=en_us<CR>:setlocal spell?<CR> " ==> Use 'cos'
 
 " Exコマンドを実行しやすくする
 nnoremap ;   :
@@ -168,8 +174,9 @@ nnoremap <C-F7> :%s/\s\+.*$//gc<CR>
 " vnoremap " "zdi^V"<C-R>z^V"<ESC>
 " vnoremap ' "zdi'<C-R>z'<ESC>
 
-" Toggle highlight
-nnoremap <silent><Esc><Esc>     :<C-u>set hlsearch!<CR>
+""" " Use unimpaired keys instead.
+""" " Toggle highlight
+""" nnoremap <silent><Esc><Esc>     :<C-u>set hlsearch!<CR> " ==> Use 'coh'
 
 " カーソル下のファイルを開き、さらにウィンドウを縦分割する
 nnoremap <Leader>f :vsp<CR>gf
@@ -177,11 +184,12 @@ nnoremap <Leader>f :vsp<CR>gf
 """"""""""""" """ " Open man in a new tab ==> I installed "thinca/vim-ref" on 4/11/2016
 """"""""""""" nnoremap K :execute 'tabnew <bar> read !' . &keywordprg . ' ' . expand("<cword>")<CR>gg:set syntax=man<CR>
 
-" For QuickFix
-nnoremap <C-k>  :cp<CR>
-" I don't know why but I need to hit Shift-Ctrl-j to take effect the following.
-" In ":verbose nmap" result, actually <NL> is mapped to :cn<CR> instead of <C-j>.
-nnoremap <C-j>  :cn<CR>
+""" " Use unimpaired keys instead.
+""" " For QuickFix
+""" nnoremap <C-k>  :cp<CR>  " ==> Use '[q'
+""" " I don't know why but I need to hit Shift-Ctrl-j to take effect the following.
+""" " In ":verbose nmap" result, actually <NL> is mapped to :cn<CR> instead of <C-j>.
+""" nnoremap <C-j>  :cn<CR>  " ==> Use ']q'
 
 "================================================================================
 " Plugin settings that are lead by <Space> + character
