@@ -23,13 +23,14 @@ nnoremap <Leader>E :e $MYVIMRC<CR>
 " Reload .vimrc
 nnoremap <Leader>R :<C-u>source $MYVIMRC<Enter>:echo 'INFO: $MYVIMRC is just sourced!'<Enter>
 
-" 検索で飛んだ箇所が画面中央にくるようにする
-nnoremap n nzz
-nnoremap N Nzz
-nnoremap * *zz
-nnoremap # #zz
-nnoremap g* g*zz
-nnoremap g# g#zz
+" Disabled the following mappings to map those keys for "auto_nohlsearch" of incsearch.vim 
+""" " 検索で飛んだ箇所が画面中央にくるようにする
+""" nnoremap n nzz
+""" nnoremap N Nzz
+""" nnoremap * *zz
+""" nnoremap # #zz
+""" nnoremap g* g*zz
+""" nnoremap g# g#zz
 
 "ビジュアルモード時vで行末まで選択
 vnoremap v $h
