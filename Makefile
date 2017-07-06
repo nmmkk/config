@@ -10,7 +10,7 @@ default: linux
 # linux: misc-setup vim-setup vim-make-vimproc-linux vimperatorrc-setup zsh-setup
 linux: misc-setup vim-setup vimperatorrc-setup zsh-setup fish-setup
 
-misc-setup: tmux-setup screen-setup git-setup ag-setup
+misc-setup: tmux-setup screen-setup git-setup ag-setup ec-setup
 
 tmux-setup:
 	make -C tmux/
@@ -35,6 +35,15 @@ ag-setup:
 	    echo 'agignore is just created!'; \
 	else \
 	    echo 'agignore already exists. Skip to set it up. ($(INSTALL_BASE)/.agignore)'; \
+	fi
+
+ec-setup:
+	@# Make a symbolic link for EditorConfig file
+	@if [ ! -f $(INSTALL_BASE)/.editorconfig ]; then \
+	    ln -s $(CURDIR)/dotfiles/dot.editorconfig $(INSTALL_BASE)/.editorconfig; \
+	    echo 'Root editorconfig is just created!'; \
+	else \
+	    echo 'Root editorconfig already exists. Skip to set it up. ($(INSTALL_BASE)/.editorconfig)'; \
 	fi
 
 zsh-setup:
