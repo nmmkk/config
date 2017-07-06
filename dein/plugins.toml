@@ -16,6 +16,9 @@ repo = 'thinca/vim-ref'
 [[plugins]] # Realtime preview by Vim. (Markdown, reStructuredText, textile)
 repo = 'kannokanno/previm'
 
+[[plugins]] # Open URI with your favorite browser from your most favorite editor
+repo = 'tyru/open-browser.vim'
+
 [[plugins]] # A light and configurable statusline/tabline for Vim
 repo = 'itchyny/lightline.vim'
 hook_add = '''
