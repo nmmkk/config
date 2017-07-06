@@ -3,13 +3,18 @@ include $(CURDIR)/../build/make-defs.mk
 SRC_DIR := $(CURDIR)
 INSTALL_DIR := $(INSTALL_BASE)/.config/dein
 
-.PHONY: default all install
+.PHONY: default all install dir
 
 default: all
 
 all: install
 
-install:
+dir:
+	@if [ ! -d $(INSTALL_DIR) ]; then \
+	    mkdir -pv $(INSTALL_DIR); \
+	fi
+
+install: dir
 	@# Set symbolic links in INSTALL_DIR so that each link points a file in this directory.
 	@any_installed=0; \
 	for name in *.toml; \

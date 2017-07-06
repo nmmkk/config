@@ -3,7 +3,7 @@ include $(CURDIR)/../build/make-defs.mk
 SRC_DIR := $(CURDIR)
 INSTALL_DIR := $(INSTALL_BASE)/.config/nvim
 
-.PHONY: default all install clean
+.PHONY: default all install clean dir
 
 default: all
 
@@ -11,7 +11,12 @@ all: setup
 
 setup: setup-init setup-snippets
 
-setup-init:
+dir:
+	@if [ ! -d $(INSTALL_DIR) ]; then \
+	    mkdir -pv $(INSTALL_DIR); \
+	fi
+
+setup-init: dir
 	@# Make init.vim if it does not exist yet
 	@if [ ! -f $(INSTALL_DIR)/init.vim ]; then \
 	    echo 'source '$(SRC_DIR)'/init.vim' >> $(INSTALL_DIR)/init.vim; \
