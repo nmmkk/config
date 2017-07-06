@@ -72,6 +72,9 @@ hook_add = '''
     map g# <Plug>(incsearch-nohl-g#)
 '''
 
+[[plugins]] # CVS/SVN/SVK/git/hg/bzr integration plugin
+repo = 'vim-scripts/vcscommand.vim'
+
 #==================================================
 # Colors
 #==================================================
