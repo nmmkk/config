@@ -48,6 +48,9 @@ repo = 'tpope/vim-repeat'
 [[plugins]] # easy to use, file-type sensible comments for Vim. It can handle embedded syntax.
 repo = 'tomtom/tcomment_vim'
 
+[[plugins]] # easy to use, file-type sensible comments for Vim. It can handle embedded syntax.
+repo = 'tomtom/tcomment_vim'
+
 #==================================================
 # Colors
 #==================================================
