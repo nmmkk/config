@@ -33,6 +33,9 @@ repo = 'KabbAmine/zeavim.vim'
 [[plugins]]
 repo = 'tpope/vim-fugitive'
 
+[[plugins]] # A vim plugin to display the indention levels with thin vertical lines
+repo = 'Yggdroot/indentLine'
+
 [[plugins]] # surround.vim: quoting/parenthesizing made simple
 repo = 'tpope/vim-surround'
 
