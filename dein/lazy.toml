@@ -95,3 +95,6 @@ hook_add = '''
 repo = 'davidhalter/jedi-vim'
 on_ft = 'python'
 
+[[plugins]] # Vim plugin for .tmux.conf
+repo = 'tmux-plugins/vim-tmux'
+on_ft = 'tmux'
