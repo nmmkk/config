@@ -1,0 +1,97 @@
+[[plugins]]
+repo = 'Shougo/neomru.vim'
+on_source = ['unite.vim']
+
+[[plugins]]
+repo = 'Shougo/context_filetype.vim'
+
+[[plugins]]
+repo = 'Shougo/neosnippet'
+on_event = 'InsertEnter'
+on_ft = ['snippet']
+depends = ['neosnippet-snippets']
+hook_source = '''
+  " Plugin key-mappings.
+  imap <C-k> <Plug>(neosnippet_expand_or_jump)
+  smap <C-k> <Plug>(neosnippet_expand_or_jump)
+  xmap <C-k> <Plug>(neosnippet_expand_target)
+
+  " SuperTab like snippets behavior.
+  imap <expr><TAB>    neosnippet#expandable_or_jumpable() ?
+              \ "\<Plug>(neosnippet_expand_or_jump)"
+              \: pumvisible() ? "\<C-n>" : "\<TAB>"
+  smap <expr><TAB>    neosnippet#expandable_or_jumpable() ?
+              \ "\<Plug>(neosnippet_expand_or_jump)"
+              \: pumvisible() ? "\<C-n>" : "\<TAB>"
+
+  if has('conceal')
+    set conceallevel=2 concealcursor=niv
+  endif
+
+  " The location of my snippets
+  let s:my_snippet = g:config_home . '/nvim/snippets'
+  let g:neosnippet#snippets_directory = s:my_snippet
+'''
+
+[[plugins]]
+repo = 'Shougo/vimproc.vim'
+build = 'make'
+on_source = ['unite.vim', 'vimshell.vim']
+
+[[plugins]] # Emmet
+repo = 'mattn/emmet-vim'
+on_event = 'InsertEnter'
+hook_source = '''
+    let g:user_emmet_mode = 'i'
+    let g:user_emmet_leader_key='<C-E>'
+    let g:use_emmet_complete_tag = 1
+    let g:user_emmet_settings = {
+    \   'variables': {
+    \       'lang': "ja"
+    \   },
+    \   'indentation': '    '
+    \}
+'''
+
+[[plugins]] # A plugin of http://codic.jp/ for Vim.
+repo = 'koron/codic-vim'
+on_cmd = 'Codic'
+
+[[plugins]] # EditorConfig
+repo = 'editorconfig/editorconfig-vim'
+on_path = '.*'
+hook_source = '''
+    let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
+'''
+
+
+# Languages
+[[plugins]] # Vim support for editing fish scripts
+repo = 'dag/vim-fish'
+on_ft = 'fish'
+
+[[plugins]] # Vim plugin for Todo.txt
+repo = 'freitass/todo.txt-vim'
+on_ft = 'todo'
+
+[[plugins]]
+repo = 'vimperator/vimperator.vim'
+on_ft = 'vimperator'
+
+[[plugins]]
+repo  = 'cespare/vim-toml'
+on_ft = 'toml'
+
+# Markdown
+[[plugins]]
+repo = 'rcmdnk/vim-markdown'
+on_ft = ['markdown','mkd']
+hook_add = '''
+    let g:vim_markdown_frontmatter = 1
+    let g:vim_markdown_math = 1
+'''
+
+[[plugins]] # Using the jedi autocompletion library for VIM.
+repo = 'davidhalter/jedi-vim'
+on_ft = 'python'
+

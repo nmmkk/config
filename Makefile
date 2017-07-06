@@ -58,6 +58,14 @@ vim-setup:
 	make -C vim/
 	@echo
 
+dein-setup:
+	make -C dein/
+	@echo
+
+nvim-setup: dein-setup
+	make -C nvim/
+	@echo
+
 vimperatorrc-setup:
 	@if [ ! -f $(INSTALL_BASE)/.vimperatorrc ]; then \
 	    echo 'source '$(BASE_DIR)'/dotfiles/dot.vimperatorrc' >> $(INSTALL_BASE)/.vimperatorrc; \

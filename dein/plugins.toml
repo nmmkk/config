@@ -1,0 +1,50 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'Shougo/unite.vim'
+
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+
+[[plugins]] # Integrates GNU GLOBAL source code tag system with VIM.
+repo = 'vim-scripts/gtags.vim'
+
+[[plugins]] # Integrated reference viewer.
+repo = 'thinca/vim-ref'
+
+[[plugins]] # Realtime preview by Vim. (Markdown, reStructuredText, textile)
+repo = 'kannokanno/previm'
+
+[[plugins]] # A light and configurable statusline/tabline for Vim
+repo = 'itchyny/lightline.vim'
+hook_add = '''
+    let g:lightline = {
+    \   'colorscheme': 'wombat'
+    \}
+'''
+
+[[plugins]] # Highlights trailing whitespace in red and provides :FixWhitespace to fix it.
+repo = 'bronson/vim-trailing-whitespace'
+
+[[plugins]] # Zeal for Vim
+repo = 'KabbAmine/zeavim.vim'
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+
+#==================================================
+# Colors
+#==================================================
+[[plugins]] # hybrid
+repo = 'w0ng/vim-hybrid'
+
+[[plugins]] # solarized
+repo = 'altercation/vim-colors-solarized'
+
+[[plugins]] # dracula
+repo = 'dracula/vim'
+
+[[plugins]] # molokai
+repo = 'tomasr/molokai'
+
