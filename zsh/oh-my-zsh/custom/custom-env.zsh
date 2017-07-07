@@ -9,19 +9,23 @@ export LESS='-R'    # to enable coloring
 export EDITOR=vim
 
 export PATH=$PATH:${HOME}/tools
+
 # }}}1
 
 # Linuxbrew # {{{1
 
 # enable_linuxbrew() and disable_linuxbrew() set the following sets of
 # environment variables.
-LB_PATH="${HOME}/.linuxbrew/sbin:${HOME}/.linuxbrew/bin:${PATH}"
-LB_MANPATH="${HOME}/.linuxbrew/share/man:${MANPATH}"
-LB_INFOPATH="${HOME}/.linuxbrew/share/info:${INFOPATH}"
+export LB_HOME=${HOME}/.linuxbrew
+export LB_PATH="${HOME}/.linuxbrew/sbin:${HOME}/.linuxbrew/bin:${PATH}"
+export LB_MANPATH="${HOME}/.linuxbrew/share/man:${MANPATH}"
+export LB_INFOPATH="${HOME}/.linuxbrew/share/info:${INFOPATH}"
+# export LB_PKG_CONFIG_PATH="${LB_HOME}/lib64/pkgconfig:${LB_HOME}/lib/pkgconfig:${PKG_CONFIG_PATH}"
 
-ORIG_PATH="${PATH}"
-ORIG_MANPATH="${MANPATH}"
-ORIG_INFOPATH="${INFOPATH}"
+export ORIG_PATH="${PATH}"
+export ORIG_MANPATH="${MANPATH}"
+export ORIG_INFOPATH="${INFOPATH}"
+# export ORIG_PKG_CONFIG_PATH="${PKG_CONFIG_PATH}"
 # }}}1
 
 # GNU Global# {{{1
