@@ -18,6 +18,7 @@ let s:profile_names = [
 \   'binary_mode',
 \   'coding_style',
 \   'vim-ref',
+\   'local',
 \]
 "}}}3
 
@@ -53,7 +54,7 @@ let s:profiles_local_dir_path = g:config_home . '/nvim/local'
 
 " for sourcing profiles under the local directory"{{{3
 function! s:source_local_profile(name)
-    let l:path = expand(printf('%s%s.nvim', s:profiles_local_dir_path, a:name))
+    let l:path = expand(printf('%s/%s.nvim', s:profiles_local_dir_path, a:name))
     if filereadable(l:path)
         execute printf('source %s', l:path)
     endif

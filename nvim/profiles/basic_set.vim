@@ -123,7 +123,4 @@ set termguicolors
 " Close quickfix with 'q'
 autocmd FileType qf nnoremap <silent><buffer>q :quit<CR>
 
-" Lastly, source local settings
-ResourceLocalProfile local_basic_set
-
 " vim: foldmethod=marker

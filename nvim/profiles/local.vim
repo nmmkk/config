@@ -1,0 +1,2 @@
+ResourceLocalProfile basic_set
+ResourceLocalProfile syntastic
