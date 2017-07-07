@@ -1,10 +1,5 @@
 " Key mapping
 
-" Leader key is changed to "," from "\".
-let mapleader = ","
-" Swap "\" and ",".
-noremap \ ,
-
 "### カーソル移動 ###"
 nnoremap j gj
 nnoremap k gk

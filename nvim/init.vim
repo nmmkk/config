@@ -84,6 +84,13 @@ augroup VimrcAutoCmd
 augroup END
 "}}}1
 
+" Leader key needs to be set before any other mappings are defined.
+" So define it here before loading dein settings where I have defined lots of
+" "hook_add" defining mappings with <Leader>.
+let mapleader = ","
+" Swap "\" and ",".
+noremap \ ,
+
 " Source settings {{{1
 """"" " First, source bundles{{{2
 """"" "    I decided to stick with NeoBundle as some my working environments are
