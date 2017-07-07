@@ -179,6 +179,25 @@ hook_add = '''
     let g:memolist_delimiter_yaml_end  = "---"
 '''
 
+[[plugins]] #  Syntax checking hacks for vim
+repo = 'vim-syntastic/syntastic'
+hook_add = '''
+    set statusline+=%#warningmsg#
+    set statusline+=%{SyntasticStatuslineFlag()}
+    set statusline+=%*
+
+    let g:syntastic_always_populate_loc_list = 1
+    let g:syntastic_auto_loc_list = 1
+    let g:syntastic_check_on_open = 0
+    let g:syntastic_check_on_wq = 0
+
+    nnoremap [Syntastic] <nop>
+    nmap <Leader>s [Syntastic]
+
+    nnoremap <silent> [Syntastic]c :SyntasticCheck<CR>
+    nnoremap <silent> [Syntastic]t :SyntasticToggleMode<CR>
+'''
+
 #==================================================
 # Colors
 #==================================================
