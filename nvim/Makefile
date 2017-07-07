@@ -15,6 +15,9 @@ dir:
 	@if [ ! -d $(INSTALL_DIR) ]; then \
 	    mkdir -pv $(INSTALL_DIR); \
 	fi
+	@if [ ! -d $(INSTALL_DIR)/local ]; then \
+	    mkdir -pv $(INSTALL_DIR)/local; \
+	fi
 
 setup-init: dir
 	@# Make init.vim if it does not exist yet
@@ -27,6 +30,15 @@ setup-init: dir
 	else \
 	    echo 'init.vim already exists. Skip to set it up. ($(INSTALL_DIR)/init.vim)'; \
 	fi
+	@# Make an empty local conf file if it does not exist yet
+	@for local_conf in local_basic_set.nvim; do \
+	    if [ ! -f $(INSTALL_DIR)/local/$${local_conf} ]; then \
+	        touch $(INSTALL_DIR)/local/$${local_conf}; \
+	        echo "$${local_conf} is just created as an empty file. ($(INSTALL_DIR)/local/$${local_conf})"; \
+	    else \
+	        echo "$${local_conf} already exists. ($(INSTALL_DIR)/local/$${local_conf})"; \
+	    fi; \
+	done
 
 setup-snippets:
 	@if [ ! -e $(INSTALL_DIR)/snippets ]; then \
