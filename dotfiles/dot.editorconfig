@@ -21,7 +21,7 @@ charset = utf-8
 indent_size = 4
 
 # Limit line length
-[*.{c,cpp,py}]
+[*.{c,h,cpp,hpp,py}]
 max_line_length = 80
 
 # Tab indentation (no size specified)
