@@ -120,6 +120,9 @@ set grepprg=grep\ -nH
 " Ref: https://github.com/dracula/vim/issues/11
 set termguicolors
 
+" Close quickfix with 'q'
+autocmd FileType qf nnoremap <silent><buffer>q :quit<CR>
+
 " Lastly, source local settings
 ResourceLocalProfile local_basic_set
 
