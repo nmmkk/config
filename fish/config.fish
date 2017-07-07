@@ -21,9 +21,9 @@ end
 switch $os
 case Linux
     # Originals so that we can restore it later
-    set ORIG_PATH $PATH
-    set ORIG_MANPATH $MANPATH
-    set ORIG_INFOPATH $INFOPATH
+    set -gx FISH_ORIG_PATH $PATH
+    set -gx FISH_ORIG_MANPATH $MANPATH
+    set -gx FISH_ORIG_INFOPATH $INFOPATH
 
     # Make empty directories silently to prevent errors in enable_linuxbrew()
     # on a Linux machine that does not have linuxbrew installed.
@@ -34,9 +34,9 @@ case Linux
         $HOME/.linuxbrew/share/info
 
     # Ones with linuxbrew enabled
-    set LB_PATH  $HOME/.linuxbrew/sbin $HOME/.linuxbrew/bin $PATH
-    set LB_MANPATH  $HOME/.linuxbrew/share/man $MANPATH
-    set LB_INFOPATH  $HOME/.linuxbrew/share/info $INFOPATH
+    set -gx FISH_LB_PATH  $HOME/.linuxbrew/sbin $HOME/.linuxbrew/bin $PATH
+    set -gx FISH_LB_MANPATH  $HOME/.linuxbrew/share/man $MANPATH
+    set -gx FISH_LB_INFOPATH  $HOME/.linuxbrew/share/info $INFOPATH
 end
 
 
@@ -60,9 +60,9 @@ function enable_linuxbrew
         return 0
     end
 
-    set PATH $LB_PATH
-    set MANPATH $LB_MANPATH
-    set INFOPATH $LB_INFOPATH
+    set PATH $FISH_LB_PATH
+    set MANPATH $FISH_LB_MANPATH
+    set INFOPATH $FISH_LB_INFOPATH
 end
 
 function disable_linuxbrew
@@ -71,9 +71,9 @@ function disable_linuxbrew
         return 0
     end
 
-    set PATH $ORIG_PATH
-    set MANPATH $ORIG_MANPATH
-    set INFOPATH $ORIG_INFOPATH
+    set PATH $FISH_ORIG_PATH
+    set MANPATH $FISH_ORIG_MANPATH
+    set INFOPATH $FISH_ORIG_INFOPATH
 end
 
 # [bashで言うところの!$はfishではどうすればよいか - Qiita](http://qiita.com/ymko/items/d7c5c4d0cc6174d5fc86)
