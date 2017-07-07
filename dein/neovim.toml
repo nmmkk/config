@@ -35,28 +35,45 @@ hook_source = '''
     inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<C-h>"
 '''
 
-### [[plugins]] # Successor of unite.vim
-### repo = 'Shougo/denite.nvim'
-### if = 'has("python3")'
-### on_cmd = 'Denite'
-### hook_post_source = '''
-###     " file_rec
-###     if executable('pt')
-###         call denite#custom#var('file_rec', 'command', ['pt', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', ''])
-###     endif
-### 
-###     " grep
-###     if executable('pt')
-###         call denite#custom#var('grep', 'command', ['pt', '--nogroup', '--nocolor', '--smart-case', '--hidden'])
-###         call denite#custom#var('grep', 'default_opts', [])
-###         call denite#custom#var('grep', 'recursive_opts', [])
-###     endif
-### 
-###     call denite#custom#source('file_mru', 'matchers', ['matcher_fuzzy', 'matcher_project_files'])
-###     call denite#custom#source('file_mru', 'converters', ['converter_relative_word'])
-### '''
+[[plugins]] # Successor of unite.vim
+repo = 'Shougo/denite.nvim'
+if = 'has("python3")'
+on_cmd = 'Denite'
+depends = ['neomru.vim', 'neoyank.vim']
+hook_add = '''
+    nmap <silent> <C-u><C-t> :<C-u>Denite filetype<CR>
+    nmap <silent> <C-u><C-p> :<C-u>Denite file_rec<CR>
+    nmap <silent> <C-u><C-j> :<C-u>Denite line<CR>
+    nmap <silent> <C-u><C-g> :<C-u>Denite grep<CR>
+    nmap <silent> <C-u><C-]> :<C-u>DeniteCursorWord grep<CR>
+    nmap <silent> <C-u><C-u> :<C-u>Denite file_mru<CR>
+    nmap <silent> <C-u><C-y> :<C-u>Denite neoyank<CR>
+    nmap <silent> <C-u><C-r> :<C-u>Denite -resume<CR>
+    nmap <silent> <C-u>; :<C-u>Denite -resume -immediately -select=+1<CR>
+    nmap <silent> <C-u>- :<C-u>Denite -resume -immediately -select=-1<CR>
+    " nmap <silent> <C-u><C-d> :<C-u>call denite#start([{'name': 'file_rec', 'args': ['~/dotfiles']}])<CR>
+    nnoremap ml :<C-u>call denite#start([{'name': 'file_rec', 'args': [g:memolist_path]}])<CR>
+'''
+hook_post_source = '''
+    " file_rec
+    if executable('at')
+        call denite#custom#var('file_rec', 'command', ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+    elseif executable('pt')
+        call denite#custom#var('file_rec', 'command', ['pt', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', ''])
+    endif
 
-### [[plugins]]
-### repo = 'Shougo/neoyank.vim'
-### depends = 'denite.nvim'
-### on_event = 'TextYankPost'
+    " grep
+    if executable('ag')
+        call denite#custom#var('grep', 'command', ['ag'])
+        call denite#custom#var('grep', 'recursive_opts', [])
+        call denite#custom#var('grep', 'pattern_opt', [])
+        call denite#custom#var('grep', 'default_opts', ['--follow', '--no-group', '--no-color'])
+    elseif executable('pt')
+        call denite#custom#var('grep', 'command', ['pt', '--nogroup', '--nocolor', '--smart-case', '--hidden'])
+        call denite#custom#var('grep', 'default_opts', [])
+        call denite#custom#var('grep', 'recursive_opts', [])
+    endif
+
+    call denite#custom#source('file_mru', 'matchers', ['matcher_fuzzy', 'matcher_project_files'])
+    call denite#custom#source('file_mru', 'converters', ['converter_relative_word'])
+'''
