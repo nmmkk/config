@@ -19,13 +19,16 @@ hook_source = '''
   smap <C-k> <Plug>(neosnippet_expand_or_jump)
   xmap <C-k> <Plug>(neosnippet_expand_target)
 
-  " SuperTab like snippets behavior.
-  imap <expr><TAB>    neosnippet#expandable_or_jumpable() ?
-              \ "\<Plug>(neosnippet_expand_or_jump)"
-              \: pumvisible() ? "\<C-n>" : "\<TAB>"
-  smap <expr><TAB>    neosnippet#expandable_or_jumpable() ?
-              \ "\<Plug>(neosnippet_expand_or_jump)"
-              \: pumvisible() ? "\<C-n>" : "\<TAB>"
+  " This started behaving weirdly. It does not expand the snippet, but inserted
+  " "<Plug>(neosnippet_expand_or_jump)". I am not sure what started to expose
+  " this issue.
+  """ " SuperTab like snippets behavior.
+  """ imap <expr><TAB>    neosnippet#expandable_or_jumpable() ?
+  """             \ "\<Plug>(neosnippet_expand_or_jump)"
+  """             \: pumvisible() ? "\<C-n>" : "\<TAB>"
+  """ smap <expr><TAB>    neosnippet#expandable_or_jumpable() ?
+  """             \ "\<Plug>(neosnippet_expand_or_jump)"
+  """             \: pumvisible() ? "\<C-n>" : "\<TAB>"
 
   if has('conceal')
     set conceallevel=2 concealcursor=niv
