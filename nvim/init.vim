@@ -48,12 +48,12 @@ command! -nargs=+ ResourceProfile call s:call_source_profiles(<q-args>)
 " local settings"{{{2
 
 " Variables"{{{3
-let s:profiles_local_dir_path = g:config_home . '/local'
+let s:profiles_local_dir_path = g:config_home . '/nvim/local'
 "}}}3
 
 " for sourcing profiles under the local directory"{{{3
 function! s:source_local_profile(name)
-    let l:path = expand(printf('%s%s.vim', s:profiles_local_dir_path, a:name))
+    let l:path = expand(printf('%s%s.nvim', s:profiles_local_dir_path, a:name))
     if filereadable(l:path)
         execute printf('source %s', l:path)
     endif
