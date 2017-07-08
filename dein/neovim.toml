@@ -45,17 +45,20 @@ if = 'has("python3")'
 on_cmd = 'Denite'
 depends = ['neomru.vim', 'neoyank.vim']
 hook_add = '''
-    nmap <silent> <C-u><C-t> :<C-u>Denite filetype<CR>
-    nmap <silent> <C-u><C-p> :<C-u>Denite file_rec<CR>
-    nmap <silent> <C-u><C-j> :<C-u>Denite line<CR>
-    nmap <silent> <C-u><C-g> :<C-u>Denite grep<CR>
-    nmap <silent> <C-u><C-]> :<C-u>DeniteCursorWord grep<CR>
-    nmap <silent> <C-u><C-u> :<C-u>Denite file_mru<CR>
-    nmap <silent> <C-u><C-y> :<C-u>Denite neoyank<CR>
-    nmap <silent> <C-u><C-r> :<C-u>Denite -resume<CR>
-    nmap <silent> <C-u>; :<C-u>Denite -resume -immediately -select=+1<CR>
-    nmap <silent> <C-u>- :<C-u>Denite -resume -immediately -select=-1<CR>
-    " nmap <silent> <C-u><C-d> :<C-u>call denite#start([{'name': 'file_rec', 'args': ['~/dotfiles']}])<CR>
+    nnoremap [Denite] <nop>
+    nmap <Leader>d [Denite]
+
+    nnoremap <silent> [Denite]t :Denite filetype<CR>
+    nnoremap <silent> [Denite]p :Denite file_rec<CR>
+    nnoremap <silent> [Denite]j :Denite line<CR>
+    nnoremap <silent> [Denite]g :Denite grep<CR>
+    nnoremap <silent> [Denite]] :DeniteCursorWord grep<CR>
+    nnoremap <silent> [Denite]u :Denite file_mru<CR>
+    nnoremap <silent> [Denite]y :Denite neoyank<CR>
+    nnoremap <silent> [Denite]r :Denite -resume<CR>
+    nnoremap <silent> [Denite]; :Denite -resume -immediately -select=+1<CR>
+    nnoremap <silent> [Denite]- :Denite -resume -immediately -select=-1<CR>
+    " nnoremap <silent> [Denite]<C-d> :<C-u>call denite#start([{'name': 'file_rec', 'args': ['~/dotfiles']}])<CR>
     nnoremap ml :<C-u>call denite#start([{'name': 'file_rec', 'args': [g:memolist_path]}])<CR>
 '''
 hook_post_source = '''
