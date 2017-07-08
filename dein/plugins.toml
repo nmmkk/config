@@ -136,10 +136,11 @@ hook_add = '''
     \       'outputter/buffer/split'  : ':rightbelow 8sp',
     \       'outputter/buffer/close_on_empty' : 1,
     \   },
-    \   'c/make/fs': {
-    \       'command': 'make',
-    \       'exec': '%c -f wrap.mk',
-    \       'cmdopt': '-std=c11'
+    \   'c': {
+    \       'command': 'gcc',
+    \       'exec' : ['%c %s -o %s:p:r', '%s:p:r %a', 'rm -f %s:p:r'],
+    \       'tempfile' : '{tempname()}.c',
+    \       'cmdopt': '-std=c11 -Wall -Wextra',
     \   },
     \}
 '''
