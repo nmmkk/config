@@ -94,9 +94,6 @@ repo = 'tpope/vim-repeat'
 [[plugins]] # easy to use, file-type sensible comments for Vim. It can handle embedded syntax.
 repo = 'tomtom/tcomment_vim'
 
-[[plugins]] # easy to use, file-type sensible comments for Vim. It can handle embedded syntax.
-repo = 'tomtom/tcomment_vim'
-
 [[plugins]] # incsearch.vim incrementally highlights ALL pattern matches unlike default 'incsearch'
 repo = 'haya14busa/incsearch.vim'
 hook_add = '''
