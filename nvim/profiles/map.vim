@@ -1,4 +1,7 @@
 " Key mapping
+"
+" NOTE: Mappings for each plugin are defined in dein toml files.
+"
 
 "### カーソル移動 ###"
 nnoremap j gj
@@ -59,13 +62,3 @@ nnoremap <C-F7> :%s/\s\+.*$//gc<CR>
 " カーソル下のファイルを開き、さらにウィンドウを縦分割する
 nnoremap <Leader>f :vsp<CR>gf
 
-"================================================================================
-" Plugin settings that are lead by <Space> + character
-" And the actual settings are defined in separate files like "vimrc_gnuglobal".
-"================================================================================
-
-"--------------------------------------------------------------------------------
-" for NERDTree
-"
-nnoremap <silent><C-e> :NERDTreeToggle<CR>
-let g:NERDTreeBookmarksFile=$HOME . '/rc/vim/NERDTreeBookmarks'
