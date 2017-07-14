@@ -196,6 +196,19 @@ hook_add = '''
     nnoremap <silent> [Syntastic]t :SyntasticToggleMode<CR>
 '''
 
+[[plugins]] # Vim plugin: Create your own submodes
+repo = 'kana/vim-submode'
+hook_add = '''
+    call submode#enter_with('bufmove', 'n', '', '[MyKey]>', '<C-w>>')
+    call submode#enter_with('bufmove', 'n', '', '[MyKey]<', '<C-w><')
+    call submode#enter_with('bufmove', 'n', '', '[MyKey]+', '<C-w>+')
+    call submode#enter_with('bufmove', 'n', '', '[MyKey]-', '<C-w>-')
+    call submode#map('bufmove', 'n', '', '>', '<C-w>>')
+    call submode#map('bufmove', 'n', '', '<', '<C-w><')
+    call submode#map('bufmove', 'n', '', '+', '<C-w>+')
+    call submode#map('bufmove', 'n', '', '-', '<C-w>-')
+'''
+
 #==================================================
 # Colors
 #==================================================
