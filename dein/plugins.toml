@@ -209,6 +209,9 @@ hook_add = '''
     call submode#map('bufmove', 'n', '', '-', '<C-w>-')
 '''
 
+[[plugins]] # Vim plugin: Turn :cd into :tabpagecd, to use one tab page per project
+repo = 'kana/vim-tabpagecd'
+
 #==================================================
 # Colors
 #==================================================
