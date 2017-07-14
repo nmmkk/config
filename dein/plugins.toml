@@ -212,6 +212,9 @@ hook_add = '''
 [[plugins]] # Vim plugin: Turn :cd into :tabpagecd, to use one tab page per project
 repo = 'kana/vim-tabpagecd'
 
+[[plugins]] # Vim script for text filtering and alignment
+repo = 'godlygeek/tabular'
+
 #==================================================
 # Colors
 #==================================================
