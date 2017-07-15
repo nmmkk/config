@@ -54,6 +54,7 @@ hook_add = '''
     nnoremap <silent> [Denite]g :Denite grep<CR>
     nnoremap <silent> [Denite]] :DeniteCursorWord grep<CR>
     nnoremap <silent> [Denite]u :Denite file_mru<CR>
+    nnoremap <silent> [Denite]b :Denite buffer<CR>
     nnoremap <silent> [Denite]y :Denite neoyank<CR>
     nnoremap <silent> [Denite]r :Denite -resume<CR>
     nnoremap <silent> [Denite]; :Denite -resume -immediately -select=+1<CR>
