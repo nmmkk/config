@@ -91,6 +91,9 @@ repo = 'tpope/vim-unimpaired'
 [[plugins]] # repeat.vim: enable repeating supported plugin maps with .
 repo = 'tpope/vim-repeat'
 
+[[plugins]] # speeddating.vim: use CTRL-A/CTRL-X to increment dates, times, and more
+repo = 'tpope/vim-speeddating'
+
 [[plugins]] # easy to use, file-type sensible comments for Vim. It can handle embedded syntax.
 repo = 'tomtom/tcomment_vim'
 
