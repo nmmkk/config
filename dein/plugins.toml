@@ -287,6 +287,15 @@ repo = 'kana/vim-tabpagecd'
 [[plugins]] # Vim script for text filtering and alignment
 repo = 'godlygeek/tabular'
 
+[[plugins]] # Vim script for text filtering and alignment
+repo = 'vim-scripts/ShowMarks'
+hook_add = '''
+    let g:showmarks_include="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+'''
+
+# [[plugins]] # showing marks using number array in color, easy to trace.
+# repo = 'vim-scripts/number-marks'
+
 #==================================================
 # Colors
 #==================================================
