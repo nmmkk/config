@@ -299,6 +299,9 @@ hook_add = '''
 # [[plugins]] # showing marks using number array in color, easy to trace.
 # repo = 'vim-scripts/number-marks'
 
+[[plugins]] # Vim motions on speed!
+repo = 'easymotion/vim-easymotion'
+
 #==================================================
 # Colors
 #==================================================

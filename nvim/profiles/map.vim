@@ -7,8 +7,9 @@
 nnoremap j gj
 nnoremap k gk
 
-" <Leader><Leader>で変更があれば保存
-noremap <Leader><Leader> :up<CR>
+" 変更があれば保存: "<Leader><Leader>" started conflicting with easy-motion
+""" noremap <Leader><Leader> :up<CR>
+noremap \\ :up<CR>
 
 " Edit .vimrc
 nnoremap <Leader>E :e $MYVIMRC<CR>
