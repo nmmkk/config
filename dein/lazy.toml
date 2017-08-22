@@ -103,6 +103,15 @@ hook_add = '''
 '''
 depends = ['vim-markdown-quote-syntax']
 
+[[plugins]] # A vim 7.4+ plugin to generate table of contents for Markdown files.
+repo = 'mzlogin/vim-markdown-toc'
+on_ft = ['markdown', 'mkd']
+hook_add = '''
+    let g:vmt_auto_update_on_save = 1
+    let g:vmt_dont_insert_fence = 0
+    let g:vmt_cycle_list_item_markers = 1
+'''
+
 [[plugins]] # vim plugin for highliting code in markdown quote
 ## repo = 'joker1007/vim-markdown-quote-syntax'
 repo = 'rcmdnk/vim-markdown-quote-syntax'
