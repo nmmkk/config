@@ -100,8 +100,9 @@ hook_add = '''
     let g:vim_markdown_autowrite = 1
     let g:vim_markdown_no_extensions_in_markdown = 1
     let g:vim_markdown_conceal = 0
+    let g:vim_markdown_toml_frontmatter = 1
 '''
-depends = ['vim-markdown-quote-syntax']
+depends = ['vim-markdown-quote-syntax', 'vim-toml']
 
 [[plugins]] # A vim 7.4+ plugin to generate table of contents for Markdown files.
 repo = 'mzlogin/vim-markdown-toc'
