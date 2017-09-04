@@ -18,6 +18,9 @@ end
 # PATH
 #
 
+# For nodebrew
+set -gx PATH $HOME/.nodebrew/current/bin $PATH
+
 switch $os
 case Linux
     # Originals so that we can restore it later
