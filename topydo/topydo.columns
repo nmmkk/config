@@ -1,10 +1,3 @@
-[Current]
-title = Current
-filterexpr = 
-sortexpr = desc:importance
-groupexpr = project
-show_all = 0
-
 [DueToday]
 title = DueToday
 filterexpr = due:=today
@@ -17,7 +10,21 @@ filterexpr = due:<today
 sortexpr = desc:due
 show_all = 1
 
+[Priorities]
+title = Priorities
+filterexpr = (>E)
+sortexpr = desc:due
+show_all = 1
+
 [Starred]
 title = Starred
 filterexpr = star:1
 show_all = 1
+
+[Current]
+title = Current
+filterexpr = 
+sortexpr = desc:importance
+groupexpr = project
+show_all = 0
+
