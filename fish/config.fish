@@ -42,6 +42,15 @@ case Linux
     set -gx FISH_LB_INFOPATH  $HOME/.linuxbrew/share/info $INFOPATH
 end
 
+#
+# Environment variables
+#
+
+set -gx XDG_DATA_HOME $HOME/.local/share
+set -gx XDG_CONFIG_HOME $HOME/.config
+# set -gx XDG_DATA_DIRS /usr/local/share/:/usr/share/
+# set -gx XDG_CONFIG_DIRS /etc/xdg
+set -gx XDG_CACHE_HOME $HOME/.cache
 
 #
 # Workarond for xsel error upon <C-w>, <C-u> ... etc.
@@ -130,5 +139,9 @@ if type todo.sh >/dev/null ^/dev/null
     balias t todo.sh
     set -gx TODOTXT_DEFAULT_ACTION list
     set -gx TODOTXT_SORT_COMMAND 'env LC_COLLATE=C sort -k 2,2 -k 1,1n'
+end
+
+if type jrnl >/dev/null ^/dev/null
+    balias j jrnl
 end
 
