@@ -10,7 +10,7 @@ default: linux
 # linux: misc-setup vim-setup vim-make-vimproc-linux vimperatorrc-setup zsh-setup
 linux: misc-setup vim-setup vimperatorrc-setup zsh-setup fish-setup
 
-misc-setup: tmux-setup screen-setup git-setup ag-setup ec-setup
+misc-setup: tmux-setup screen-setup git-setup ag-setup ec-setup jrnl-setup
 
 tmux-setup:
 	make -C tmux/
@@ -44,6 +44,15 @@ ec-setup:
 	    echo 'Root editorconfig is just created!'; \
 	else \
 	    echo 'Root editorconfig already exists. Skip to set it up. ($(INSTALL_BASE)/.editorconfig)'; \
+	fi
+
+jrnl-setup:
+	@# Make a symbolic link for jrnl configuration file
+	@if [ ! -f $(INSTALL_BASE)/.config/jrnl ]; then \
+	    ln -s $(CURDIR)/dotfiles/dot.jrnl $(INSTALL_BASE)/.config/jrnl; \
+	    echo 'jrnl configuration file is just created!'; \
+	else \
+	    echo 'jrnl configuration file already exists. Skip to set it up. ($(INSTALL_BASE)/.config/jrnl)'; \
 	fi
 
 zsh-setup:
