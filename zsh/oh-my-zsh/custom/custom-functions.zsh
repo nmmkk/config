@@ -119,6 +119,7 @@ function enable_linuxbrew() { # {{{1
     MANPATH=${LB_MANPATH}
     INFOPATH=${LB_INFOPATH}
     # PKG_CONFIG_PATH=${LB_PKG_CONFIG_PATH}
+    XDG_DATA_DIRS=${LB_XDG_DATA_DIRS}
 } #}}}1
 
 function disable_linuxbrew() { # {{{1
@@ -128,6 +129,7 @@ function disable_linuxbrew() { # {{{1
     MANPATH=${ORIG_MANPATH}
     INFOPATH=${ORIG_INFOPATH}
     # PKG_CONFIG_PATH=${ORIG_PKG_CONFIG_PATH}
+    XDG_DATA_DIRS=${ORIG_XDG_DATA_DIRS}
 } #}}}1
 
 # Source the file for local functions
