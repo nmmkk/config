@@ -26,7 +26,8 @@ alias f="find"
 ### alias findgrep="find -type f -exec grep -Hn --color" # ==> changed to a function
 alias s="svn"
 alias g="git"
-alias j="jobs -l"
+alias jrnl=" jrnl"
+alias j="jrnl"
 alias la='ls -la'
 alias le='ls | grep -ie'
 alias lsdir='ls -l | grep "^d"'
