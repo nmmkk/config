@@ -44,7 +44,7 @@ if [ x = xy ]; then
     PROMPT='${PROMPT_PREFIX}${DATE_TIME}${SEPARATOR1}${USER_NAME}${SEPARATOR2}${HOST_NAME}${SEPARATOR3}${CURRENT_DIRECTORY} $(my_git_status)
 $PROMPT_CHAR'
     PROMPT2=$(str_with_color grey '> ')
-    SSH_REMOTE_HOST=$(str_with_color black '(ssh from ${SSH_CLIENT%%" "*})')
+    SSH_REMOTE_HOST=$(str_with_color black '(ssh from ${SSH_CONNECTION%%" "*})')
     # }}}
 else
     # Good for dark background# {{{
@@ -60,7 +60,7 @@ else
     PROMPT='${PROMPT_PREFIX}${DATE_TIME}${SEPARATOR1}${USER_NAME}${SEPARATOR2}${HOST_NAME}${SEPARATOR3}${CURRENT_DIRECTORY} $(my_git_status)
 $PROMPT_CHAR'
     PROMPT2=$(str_with_color grey '> ')
-    SSH_REMOTE_HOST=$(str_with_color white '(ssh from ${SSH_CLIENT%%" "*})')
+    SSH_REMOTE_HOST=$(str_with_color white '(ssh from ${SSH_CONNECTION%%" "*})')
     # }}}
 fi
 
