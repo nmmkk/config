@@ -11,6 +11,12 @@ export EDITOR=vim
 # .local/bin is for files installed via pip
 export PATH=${HOME}/.local/bin:$PATH:${HOME}/tools
 
+export XDG_DATA_HOME=$HOME/.local/share
+export XDG_CONFIG_HOME=$HOME/.config
+# export XDG_DATA_DIRS=/usr/local/share/:/usr/share/
+# export XDG_CONFIG_DIRS=/etc/xdg
+export XDG_CACHE_HOME=$HOME/.cache
+
 # }}}1
 
 # Linuxbrew # {{{1
@@ -22,11 +28,13 @@ export LB_PATH="${HOME}/.linuxbrew/sbin:${HOME}/.linuxbrew/bin:${PATH}"
 export LB_MANPATH="${HOME}/.linuxbrew/share/man:${MANPATH}"
 export LB_INFOPATH="${HOME}/.linuxbrew/share/info:${INFOPATH}"
 # export LB_PKG_CONFIG_PATH="${LB_HOME}/lib64/pkgconfig:${LB_HOME}/lib/pkgconfig:${PKG_CONFIG_PATH}"
+export LB_XDG_DATA_DIRS="${HOME}/.linuxbrew/share:${XDG_DATA_DIRS}"
 
 export ORIG_PATH="${PATH}"
 export ORIG_MANPATH="${MANPATH}"
 export ORIG_INFOPATH="${INFOPATH}"
 # export ORIG_PKG_CONFIG_PATH="${PKG_CONFIG_PATH}"
+export ORIG_XDG_DATA_DIRS="${XDG_DATA_DIRS}"
 # }}}1
 
 # GNU Global# {{{1
