@@ -45,6 +45,7 @@ NeoBundle 'thinca/vim-ref' " Integrated reference viewer.
 NeoBundle 'aklt/plantuml-syntax' " vim syntax file for plantuml
 NeoBundle 'godlygeek/tabular' " Vim script for text filtering and alignment
 NeoBundle 'plasticboy/vim-markdown' " Markdown Vim Mode
+NeoBundle 'mzlogin/vim-markdown-toc' " :package: A vim 7.4+ plugin to generate table of contents for Markdown files.
 NeoBundle 'kannokanno/previm' " Realtime preview by Vim. (Markdown, reStructuredText, textile)
 NeoBundle 'tyru/open-browser.vim' " Open URI with your favorite browser from your most favorite editor
 NeoBundle 'xolox/vim-misc' " Miscellaneous auto-load Vim scripts
