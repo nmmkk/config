@@ -290,11 +290,14 @@ repo = 'kana/vim-tabpagecd'
 [[plugins]] # Vim script for text filtering and alignment
 repo = 'godlygeek/tabular'
 
-[[plugins]] # Vim script for text filtering and alignment
-repo = 'vim-scripts/ShowMarks'
-hook_add = '''
-    let g:showmarks_include="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-'''
+# [[plugins]] # Vim script for text filtering and alignment
+# repo = 'vim-scripts/ShowMarks'
+# hook_add = '''
+#     let g:showmarks_include="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+# '''
+# 15 Aug 2017: Disable ShowMarks because the following error appears everytime nvim opens.
+# > Error detected while processing function <SNR>60_ShowMarks:
+# > Not possible to change sign ShowMark0
 
 # [[plugins]] # showing marks using number array in color, easy to trace.
 # repo = 'vim-scripts/number-marks'
