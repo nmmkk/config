@@ -38,9 +38,11 @@ export ORIG_XDG_DATA_DIRS="${XDG_DATA_DIRS}"
 # }}}1
 
 # GNU Global# {{{1
-# Pygments to extend GNU GLOBAL supports for more languages like Python, Perl, Vimm, and more.
-export GTAGSCONF=/usr/local/share/gtags/gtags.conf
-export GTAGSLABEL=pygments
+# Pygments to extend GNU GLOBAL supports for more languages like Python, Perl, Vim, and more.
+GTAGSCONF=/usr/local/share/gtags/gtags.conf
+[ -f "${GTAGSCONF}" ] && export GTAGSCONF
+GTAGSLABEL=pygments
+[ -x "$(which "${GTAGSLABEL}" >/dev/null 2>&1)" ] && export GTAGSLABEL
 # }}}1
 
 # Characters to be recognized as a part of a word# {{{1
