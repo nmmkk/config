@@ -19,7 +19,9 @@ end
 #
 
 # For nodebrew
-set -gx PATH $HOME/.nodebrew/current/bin $PATH
+if type nodebrew >/dev/null ^/dev/null
+    set -gx PATH $HOME/.nodebrew/current/bin $PATH
+end
 
 switch $os
 case Linux
