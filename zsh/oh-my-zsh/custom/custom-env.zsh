@@ -8,7 +8,8 @@ export LESS='-R'    # to enable coloring
 # PAGER=lv          # needed on CentOS 5
 export EDITOR=vim
 
-export PATH=$PATH:${HOME}/tools
+# .local/bin is for files installed via pip
+export PATH=${HOME}/.local/bin:$PATH:${HOME}/tools
 
 # }}}1
 
