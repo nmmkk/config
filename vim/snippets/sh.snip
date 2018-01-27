@@ -234,6 +234,27 @@ options     head
 	    fi
 	}
 
+snippet     confirm
+options     head
+	confirm()
+	{
+	    local message="\${1:Do you really want to proceed? (y/[n]):} "
+	    local response
+	
+	    read -p "${message}" response
+	    case "${response}" in
+	        [yY][eE][sS]|[yY])
+	            return 0
+	            ;;
+	        *)
+	            return 1
+	            ;;
+	    esac
+	}
+	
+	# Usage
+	confirm || exit 1
+
 snippet     parse_args
 options     head
 	parse_args()
