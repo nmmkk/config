@@ -1,16 +1,9 @@
 snippet #!
-abbr    #!/bin/sh
+abbr    #!/usr/bin/env bash
 alias   shebang
 options head
-	#!/bin/${1:sh}
+	#!/usr/bin/env ${1:bash}
 	${0}
-
-
-# snippet     shebang
-# options     head
-# 	#!/bin/bash
-# 	
-# 	${1}
 
 snippet if
 	if [ ${1:#:condition} ]; then
@@ -39,22 +32,16 @@ alias wh
 		${0:TARGET}
 	done
 
-
 snippet until
 	until ${1:#:condition} ; do
 		${0:TARGET}
 	done
-
 
 snippet heredoc
 alias   h <<
 	<< ${1:EOF}
 		${0:#:TARGET}
 	$1
-
-snippet env
-	#!/usr/bin/env ${1}
-
 
 snippet tmp
 	${1:TMPFILE}=$(mktemp ${2:XXX})
@@ -64,7 +51,6 @@ snippet tmp
 	${0}
 
 snippet function
-alias func
 	${1:#:name}()
 	{
 		${0:TARGET}
@@ -92,21 +78,13 @@ options     head
 			${3:echo "$$1 Didn't match anything"}
 	esac
 
-snippet     warn
-options     head
-	echo "${0:TARGET}" 1>&2
-
-snippet     abort
-options     head
-	echo "${0:TARGET}" 1>&2
-	exit 1
-
 snippet     copyright
 options     head
 	#
-	#   Copyright (c) ${0:Year} ${1:Organization}
+	#   Copyright (c) ${1:Year} ${2:Organization}
 	#     All rights reserved.
 	#
+	${0}
 
 #
 # Definitions
@@ -115,11 +93,58 @@ snippet     myname
 options     head
 	SCRIPT_NAME="$(basename "${BASH_SOURCE:-${(%):-%N}}")"
 	SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE:-${(%):-%N}}")"; pwd)"
+	SCRIPT_VERSION="0.0.1"
+
+snippet     color
+options     head
+	# Define ANSI colors and formatting
+	if [ "${TERM:-dumb}" != "dumb" ]; then
+	    TXTUNDERLINE="\e[4m"
+	    TXTBOLD="\e[1m"
+	    TXTRED="\e[31m"
+	    TXTGREEN="\e[32m"
+	    TXTYELLOW="\e[33m"
+	    TXTBLUE="\e[34m"
+	    TXTRESET="\e[0m"
+	else
+	    # shellcheck disable=SC2034
+	    TXTUNDERLINE=""
+	    # shellcheck disable=SC2034
+	    TXTBOLD=""
+	    # shellcheck disable=SC2034
+	    TXTRED=""
+	    # shellcheck disable=SC2034
+	    TXTGREEN=""
+	    # shellcheck disable=SC2034
+	    TXTYELLOW=""
+	    # shellcheck disable=SC2034
+	    TXTBLUE=$""
+	    # shellcheck disable=SC2034
+	    TXTRESET=""
+	fi
+
+snippet     header_definitions
+options     head
+	#==============================================================================
+	# Definitions
+	#==============================================================================
+
+snippet     header_subroutines
+options     head
+	#==============================================================================
+	# Sub routines
+	#==============================================================================
+
+snippet     header_mainroutine
+options     head
+	#==============================================================================
+	# Main routines
+	#==============================================================================
 
 #
 # Handy functions
 #
-snippet     show_help
+snippet     func_show_help
 options     head
 	show_help()
 	{
@@ -127,7 +152,7 @@ options     head
 	Usage:
 	  ${SCRIPT_NAME} <arg1>
 	    - TBD
-	
+
 	Options:
 	  -h,--help        Display this help and exit.
 	  -v               Verbose mode. Can be used multiple times for
@@ -136,8 +161,14 @@ options     head
 	__EOT__
 	}
 
-snippet     isnum
-abbr        is_numeric()
+snippet     func_show_version
+options     head
+	show_version()
+	{
+	    echo "${SCRIPT_NAME}: version ${SCRIPT_VERSION}"
+	}
+
+snippet     func_is_numeric
 options     head
 	### @fn is_numeric value
 	### @brief Check if the given argument is a number or not.
@@ -163,8 +194,7 @@ options     head
 # 	    esac
 # 	}
 
-snippet     isdecimal
-abbr        is_decimal()
+snippet     func_is_decimal
 options     head
 	is_decimal()
 	{
@@ -174,32 +204,53 @@ options     head
 	    esac
 	}
 
-snippet     now
+snippet     func_now
 options     head
 	now()
 	{
 	    date --rfc-3339=ns
 	}
 
-snippet     log
+snippet     func_log
 options     head
 	log()
 	{
 	    [ -w ${LOG_FILE} ] && echo "$*" >> ${LOG_FILE}
 	}
 
-snippet     err
+snippet     func_err
 options     head
 	err()
 	{
-	    msg="$*"
 	    v_now=$(now)
 
-	    echo "${msg}" 1>&2
-	    log "[${v_now}]: ${msg}"
+	    echo "$*" 1>&2
+	    log "[${v_now}]: $*"
 	}
 
-snippet     info
+snippet     func_warn
+options     head
+	warn()
+	{
+	    echo "${TXTYELLOW}WARN:${TXTRESET} $*" 1>&2
+	}
+
+snippet     func_error
+options     head
+	err()
+	{
+	    echo "${TXTRED}ERROR:${TXTRESET} $*" 1>&2
+	}
+
+snippet     func_abort
+options     head
+	abort()
+	{
+	    err "$*"
+	    exit 1
+	}
+
+snippet     func_info
 options     head
 	info()
 	{
@@ -224,9 +275,9 @@ options     head
 	    log "[${v_now}]: ${msg}"
 	}
 
-snippet     isroot
+snippet     func_is_root
 options     head
-	check_if_root()
+	is_root()
 	{
 	    if [ ${EUID} -ne 0 ]; then
 	        err "ERROR: You need to be root to perform this program."
@@ -234,13 +285,13 @@ options     head
 	    fi
 	}
 
-snippet     confirm
+snippet     func_confirm
 options     head
 	confirm()
 	{
 	    local message="\${1:Do you really want to proceed? (y/[n]):} "
 	    local response
-	
+
 	    read -p "${message}" response
 	    case "${response}" in
 	        [yY][eE][sS]|[yY])
@@ -251,16 +302,16 @@ options     head
 	            ;;
 	    esac
 	}
-	
+
 	# Usage
 	confirm || exit 1
 
-snippet     parse_args
+snippet     func_parse_args
 options     head
 	parse_args()
 	{
-	    local all_args="$@"
-	    local args=""  # set after all the options are parsed.
+	    declare -a all_args=( "$@" )
+	    declare -a args=""  # set after all the options are parsed.
 
 	    # Initialize our own variables:
 	    VERBOSITY=0
@@ -268,8 +319,11 @@ options     head
 	    # Parse options
 	    OPTIND=1 # Reset is necessary if getopts was used previously in the script.
 	             # It is a good idea to make this local in a function.
-	    while getopts "fhvV" opt; do
+	    while getopts "a:fhvV" opt; do
 	        case "${opt}" in
+	            a)
+	                OPT_ARG_CONTENT="${OPTARG}"
+	                ;;
 	            f)
 	                OPT_FORCE=1
 	                ;;
@@ -278,7 +332,7 @@ options     head
 	                exit 0
 	                ;;
 	            v)
-	                VERBOSITY=$((VERBOSITY+1))
+	                (( VERBOSITY += 1 ))
 	                ;;
 	            V)
 	                show_version
@@ -294,227 +348,27 @@ options     head
 
 	    info 1 "VERBOSITY=${VERBOSITY}"
 
-	    # Parse arguments
-	    info 1 "all_args=${all_args}"
+	    # Dump arguments
+	    info 1 "all_args=${all_args[@]}"
 	    args="$@"
 	    info 1 "args=${args}"
 
-	    CI_LIST_OF_CONTENTS=\$1
-	    [ x"${CI_LIST_OF_CONTENTS}" = x"" ] && { err "ERROR: No file name is specified."; show_help >&2; exit 1; }
-	    [ -e ${CI_LIST_OF_CONTENTS} ] || { err "ERROR: Given name of file does not exist (${CI_LIST_OF_CONTENTS})"; exit 1; }
-	    [ -r ${CI_LIST_OF_CONTENTS} ] || { err "ERROR: Given name of file is not readable (${CI_LIST_OF_CONTENTS})"; exit 1; }
-
-	}
-
-	parse_args "$@"
-
-snippet     initme
-options     head
-	#!/bin/bash
-	#
-	#
-
-	#============================================================
-	# Definitions
-	#============================================================
-	SCRIPT_NAME="$(basename "${BASH_SOURCE:-${(%):-%N}}")"
-	SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE:-${(%):-%N}}")"; pwd)"
-	PROG_VERSION=0.0.1
-
-	VERBOSITY=0
-
-	LOG_DIR_BASE=${HOME}/logs/${SCRIPT_NAME}
-	LOG_FILE=    # set by init_me()
-
-	OPT_FORCE=0  # 1: forcibly run  0: ask the user if TBD
-
-	#============================================================
-	# Sub routines
-	#============================================================
-	today()
-	{
-	    date '+%Y%m%d'
-	}
-
-	now()
-	{
-	    date --rfc-3339=ns
-	}
-
-	log()
-	{
-	    [ -w ${LOG_FILE} ] && echo "$*" >> ${LOG_FILE}
-	}
-
-	err()
-	{
-	    msg="$*"
-	    v_now=$(now)
-
-	    echo "${msg}" 1>&2
-	    log "[${v_now}]: ${msg}"
-	}
-
-	is_decimal()
-	{
-	    case "$*" in
-	        ''|*[!0-9]*) return 0;;
-	        *) return 1;;
-	    esac
-	}
-
-	info()
-	{
-	    level=\$1
-	    shift
-	    msg="$@"
-	    v_now=$(now)
-
-	    is_decimal ${level}
-	    if [ $? -eq 0 ]; then
-	        # Oops, no number is given in the arguments. Restore the 1st argument in ${msg}
-	        msg="${level} ${msg}"
-	        # set default value: it will be output by default
-	        level=0
-	    fi
-
-	    if [ ${level} -le ${VERBOSITY} ]; then
-	        echo "${msg}"
-	    fi
-
-	    # All messages are saved into the log file even any verbosity is given.
-	    log "[${v_now}]: ${msg}"
-	}
-
-	init_me()
-	{
-	    local now=$(date '+%Y%m%d_%H%M%S')
-
-	    [ x"${LOG_DIR_BASE}" = x"" ] && err "INTERNAL ERROR: LOG_DIR_BASE is not set yet in init_me(), so stopped"
-	    mkdir --mode=777 -p ${LOG_DIR_BASE}
-
-	    LOG_FILE=${LOG_DIR_BASE}/$(basename \$0 .sh)_$(hostname)_${now}.txt
-	    touch ${LOG_FILE} || {
-	        err "INTERNAL ERROR: init_me() failed to create log file at ${LOG_FILE}"
+	    # Parse positional arguments
+	    ARG_1=\$1
+	    if [ x"${ARG_1}" = x"" ]; then
+	        err "No argument is specified"
+	        show_help >&2
 	        exit 1
-	    }
-	    info 0 "Log file is at ${LOG_FILE}"
-
-	    info 1 "Done: init_me()"
-	}
-
-	show_help()
-	{
-	    cat <<__EOT__
-	Usage:
-	  ${SCRIPT_NAME} <arg1>
-	    - TBD
-
-	Options:
-	  -h,--help        Display this help and exit.
-	  -v               Verbose mode. Can be used multiple times for
-	                    increased verbosity.
-	  -V               Show version.
-	__EOT__
-	}
-
-	show_version()
-	{
-	    echo "${SCRIPT_NAME}: version ${CI_SCRIPT_VERSION}"
-	}
-
-	parse_args()
-	{
-	    local all_args="$@"
-	    local args=""  # set after all the options are parsed.
-
-	    # Initialize our own variables:
-	    VERBOSITY=0
-
-	    # Parse options
-	    OPTIND=1 # Reset is necessary if getopts was used previously in the script.
-	             # It is a good idea to make this local in a function.
-	    while getopts "fhvV" opt; do
-	        case "${opt}" in
-	            f)
-	                OPT_FORCE=1
-	                ;;
-	            h)
-	                show_help
-	                exit 0
-	                ;;
-	            v)
-	                VERBOSITY=$((VERBOSITY+1))
-	                ;;
-	            V)
-	                show_version
-	                exit 0
-	                ;;
-	            '?')
-	                show_help >&2
-	                exit 1
-	                ;;
-	        esac
-	    done
-	    shift "$((OPTIND-1))" # Shift off the options and optional --.
-
-	    info 1 "VERBOSITY=${VERBOSITY}"
-
-	    # Parse arguments
-	    info 1 "all_args=${all_args}"
-	    args="$@"
-	    info 1 "args=${args}"
-
-	    CI_LIST_OF_CONTENTS=\$1
-	    [ x"${CI_LIST_OF_CONTENTS}" = x"" ] && { err "ERROR: No file name is specified."; show_help >&2; exit 1; }
-	    [ -e ${CI_LIST_OF_CONTENTS} ] || { err "ERROR: Given name of file does not exist (${CI_LIST_OF_CONTENTS})"; exit 1; }
-	    [ -r ${CI_LIST_OF_CONTENTS} ] || { err "ERROR: Given name of file is not readable (${CI_LIST_OF_CONTENTS})"; exit 1; }
-
-	}
-
-	clean_up()
-	{
-	    local verbose=
-
-	    [ ${VERBOSITY} -ge 3 ] && verbose="-v"
-	    rm -rf ${verbose} ${CI_WORK_DIR_BASE}
-
-	    info 0 "Log file of this script is at ${LOG_FILE}"
-	    info 0 ""
-	}
-
-	check_if_root()
-	{
-	    if [ ${EUID} -ne 0 ]; then
-	        err "ERROR: You need to be root to perform this program."
+	    fi
+	    if [ ! -e "${ARG_1}" ]; then
+	        err "Given name of file does not exist (${ARG_1})"
+	        exit 1
+	    fi
+	    if [ ! -r "${ARG_1}" ]; then
+	        err "Given name of file is not readable (${ARG_1})"
 	        exit 1
 	    fi
 	}
 
-	check_prerequisites()
-	{
-	    check_if_root || return $?
-	}
-
-	#============================================================
-	# Main routine
-	#============================================================
-
-	umask 000 # so that normal user can delete log files and ${SCRIPT_NAME} directory that this program creates.
-
-	init_me
 	parse_args "$@"
-	check_prerequisites || exit $?
 
-	trap clean_up EXIT
-
-	### Main stuffs are here...
-
-	info 0 ""
-	info 0 "Done!"
-	info 0 ""
-
-	# then clean_up() is executed automatically.
-
-
-# vim: set noexpandtab :
