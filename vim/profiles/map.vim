@@ -24,6 +24,10 @@ nnoremap <F7> :ar<CR>
 nnoremap <F6> :N<CR>
 nnoremap <F8> :n<CR>
 
+" Insert timestamp
+nnoremap <F3> i<C-R>=strftime("%Y-%m-%dT%H_%M_%S")<CR><Esc>
+inoremap <F3> <C-R>=strftime("%Y-%m-%dT%H_%M_%S")<CR>
+
 """"""""""""" " Use s as prefix of various commands. (BTW, Default s behavior is achived by cl.)
 """"""""""""" nnoremap s <Nop>
 "### タブ操作を快適に
