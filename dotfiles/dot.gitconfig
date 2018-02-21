@@ -40,10 +40,9 @@
     helper = cache --timeout 3600
 [init]
     templatedir = ~/.git_template
-[user]
-	name = nmmkk
-	email = nmmkk00@gmail.com
 [cola]
 	spellcheck = false
 [push]
 	default = simple
+[user]
+	useConfigOnly = true
