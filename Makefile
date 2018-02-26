@@ -3,14 +3,15 @@
 include $(CURDIR)/build/make-defs.mk
 
 .PHONY: default all linux misc-setup tmux-setup screen-setup screen-clean \
-        git-setup vim-setup zsh-setup install update clean
+		git-setup vim-setup zsh-setup install update clean ag-setup jrnl-setup \
+        topydo-setup taskwarrior-setup
 
 default: linux
 
 # linux: misc-setup vim-setup vim-make-vimproc-linux vimperatorrc-setup zsh-setup
 linux: misc-setup vim-setup vimperatorrc-setup zsh-setup fish-setup
 
-misc-setup: tmux-setup screen-setup git-setup ag-setup ec-setup jrnl-setup
+misc-setup: tmux-setup screen-setup git-setup ag-setup ec-setup jrnl-setup topydo-setup taskwarrior-setup
 
 tmux-setup:
 	make -C tmux/
@@ -98,5 +99,9 @@ vim-clean-plugins:
 
 topydo-setup:
 	make -C topydo/
+	@echo
+
+taskwarrior-setup:
+	make -C taskwarrior/
 	@echo
 
