@@ -6,6 +6,9 @@ if has('win32') || has('win64')
 endif
 "}}}1
 
+let g:cache_home = empty($XDG_CACHE_HOME) ? expand('$HOME/.cache') : $XDG_CACHE_HOME
+let g:config_home = empty($XDG_CONFIG_HOME) ? expand('$HOME/.config') : $XDG_CONFIG_HOME
+
 " Add local .vim directory to runtimepath {{{1
 let s:local_dot_vim_dir_path = expand('<sfile>:h:h') . '/vim/dot.vim'
 execute 'set runtimepath+=' . s:local_dot_vim_dir_path

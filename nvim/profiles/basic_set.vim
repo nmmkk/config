@@ -1,11 +1,11 @@
 " Basic settings for Vim
 
 " Where to store backup files
-set backupdir=$XDG_CACHE_HOME/nvim/backupfiles/
+execute printf('set backupdir=%s/nvim/backupfiles/', g:cache_home)
 set backup
-set directory=$XDG_CACHE_HOME/nvim/swapfiles/
+execute printf('set directory=%s/nvim/swapfiles/', g:cache_home)
 set swapfile
-set undodir=$XDG_CACHE_HOME/nvim/undofiles/
+execute printf('set undodir=%s/nvim/undofiles/', g:cache_home)
 set undofile
 
 " Following is listed as a anti-pattern, so it is commented out.
