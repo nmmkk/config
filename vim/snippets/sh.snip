@@ -219,7 +219,9 @@ snippet     func_log
 options     head
 	log()
 	{
-	    [ -w ${LOG_FILE} ] && echo "$*" >> ${LOG_FILE}
+	    if [ -w "${LOG_FILE}" ]; then
+	        echo "$*" >> "${LOG_FILE}"
+	    fi
 	}
 
 snippet     func_err
