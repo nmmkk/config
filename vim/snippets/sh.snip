@@ -417,3 +417,54 @@ options     head
 	    exec 2>&7 7>&-
 	}
 
+snippet     func_choose_from_list
+options     head
+	# Show the list, let user choose one from the list, and update the variable
+	# ${TMP_CHOSEN_ITEM} with the selection. Be sure ${TMP_CHOSEN_ITEM} is parsed
+	# after calling this routine.
+	choose_from_list()
+	{
+	    local list=( $@ )
+	    local entry_count=${#list[@]}
+	    local idx=0
+	    local choice=
+
+	    if [ ${entry_count} -lt 1 ]; then
+	        err "No entry is found in the given list."
+	        return 1
+	    fi
+
+	    # Show the list
+	    for entry in "${list[@]}"
+	    do
+	        printf "%2d: %s\n" $(( idx + 1 )) "${entry}"
+	        (( idx += 1 ))
+	    done
+
+	    # Let user select
+	    echo
+	    echo "Which item would you like to pick?"
+	    while true
+	    do
+	        read -p \
+	            "Type in a number [1-${entry_count}] or [q] to quit: " \
+	            choice
+	        echo "Your choice is ${choice}"
+	        if [ x"${choice}" = x"q" ]; then
+	            echo "Quitting..."
+	            exit 0
+	        fi
+	        if is_decimal "${choice}"; then
+	            if (( 1 <= choice && choice <= entry_count )); then
+	                # Okay, choice is in the valid range.
+	                # Set the chosen file path into the global variable
+	                TMP_CHOSEN_ITEM="${list[$((choice - 1))]}"
+	                break
+	            fi
+	        fi
+	        echo "Oops, the given choice is not a valid number. Try again..."
+	    done
+
+	    return 0
+	}
+
