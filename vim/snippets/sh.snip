@@ -376,3 +376,38 @@ options     head
 
 	parse_args "$@"
 
+
+snippet     func_logging_all
+options     head
+	enable_logging_all()
+	{
+	    local log_file="\$1"
+
+	    if [ x"${log_file}" = x"" ]; then
+	        echo "The log file location is not specified"
+	        return 1
+	    fi
+	    if [ ! -w "${log_file}" ]; then
+	        echo "The log file is not writable: ${log_file}"
+	        return 2
+	    fi
+
+	    # Save the original stdout/stderr to #6 and #7 so that we can restore the
+	    # originals later.
+	    exec 6>&1
+	    exec 7>&2
+
+	    # Then redirect stdout/stderr to tee processes
+	    exec 1> >(tee -a "${log_file}")
+	    exec 2> >(tee -a "${log_file}" 1>&2)
+
+	    return 0
+	}
+
+	disable_logging_all()
+	{
+	    # Restore the original stdout/stderr and close the file descriptor 6 and 7
+	    exec 1>&6 6>&-
+	    exec 2>&7 7>&-
+	}
+
