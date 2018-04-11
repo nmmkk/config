@@ -95,6 +95,10 @@ options     head
 	SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE:-${(%):-%N}}")"; pwd)"
 	SCRIPT_VERSION="0.0.1"
 
+snippet     shellcheck_disable
+options     head
+	# shellcheck disable=SC${1:2034}
+
 snippet     color
 options     head
 	# Define ANSI colors and formatting
