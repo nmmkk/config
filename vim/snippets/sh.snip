@@ -228,6 +228,20 @@ options     head
 	    fi
 	}
 
+snippet     func_get_funcname
+options     head
+	get_funcname()
+	{
+	    echo "${FUNCNAME[1]}"
+	}
+
+snippet     func_get_caller_line
+options     head
+	get_caller_line()
+	{
+	    echo "${BASH_SOURCE[2]##*/}@${BASH_LINENO[1]}"
+	}
+
 snippet     func_warn
 options     head
 	warn()
