@@ -228,16 +228,6 @@ options     head
 	    fi
 	}
 
-snippet     func_err
-options     head
-	err()
-	{
-	    v_now=$(now)
-
-	    echo "$*" 1>&2
-	    log "[${v_now}]: $*"
-	}
-
 snippet     func_warn
 options     head
 	warn()
