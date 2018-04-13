@@ -246,14 +246,16 @@ snippet     func_warn
 options     head
 	warn()
 	{
-	    echo "${TXTYELLOW}WARN:${TXTRESET} $*" 1>&2
+	    echo -e "${TXTYELLOW}WARN${TXTRESET} $*" 1>&2
+	    log "$(now) | WARN  | $(get_caller_line) | $*"
 	}
 
 snippet     func_error
 options     head
 	err()
 	{
-	    echo "${TXTRED}ERROR:${TXTRESET} $*" 1>&2
+	    echo -e "${TXTRED}ERROR${TXTRESET} $*" 1>&2
+	    log "$(now) | ERROR | $(get_caller_line) | $*"
 	}
 
 snippet     func_abort
