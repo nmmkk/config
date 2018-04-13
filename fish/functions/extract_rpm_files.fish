@@ -20,12 +20,17 @@ if type rpm2cpio >/dev/null ^/dev/null ; and type cpio >/dev/null ^/dev/null
             return 3
         end
 
+        if test -d "$extract_to_here"
+            echo "ERROR: Given RPM seems already extracted at $extract_to_here" >/dev/stderr
+            return 4
+        end
+
         mkdir -p "$extract_to_here"
         cd "$extract_to_here" ; or return $status
         rpm2cpio "$rpm_dirname/$rpm_basename" | cpio -idmv
         if test $status -ne 0
             echo "ERROR: Failed in rpm command: rpm2cpio \"$rpm_dirname/$rpm_basename\" | cpio -idmv" >/dev/stderr
-            return 4
+            return 5
         end
         cd - >/dev/null
 
