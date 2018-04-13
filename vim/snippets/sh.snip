@@ -299,8 +299,8 @@ snippet     func_is_root
 options     head
 	is_root()
 	{
-	    if [ ${EUID} -ne 0 ]; then
-	        err "ERROR: You need to be root to perform this program."
+	    if [ ${EUID:-99999} -ne 0 ]; then
+	        err "You need to be root to perform this program."
 	        return 1
 	    fi
 	}
