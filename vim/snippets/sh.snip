@@ -254,12 +254,12 @@ snippet     func_info
 options     head
 	info()
 	{
-	    level=\$1
+	    level="\$1"
 	    shift
 	    msg="$*"
 	    v_now=$(now)
 
-	    is_decimal ${level}
+	    is_decimal "${level}"
 	    if [ $? -eq 0 ]; then
 	        # Oops, no number is given in the arguments. Restore the 1st argument in ${msg}
 	        msg="${level} ${msg}"
@@ -267,7 +267,7 @@ options     head
 	        level=0
 	    fi
 
-	    if [ ${level} -le ${VERBOSITY} ]; then
+	    if [ "${level}" -le "${VERBOSITY:-0}" ]; then
 	        echo "${msg}"
 	    fi
 
@@ -349,9 +349,9 @@ options     head
 	    info 1 "VERBOSITY=${VERBOSITY}"
 
 	    # Dump arguments
-	    info 1 "all_args=${all_args[@]}"
-	    args="$@"
-	    info 1 "args=${args}"
+	    info 1 "all_args=" "${all_args[@]}"
+	    args=( "$@" )
+	    info 1 "args=" "${args[@]}"
 
 	    # Parse positional arguments
 	    ARG_1=\$1
