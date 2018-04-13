@@ -266,6 +266,11 @@ options     head
 	    exit 1
 	}
 
+	### @fn is_numeric value
+	### @brief Echo if INFO verbosity. Also log it regardless of verbosity.
+	### @param level a number of the verbosity of the given message
+	### @param msg strings of the message to be echo'ed and logged
+	### @return 0 always
 snippet     func_info
 options     head
 	info()
@@ -273,7 +278,6 @@ options     head
 	    level="\$1"
 	    shift
 	    msg="$*"
-	    v_now=$(now)
 
 	    is_decimal "${level}"
 	    if [ $? -eq 0 ]; then
@@ -284,11 +288,11 @@ options     head
 	    fi
 
 	    if [ "${level}" -le "${VERBOSITY:-0}" ]; then
-	        echo "${msg}"
+	        echo -e "${TXTBLUE}INFO${TXTRESET} ${msg}"
 	    fi
 
-	    # All messages are saved into the log file even any verbosity is given.
-	    log "[${v_now}]: ${msg}"
+	    # All messages are saved into the log file regardless of verbosity
+	    log "$(now) | INFO  | $(get_caller_line) | ${msg}"
 	}
 
 snippet     func_is_root
