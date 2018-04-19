@@ -22,6 +22,19 @@ else
     export PKG_CONFIG_PATH="/usr/share/pkgconfig:${PKG_CONFIG_PATH}"
 fi
 
+#------------------------------------------------------------------------------
+# stow-get
+#------------------------------------------------------------------------------
+
+export STOW_TOP="${HOME}/usr/local"
+export PATH="${STOW_TOP}/bin:${PATH}"
+export LD_LIBRARY_PATH="${STOW_TOP}/lib64:${STOW_TOP}/lib:${LD_LIBRARY_PATH}"
+export PYTHONPATH="${STOW_TOP}/lib64:${STOW_TOP}/lib:${PYTHONPATH}"
+
+#------------------------------------------------------------------------------
+# Linuxbrew
+#------------------------------------------------------------------------------
+
 # Save the path so that I can use it later to switch PATH for linuxbrew
 if [ x"${ORIG_PATH}" = x"" ]; then
     export ORIG_PATH=${PATH}
@@ -38,10 +51,6 @@ if [ x"${ORIG_PATH}" = x"" ]; then
     ### export ORIG_PERL_MB_OPT="${PERM_MB_OPT}"
     ### export ORIG_PERL_MM_OPT="${PERL_MM_OPT}"
 fi
-
-#------------------------------------------------------------------------------
-# Linuxbrew
-#------------------------------------------------------------------------------
 
 if [ -d "${HOME}/.linuxbrew" ]; then
     export LB_TOP="${HOME}/.linuxbrew"
