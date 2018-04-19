@@ -3,13 +3,13 @@
 include $(CURDIR)/build/make-defs.mk
 
 .PHONY: default all linux misc-setup tmux-setup screen-setup screen-clean \
-		git-setup vim-setup zsh-setup install update clean ag-setup jrnl-setup \
+		git-setup vim-setup bash-setup zsh-setup install update clean ag-setup jrnl-setup \
         topydo-setup taskwarrior-setup
 
 default: linux
 
 # linux: misc-setup vim-setup vim-make-vimproc-linux vimperatorrc-setup zsh-setup
-linux: misc-setup vim-setup vimperatorrc-setup zsh-setup fish-setup
+linux: misc-setup bash-setup zsh-setup fish-setup vim-setup vimperatorrc-setup
 
 misc-setup: tmux-setup screen-setup git-setup ag-setup ec-setup jrnl-setup topydo-setup taskwarrior-setup
 
@@ -55,6 +55,10 @@ jrnl-setup:
 	else \
 	    echo 'jrnl configuration file already exists. Skip to set it up. ($(INSTALL_BASE)/.config/jrnl)'; \
 	fi
+
+bash-setup:
+	make -C bash/
+	@echo
 
 zsh-setup:
 	make -C zsh/
