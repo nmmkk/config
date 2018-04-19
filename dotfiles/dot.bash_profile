@@ -71,6 +71,9 @@ if [ ! -d "${LB_PERL5LIB}" ]; then
     mkdir -p "${LB_PERL5LIB}"
 fi
 
+export HOMEBREW_NO_ANALYTICS=1
+export HOMEBREW_NO_EMOJI=1
+
 disable_linuxbrew
 
 #------------------------------------------------------------------------------
