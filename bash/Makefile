@@ -19,11 +19,11 @@ bash-setup-configs:
 	        ls -l $${target}; \
 	    elif [ -e $${target} ]; then \
 	        echo "INFO: Make a backup and set up a symbolic link."; \
-	        mv -v $${target} \ $${target}-bak-$(shell date '+%Y%m%d_%H%M%S'); \
-	        ln -sfv $(BASE_DIR)/dotfiles/dot$${config} \ $${target}; \
+	        mv -v $${target} $${target}-bak-$(shell date '+%Y%m%d_%H%M%S'); \
+	        ln -sfv $(BASE_DIR)/dotfiles/dot$${config} $${target}; \
 	    else \
 	        echo "INFO: No such file yet; setting up a symbolic link."; \
-	        ln -sfv $(BASE_DIR)/dotfiles/dot$${config} \ $${target}; \
+	        ln -sfv $(BASE_DIR)/dotfiles/dot$${config} $${target}; \
 	    fi; \
 	done
 
