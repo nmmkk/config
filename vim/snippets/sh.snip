@@ -280,7 +280,7 @@ options     head
 	    msg="$*"
 
 	    is_decimal "${level}"
-	    if [ $? -eq 0 ]; then
+	    if [ $? -ne 0 ]; then
 	        # Oops, no number is given in the arguments. Restore the 1st argument in ${msg}
 	        msg="${level} ${msg}"
 	        # set default value: it will be output by default
