@@ -62,7 +62,9 @@ set -gx XDG_CACHE_HOME $HOME/.cache
 #
 set FISH_CLIPBOARD_CMD "cat" # Stop that.
 
-
+# omf::theme::bobthefish
+set -gx theme_powerline_fonts no
+set -gx theme_color_scheme solarized
 
 #
 # Functions
