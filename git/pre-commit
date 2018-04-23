@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+
+#==============================================================================
+# Definitions
+#==============================================================================
+SCRIPT_NAME="$(basename "${BASH_SOURCE:-${(%):-%N}}")"
+# SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE:-${(%):-%N}}")"; pwd)"
+
+# Define ANSI colors and formatting
+if [ "${TERM:-dumb}" != "dumb" ]; then
+    TXTUNDERLINE="\e[4m"
+    TXTBOLD="\e[1m"
+    TXTRED="\e[31m"
+    TXTGREEN="\e[32m"
+    TXTYELLOW="\e[33m"
+    TXTBLUE="\e[34m"
+    TXTRESET="\e[0m"
+else
+    # shellcheck disable=SC2034
+    TXTUNDERLINE=""
+    # shellcheck disable=SC2034
+    TXTBOLD=""
+    # shellcheck disable=SC2034
+    TXTRED=""
+    # shellcheck disable=SC2034
+    TXTGREEN=""
+    # shellcheck disable=SC2034
+    TXTYELLOW=""
+    # shellcheck disable=SC2034
+    TXTBLUE=$""
+    # shellcheck disable=SC2034
+    TXTRESET=""
+fi
+
+#==============================================================================
+# Sub routines
+#==============================================================================
+err()
+{
+    echo -e "${SCRIPT_NAME%.sh}: ${TXTRED}ERROR${TXTRESET} $*" 1>&2
+}
+
+#==============================================================================
+# Main routines
+#==============================================================================
+if [ -z "$(git config --local user.name)" ]; then
+    err "user.name is not set locally"
+    exit 1
+fi
+if [ -z "$(git config --local user.email)" ]; then
+    err "user.email is not set locally"
+    exit 2
+fi
+
