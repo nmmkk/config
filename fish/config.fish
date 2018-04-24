@@ -147,6 +147,14 @@ function disable_linuxbrew
     set -gx LB_ENABLED
 end
 
+function show_if_lb_enabled -d 'Show if Linuxbrew is enabled, mainly for the prompt'
+    if [ x"$LB_ENABLED" = x"1" ]
+        set_color $fish_color_error
+        echo " LB"
+        set_color $fish_color_autosuggestion
+    end
+end
+
 # [bashで言うところの!$はfishではどうすればよいか - Qiita](http://qiita.com/ymko/items/d7c5c4d0cc6174d5fc86)
 function bind_bang
     switch (commandline -t)[-1]
