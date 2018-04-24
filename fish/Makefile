@@ -6,7 +6,8 @@ default: linux
 
 linux: fish-setup
 
-fish-setup: fish-setup-fishrc fish-setup-completions fish-setup-functions
+fish-setup: fish-setup-fishrc fish-setup-completions fish-setup-functions \
+            fish-fisherman
 
 fish-setup-fishrc:
 	@if [ ! -d $(INSTALL_BASE)/.config/fish ]; then \
@@ -45,3 +46,6 @@ fish-setup-functions:
 	    fi \
 	done
 
+fish-fisherman:
+	make -C fisherman/
+	@echo ""
