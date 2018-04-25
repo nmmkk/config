@@ -21,7 +21,9 @@ PS1='${LB_ENABLED:+[brew] }#\D{%Y-%m-%dT%H:%M:%S} \u@\h:\w\n\$ '
 is_os()
 {
     local this="$1"
-    local os=$(uname -o)
+    local os=
+
+    os="$(uname)"
 
     case "${os}" in
         "${this}" )
