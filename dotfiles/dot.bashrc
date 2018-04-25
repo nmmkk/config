@@ -18,6 +18,11 @@ PS1='${LB_ENABLED:+[brew] }#\D{%Y-%m-%dT%H:%M:%S} \u@\h:\w\n\$ '
 #------------------------------------------------------------------------------
 # Function
 #------------------------------------------------------------------------------
+get_caller_line()
+{
+    echo "${BASH_SOURCE[2]##*/}@${BASH_LINENO[1]}"
+}
+
 is_os()
 {
     local this="$1"
@@ -30,7 +35,7 @@ is_os()
             return 0
             ;;
         * )
-            echo "You are not on ${this}" 1>&2
+            echo "$(get_caller_line) | You are not on ${this}" 1>&2
             return 1
             ;;
     esac
@@ -40,7 +45,7 @@ is_os()
 # variables that are already prepared in bash_profile.
 enable_linuxbrew ()
 {
-    is_os "GNU/Linux" || return 0
+    is_os "Linux" || return 0
 
     export PATH="${LB_PATH}"
     export MANPATH="${LB_MANPATH}"
