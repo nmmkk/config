@@ -80,7 +80,7 @@ enable_linuxbrew ()
 
 disable_linuxbrew()
 {
-    is_os "GNU/Linux" || return 0
+    is_os "Linux" || return 0
 
     export PATH="${ORIG_PATH}"
     export MANPATH="${ORIG_MANPATH}"
