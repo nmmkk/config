@@ -8,12 +8,50 @@ fi
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
 
+# Define ANSI colors and formatting
+if [ "${TERM:-dumb}" != "dumb" ]; then
+    TXTUNDERLINE="\e[4m"
+    TXTBOLD="\e[1m"
+    TXTRED="\e[31m"
+    TXTGREEN="\e[32m"
+    TXTYELLOW="\e[33m"
+    TXTBLUE="\e[34m"
+    TXTRESET="\e[0m"
+else
+    # shellcheck disable=SC2034
+    TXTUNDERLINE=""
+    # shellcheck disable=SC2034
+    TXTBOLD=""
+    # shellcheck disable=SC2034
+    TXTRED=""
+    # shellcheck disable=SC2034
+    TXTGREEN=""
+    # shellcheck disable=SC2034
+    TXTYELLOW=""
+    # shellcheck disable=SC2034
+    TXTBLUE=$""
+    # shellcheck disable=SC2034
+    TXTRESET=""
+fi
+
 #------------------------------------------------------------------------------
 # Definition
 #------------------------------------------------------------------------------
 
 # Prompt
-PS1='${LB_ENABLED:+[brew] }#\D{%Y-%m-%dT%H:%M:%S} \u@\h:\w\n\$ '
+PS1="\$(\
+    ret=\$?; \
+    if [ x\"\${LB_ENABLED}\" = x\"1\" ]; then \
+        printf '${TXTBLUE}[brew]${TXTRESET} '; \
+    fi; \
+    printf '#\!'; \
+    if [ \$ret -eq 0 ]; then \
+        printf '|%d' \$ret; \
+    else \
+        printf '|${TXTRED}%d${TXTRESET}' \$ret; \
+    fi; \
+    printf '|\D{%Y-%m-%dT%H:%M:%S} \u@\h:\w\n\$ '; \
+)"
 
 #------------------------------------------------------------------------------
 # Function
