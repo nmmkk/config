@@ -3,5 +3,5 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE:-${(%):-%N}}")"; pwd)"
 conf_dir=($SCRIPT_DIR/../stow-get/conf ${conf_dir[@]})
 packages=(git tmux vim emacs)
 
-set_inst_dir $HOME/usr/local
+set_inst_dir $XDG_DATA_HOME/stow-get/usr/local
 

@@ -11,3 +11,12 @@ This directory is to store files for `stow-get`.
 The directory `conf/` is to store custom configuration files. The path is
 defined in the stow-get dotfile as part of `conf_dir` list.
 
+
+# Install
+
+```
+cd Downloads
+curl -fSLOR https://raw.github.com/rcmdnk/stow-get/install/install.sh
+prefix=${XDG_DATA_HOME}/stow-get/usr/local bash install.sh
+```
+

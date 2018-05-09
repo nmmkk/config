@@ -32,7 +32,7 @@ export PERL5LIB="${PERL5LIB:-${PERL_LOCAL_LIB_ROOT}/lib/perl5}"
 # stow-get
 #------------------------------------------------------------------------------
 
-export STOW_TOP="${HOME}/usr/local"
+export STOW_TOP="${XDG_DATA_HOME}/stow-get/usr/local"
 export PATH="${STOW_TOP}/bin:${PATH}"
 export LD_LIBRARY_PATH="${STOW_TOP}/lib64:${STOW_TOP}/lib:${LD_LIBRARY_PATH}"
 export PYTHONPATH="${STOW_TOP}/lib64:${STOW_TOP}/lib:${PYTHONPATH}"
