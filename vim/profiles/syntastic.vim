@@ -10,6 +10,12 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 
+" Since syntastic v 3.9, it does not read any configuraiton file by default
+" for a securify reason.
+" https://github.com/vim-syntastic/syntastic/issues/2170
+let g:syntastic_c_config_file = ".syntastic_c_config"
+let g:syntastic_cpp_config_file = ".syntastic_cpp_config"
+
 "--------------------------------------------------------------------------------
 " Key-mapping
 nnoremap [Syntastic] <nop>
