@@ -23,6 +23,12 @@ if type nodebrew >/dev/null ^/dev/null
     set -gx PATH $HOME/.nodebrew/current/bin $PATH
 end
 
+# For stow
+set -gx STOW_TOP $XDG_DATA_HOME/stow-get/usr/local
+set -gx PATH $STOW_TOP/bin $PATH
+set -gx LD_LIBRARY_PATH $STOW_TOP/lib64 $STOW_TOP/lib $LD_LIBRARY_PATH
+set -gx PYTHONPATH $STOW_TOP/lib64 $STOW_TOP/lib $PYTHONPATH
+
 switch $os
 case Linux
     # Take a backup of environment variables so that we can restore it later.
