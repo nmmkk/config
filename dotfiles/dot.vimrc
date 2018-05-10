@@ -53,6 +53,7 @@ let s:profile_names = [
 \   'todo.txt',
 \   'binary_mode',
 \   'vim-ref',
+\   'local_vimrc',
 \]
 "}}}3
 
