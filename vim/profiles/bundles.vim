@@ -51,7 +51,8 @@ NeoBundle 'tyru/open-browser.vim' " Open URI with your favorite browser from you
 NeoBundle 'xolox/vim-misc' " Miscellaneous auto-load Vim scripts
 NeoBundle 'xolox/vim-colorscheme-switcher' " Makes it easy to quickly switch between color schemes in Vim
 NeoBundle 'thinca/vim-quickrun' " Run commands quickly.
-NeoBundle 'scrooloose/syntastic' " Syntax checking hacks for vim
+NeoBundle 'w0rp/ale' " Asynchronous Lint Engine
+NeoBundle 'maximbaz/lightline-ale' " ALE indicator for the lightline vim plugin
 NeoBundle 'osyo-manga/unite-quickfix' " ''
 NeoBundle 'osyo-manga/shabadou.vim' " ''
 NeoBundle 'moznion/shabadou.vim-animation' " A progress animation plug-in for shabadou.vim
