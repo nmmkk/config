@@ -17,11 +17,11 @@ taskwarrior-dir:
 	mkdir -p $(CONFIG_DIR)
 
 taskwarrior-setup-config: taskwarrior-dir $(SYMLINK_FROM)
-	@if [ ! -f $(SYMLINK_TO) ]; then \
+	@if [ ! -e $(SYMLINK_TO) ]; then \
 	    ln -sfv $(SYMLINK_FROM) $(SYMLINK_TO); \
-	    echo 'taskwarrior: config file is just set up as a symlink'; \
+	    echo 'task: config file is just set up as a symlink ($(SYMLINK_TO))'; \
 	else \
-	    echo 'taskwarrior: config file already exists. Skip to set it up. ($(SYMLINK_TO)'; \
+	    echo 'task: config file already exists. Skip to set it up. ($(SYMLINK_TO))'; \
 	fi
 
 # taskwarrior-setup-local-config:
