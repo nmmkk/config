@@ -7,6 +7,7 @@ export XDG_CACHE_HOME=${HOME}/.cache
 
 # Get the aliases and functions
 if [ -f ~/.bashrc ]; then
+    # shellcheck disable=SC1090
 	. ~/.bashrc
 fi
 
@@ -86,5 +87,6 @@ disable_linuxbrew
 # Lastly, source the local configuration file
 #------------------------------------------------------------------------------
 if [ -f "${XDG_CONFIG_HOME}/bash/local.bash_profile" ]; then
+    # shellcheck disable=SC1090
     source "${XDG_CONFIG_HOME}/bash/local.bash_profile"
 fi
