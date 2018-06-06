@@ -187,6 +187,18 @@ nnoremap <C-k>  :cp<CR>
 " In ":verbose nmap" result, actually <NL> is mapped to :cn<CR> instead of <C-j>.
 nnoremap <C-j>  :cn<CR>
 
+" Toggle background color on lines at column 80 and greater.
+function! ToggleBgcolorColumns(index)
+    if exists("g:bgcolor_columns_on")
+        set colorcolumn=
+        unlet g:bgcolor_columns_on
+    else
+        execute "set colorcolumn=" .join(range(a:index,9999), ",")
+        let g:bgcolor_columns_on=1
+    endif
+endfunction
+nnoremap <Leader>b :call ToggleBgcolorColumns(80)<CR>
+
 "================================================================================
 " Plugin settings that are lead by <Space> + character
 " And the actual settings are defined in separate files like "vimrc_gnuglobal".
