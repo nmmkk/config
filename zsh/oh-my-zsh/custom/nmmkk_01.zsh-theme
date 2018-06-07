@@ -30,9 +30,10 @@ function my_git_status() {# {{{
 }
 # }}}
 
-if [ x = xy ]; then
+MY_ZSH_BACKGROUND="${MY_ZSH_BACKGROUND:-dark}"
+if [ x"${MY_ZSH_BACKGROUND}" = x"light" ]; then
     # Good for light background# {{{
-    DATE_TIME=$(str_with_color red '%D{%Y-%m-%dT%K:%M:%S}')
+    DATE_TIME=$(str_with_color magenta '%D{%Y-%m-%dT%K:%M:%S}')
     PROMPT_PREFIX=$(str_with_color grey '#')
     SEPARATOR1=$(str_with_color grey '|')
     USER_NAME=$(str_with_color blue '%n')
@@ -41,23 +42,25 @@ if [ x = xy ]; then
     SEPARATOR3=$(str_with_color grey ':')
     CURRENT_DIRECTORY=$(str_with_color green '%~')
     PROMPT_CHAR=$(str_with_color grey '$ ')
-    PROMPT='${PROMPT_PREFIX}${DATE_TIME}${SEPARATOR1}${USER_NAME}${SEPARATOR2}${HOST_NAME}${SEPARATOR3}${CURRENT_DIRECTORY} $(my_git_status)
+    LAST_CMD_STATUS=%(?.$(str_with_color black %?).$(str_with_color red %?))
+    PROMPT='${PROMPT_PREFIX}${DATE_TIME}${SEPARATOR1}${LAST_CMD_STATUS}${SEPARATOR1}${USER_NAME}${SEPARATOR2}${HOST_NAME}${SEPARATOR3}${CURRENT_DIRECTORY} $(my_git_status)
 $PROMPT_CHAR'
     PROMPT2=$(str_with_color grey '> ')
     SSH_REMOTE_HOST=$(str_with_color black '(ssh from ${SSH_CONNECTION%%" "*})')
     # }}}
 else
     # Good for dark background# {{{
-    DATE_TIME=$(str_with_color red '%D{%Y-%m-%dT%K:%M:%S}')
+    DATE_TIME=$(str_with_color magenta '%D{%Y-%m-%dT%K:%M:%S}')
     PROMPT_PREFIX=$(str_with_color white '#')
     SEPARATOR1=$(str_with_color white '|')
-    USER_NAME=$(str_with_color green '%n')
+    USER_NAME=$(str_with_color blue '%n')
     SEPARATOR2=$(str_with_color white '@')
     HOST_NAME=$(str_with_color cyan '%m')
     SEPARATOR3=$(str_with_color white ':')
     CURRENT_DIRECTORY=$(str_with_color green '%~')
     PROMPT_CHAR=$(str_with_color white '$ ')
-    PROMPT='${PROMPT_PREFIX}${DATE_TIME}${SEPARATOR1}${USER_NAME}${SEPARATOR2}${HOST_NAME}${SEPARATOR3}${CURRENT_DIRECTORY} $(my_git_status)
+    LAST_CMD_STATUS=%(?.$(str_with_color white %?).$(str_with_color red %?))
+    PROMPT='${PROMPT_PREFIX}${DATE_TIME}${SEPARATOR1}${LAST_CMD_STATUS}${SEPARATOR1}${USER_NAME}${SEPARATOR2}${HOST_NAME}${SEPARATOR3}${CURRENT_DIRECTORY} $(my_git_status)
 $PROMPT_CHAR'
     PROMPT2=$(str_with_color grey '> ')
     SSH_REMOTE_HOST=$(str_with_color white '(ssh from ${SSH_CONNECTION%%" "*})')
