@@ -276,13 +276,13 @@ options     head
 	    exit 1
 	}
 
+snippet     func_info
+options     head
 	### @fn is_numeric value
 	### @brief Echo if INFO verbosity. Also log it regardless of verbosity.
 	### @param level a number of the verbosity of the given message
 	### @param msg strings of the message to be echo'ed and logged
 	### @return 0 always
-snippet     func_info
-options     head
 	info()
 	{
 	    level="\$1"
