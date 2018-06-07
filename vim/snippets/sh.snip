@@ -280,12 +280,20 @@ options     head
 
 snippet     func_info
 options     head
+	info()
+	{
+	    echo -e "${TXTBLUE}INFO${TXTRESET} $*"
+	    log "$(now) | INFO  | $(get_caller_line) | $*"
+	}
+
+snippet     func_debug
+options     head
 	### @fn is_numeric value
-	### @brief Echo if INFO verbosity. Also log it regardless of verbosity.
+	### @brief Echo if verbosity meets. Also log it regardless of verbosity.
 	### @param level a number of the verbosity of the given message
 	### @param msg strings of the message to be echo'ed and logged
 	### @return 0 always
-	info()
+	debug()
 	{
 	    level="\$1"
 	    shift
@@ -300,11 +308,11 @@ options     head
 	    fi
 
 	    if [ "${level}" -le "${OPTS[verbosity]:-0}" ]; then
-	        echo -e "${TXTBLUE}INFO${TXTRESET} ${msg}"
+	        echo -e "${TXTGREEN}DEBUG${TXTRESET} ${msg}"
 	    fi
 
 	    # All messages are saved into the log file regardless of verbosity
-	    log "$(now) | INFO  | $(get_caller_line) | ${msg}"
+	    log "$(now) | DEBUG | $(get_caller_line) | ${msg}"
 	}
 
 snippet     func_is_root
