@@ -44,7 +44,7 @@ alias   h <<
 	$1
 
 snippet tmp
-	${1:TMPFILE}=$(mktemp ${2:XXX})
+	${1:TMPFILE}=$(mktemp --tmpdir=/tmp "${SCRIPT_NAME%.sh}"-${2:XXX})
 	trap "rm -f '${$1}'" 0               # EXIT
 	trap "rm -f '${$1}'; exit 1" 2       # INT
 	trap "rm -f '${$1}'; exit 1" 1 15    # HUP TERM
