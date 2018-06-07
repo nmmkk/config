@@ -221,10 +221,20 @@ options     head
 
 snippet     func_log
 options     head
+	LOG_DIR="${SCRIPT_DIR}"
+	LOG_FILE="${SCRIPT_NAME%.sh}-$(date '+%Y%m%d_%H%M%S'.log)"
+	LOG_PATH="${LOG_DIR}/${LOG_FILE}"
+
+	init_log()
+	{
+	    mkdir -p "${LOG_DIR}" || return 1
+	    touch "${LOG_PATH}" || return 2
+	}
+
 	log()
 	{
-	    if [ -w "${LOG_FILE}" ]; then
-	        echo "$*" >> "${LOG_FILE}"
+	    if [ -w "${LOG_PATH}" ]; then
+	        echo "$*" >> "${LOG_PATH}"
 	    fi
 	}
 
