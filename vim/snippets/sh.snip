@@ -157,11 +157,13 @@ options     head
 	  ${SCRIPT_NAME} <arg1>
 	    - TBD
 
-	Options:
-	  -h         Display this help and exit.
-	  -v         Verbose mode. Can be used multiple times for
-	              increased verbosity.
-	  -V         Show version.
+	Argument:
+	  <arg1>    Explanation of arg1
+
+	Option:
+	  -h        Display this help and exit.
+	  -v        Verbose mode. Can be used multiple times for increased verbosity.
+	  -V        Show version.
 	__EOT__
 	}
 
@@ -297,7 +299,7 @@ options     head
 	        level=0
 	    fi
 
-	    if [ "${level}" -le "${VERBOSITY:-0}" ]; then
+	    if [ "${level}" -le "${OPTS[verbosity]:-0}" ]; then
 	        echo -e "${TXTBLUE}INFO${TXTRESET} ${msg}"
 	    fi
 
@@ -338,13 +340,16 @@ options     head
 
 snippet     func_parse_args
 options     head
+	declare -A ARGS
+	declare -A OPTS
+
 	parse_args()
 	{
 	    declare -a all_args=( "$@" )
 	    declare -a args=""  # set after all the options are parsed.
 
 	    # Initialize our own variables:
-	    VERBOSITY=0
+	    OPTS[verbosity]=0
 
 	    # Parse options
 	    OPTIND=1 # Reset is necessary if getopts was used previously in the script.
@@ -352,17 +357,17 @@ options     head
 	    while getopts "a:fhvV" opt; do
 	        case "${opt}" in
 	            a)
-	                OPT_ARG_CONTENT="${OPTARG}"
+	                OPTS[a]="${OPTARG}"
 	                ;;
 	            f)
-	                OPT_FORCE=1
+	                OPTS[force]=1
 	                ;;
 	            h)
 	                show_help
 	                exit 0
 	                ;;
 	            v)
-	                (( VERBOSITY += 1 ))
+	                (( OPTS[verbosity] += 1 ))
 	                ;;
 	            V)
 	                show_version
@@ -374,9 +379,9 @@ options     head
 	                ;;
 	        esac
 	    done
-	    shift "$((OPTIND-1))" # Shift off the options and optional --.
+	    shift "$((OPTIND - 1))" # Shift off the options and optional --.
 
-	    info 1 "VERBOSITY=${VERBOSITY}"
+	    info 1 "verbosity=${OPTS[verbosity]}"
 
 	    # Dump arguments
 	    info 1 "all_args=" "${all_args[@]}"
@@ -384,18 +389,18 @@ options     head
 	    info 1 "args=" "${args[@]}"
 
 	    # Parse positional arguments
-	    ARG_1=\$1
-	    if [ x"${ARG_1}" = x"" ]; then
+	    ARGS[sample]=\$1
+	    if [ x"${ARGS[sample]}" = x"" ]; then
 	        err "No argument is specified"
 	        show_help >&2
 	        exit 1
 	    fi
-	    if [ ! -e "${ARG_1}" ]; then
-	        err "Given name of file does not exist (${ARG_1})"
+	    if [ ! -e "${ARGS[sample]}" ]; then
+	        err "Given name of file does not exist (${ARGS[sample]})"
 	        exit 1
 	    fi
-	    if [ ! -r "${ARG_1}" ]; then
-	        err "Given name of file is not readable (${ARG_1})"
+	    if [ ! -r "${ARGS[sample]}" ]; then
+	        err "Given name of file is not readable (${ARGS[sample]})"
 	        exit 1
 	    fi
 	}
