@@ -197,6 +197,9 @@ function! ToggleBgcolorColumns(index)
         let g:bgcolor_columns_on=1
     endif
 endfunction
+if !exists("g:bgcolor_columns_on")
+    call ToggleBgcolorColumns(80)
+endif
 nnoremap <Leader>b :call ToggleBgcolorColumns(80)<CR>
 
 "================================================================================
