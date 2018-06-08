@@ -218,3 +218,10 @@ if type jrnl >/dev/null ^/dev/null
     balias j jrnl
 end
 
+# Automatically update Brewfile.
+# Unfortunately fish is not supported, and the following lines are commented out.
+# https://github.com/rcmdnk/homebrew-file/blob/master/docs/brew-wrap.rst
+#
+# if test -f (brew --prefix)/etc/brew-wrap
+#     source (brew --prefix)/etc/brew-wrap
+# end
