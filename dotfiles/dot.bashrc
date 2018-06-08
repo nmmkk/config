@@ -39,19 +39,28 @@ fi
 #------------------------------------------------------------------------------
 
 # Prompt
-PS1="\$(\
-    ret=\$?; \
-    if [ x\"\${LB_ENABLED}\" = x\"1\" ]; then \
-        printf '${TXTBLUE}[brew]${TXTRESET} '; \
-    fi; \
-    printf '#\!'; \
-    if [ \$ret -eq 0 ]; then \
-        printf '|%d' \$ret; \
-    else \
-        printf '|${TXTRED}%d${TXTRESET}' \$ret; \
-    fi; \
-    printf '|\D{%Y-%m-%dT%H:%M:%S} \u@\h:\w\n\$ '; \
-)"
+# If jm-shell is installed, use it with 'extensive' style.
+# https://github.com/jmcclare/jm-shell
+jm_shell_ps1="${HOME}/.local/lib/bash/ps1"
+if [ -r "${jm_shell_ps1}" ]; then
+    # shellcheck disable=SC2034
+    prompt_style=extensive
+    source "${jm_shell_ps1}"
+else
+    PS1="\$(\
+        ret=\$?; \
+        if [ x\"\${LB_ENABLED}\" = x\"1\" ]; then \
+            printf '${TXTBLUE}[brew]${TXTRESET} '; \
+        fi; \
+        printf '#\!'; \
+        if [ \$ret -eq 0 ]; then \
+            printf '|%d' \$ret; \
+        else \
+            printf '|${TXTRED}%d${TXTRESET}' \$ret; \
+        fi; \
+        printf '|\D{%Y-%m-%dT%H:%M:%S} \u@\h:\w\n\$ '; \
+    )"
+fi
 
 #------------------------------------------------------------------------------
 # Function
