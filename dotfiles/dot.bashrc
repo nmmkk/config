@@ -10,13 +10,13 @@ fi
 
 # Define ANSI colors and formatting
 if [ "${TERM:-dumb}" != "dumb" ]; then
-    TXTUNDERLINE="\e[4m"
-    TXTBOLD="\e[1m"
-    TXTRED="\e[31m"
-    TXTGREEN="\e[32m"
-    TXTYELLOW="\e[33m"
-    TXTBLUE="\e[34m"
-    TXTRESET="\e[0m"
+    TXTUNDERLINE='\e[4m'
+    TXTBOLD='\e[1m'
+    TXTRED='\e[31m'
+    TXTGREEN='\e[32m'
+    TXTYELLOW='\e[33m'
+    TXTBLUE='\e[34m'
+    TXTRESET='\e[0m'
 else
     # shellcheck disable=SC2034
     TXTUNDERLINE=""
