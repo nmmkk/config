@@ -83,7 +83,7 @@ is_os()
             return 0
             ;;
         * )
-            echo "$(get_caller_line) | You are not on ${this}" 1>&2
+            # echo "$(get_caller_line) | You are not on ${this}" 1>&2
             return 1
             ;;
     esac
