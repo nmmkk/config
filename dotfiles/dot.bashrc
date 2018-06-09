@@ -2,7 +2,7 @@
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
-    . /etc/bashrc
+    source /etc/bashrc
 fi
 
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
@@ -45,6 +45,7 @@ jm_shell_ps1="${HOME}/.local/lib/bash/ps1"
 if [ -r "${jm_shell_ps1}" ]; then
     # shellcheck disable=SC2034
     prompt_style=extensive
+    # shellcheck disable=SC1090
     source "${jm_shell_ps1}"
 else
     PS1="\$(\
@@ -119,7 +120,8 @@ enable_linuxbrew ()
     #   Bash completion has been installed to:
     #     /home/username/.linuxbrew/etc/bash_completion.d
     if [ -f "${LB_TOP}"/etc/bash_completion ]; then
-        . "${LB_TOP}"/etc/bash_completion
+        # shellcheck disable=SC1090
+        source "${LB_TOP}"/etc/bash_completion
     fi
 
     export LB_ENABLED=1
@@ -166,5 +168,6 @@ shopt | grep direxpand > /dev/null && shopt -s direxpand
 # Lastly, source the local configuration file
 #------------------------------------------------------------------------------
 if [ -f "${XDG_CONFIG_HOME}/bash/local.bashrc" ]; then
+    # shellcheck disable=SC1090
     source "${XDG_CONFIG_HOME}/bash/local.bashrc"
 fi
