@@ -149,6 +149,13 @@ disable_linuxbrew()
     export LB_ENABLED=
 }
 
+enable_linuxbrew
+if [ -f "$(brew --prefix)/etc/brew-wrap" ]; then
+    # shellcheck disable=SC1090
+    source "$(brew --prefix)/etc/brew-wrap"
+fi
+disable_linuxbrew
+
 #------------------------------------------------------------------------------
 # Alias
 #------------------------------------------------------------------------------
