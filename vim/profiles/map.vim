@@ -5,21 +5,6 @@ let mapleader = ","
 " Swap "\" and ",".
 noremap \ ,
 
-
-" The following maps to run the program currently edited can be done by QuickRun.
-""" "### perl実行 ###"
-""" nnoremap <F2> ;w <Enter>;!perl % <Enter>
-
-""" " Run the script you are currently editing.
-""" autocmd VimrcAutoCmd BufNewFile,BufRead *.sh nnoremap <F2> :!bash %<CR>
-""" autocmd VimrcAutoCmd BufNewFile,BufRead *.rb nnoremap <F2> :!ruby %<CR>
-""" autocmd VimrcAutoCmd BufNewFile,BufRead *.py nnoremap <F2> :!python %<CR>
-""" autocmd VimrcAutoCmd BufNewFile,BufRead *.pl nnoremap <F2> :!perl %<CR>
-
-
-
-
-"### ファイル移動 ###"
 nnoremap <F7> :ar<CR>
 nnoremap <F6> :N<CR>
 nnoremap <F8> :n<CR>
@@ -28,80 +13,13 @@ nnoremap <F8> :n<CR>
 nnoremap <F3> i<C-R>=strftime("%Y-%m-%dT%H_%M_%S")<CR><Esc>
 inoremap <F3> <C-R>=strftime("%Y-%m-%dT%H_%M_%S")<CR>
 
-""""""""""""" " Use s as prefix of various commands. (BTW, Default s behavior is achived by cl.)
-""""""""""""" nnoremap s <Nop>
-"### タブ操作を快適に
-"""" """ 以下2つは gtags のために開放することにした。
-"""" map <C-n> ;tabnext<Enter>
-"""" map <C-p> ;tabprevious<Enter>
-""" 2016-04-07: As gtags kep mapping uses differnt leader key other than Ctrl now. So re-enabled the followings.
-""""""""""""" nnoremap sn :tabnext<Enter>
-""""""""""""" nnoremap sp :tabprevious<Enter>
-""" Disable the following one to get the original C-t back working.
-""""""" map <C-t> ;tabnew<Enter>
-
-"### ペースト・モード切り替え ###"
-""" 2016-03-08T17:42:58
-""" I just noticed that the following 2 mappings do not work within tmux.
-""" map <C-F11> ;se paste<Enter>;echo "INFO: Entering paste mode"<Enter>
-""" map <C-F12> ;se nopaste<Enter>;echo "INFO: Entering nopaste mode"<Enter>
-
-""" I just noticed that the following 2 mappings do not work within tmux.
-" set pastetoggle=<F12> "This also works, but I wanted to print something when it is toggled.
-nnoremap <F12> :se invpaste <CR>:echo "INFO: Just executed invpaste"<CR>
-
-"### カーソル移動 ###"
+" Move cursor
 nnoremap j gj
 nnoremap k gk
 
-"### カーソル移動
-" map!  la
-" map!  i
-" map!  ka
-" map!  ja
-
-"====================================================================
-" Mapping of special keys - arrow keys and function keys.
-"====================================================================
-" Buffer commands (split,move,delete) -
-" this makes a little more easy to deal with buffers.
-"""""""" map <F6> :split<C-M>
-"""""""" map <F7> :vsplit<C-M>
-"""""""" "map <F6> :bp<C-M>
-"""""""" "map <F7> :bn<C-M>
-"""""""" "map <F8> :bd<C-M>
-
-" Switch windoes
-""" map <C-Down> <C-w>j
-""" map <C-Up> <C-w>k
-""" map <C-Left> <C-w>h
-""" map <C-Right> <C-w>l
-nnoremap <C-Down> <C-w>j
-nnoremap <C-Up> <C-w>k
-nnoremap <C-Left> <C-w>h
-nnoremap <C-Right> <C-w>l
-"""""""" map <C-j> <C-w>j<C-w>_
-"""""""" map <C-k> <C-w>k<C-w>_
-"""""""" map <C-h> <C-w>h<C-w>_
-"""""""" map <C-l> <C-w>l<C-w>_
-""""""""""""" nnoremap sh <C-w>h
-""""""""""""" nnoremap sj <C-w>j
-""""""""""""" nnoremap sk <C-w>k
-""""""""""""" nnoremap sl <C-w>l
-
-"""""""" " <Tab> is bound to `complete'
-"""""""" "inoremap <tab> <c-p>
-
-"""""""" " cycle fast through buffers ...
-"""""""" nnoremap <C-n> :bn<CR>
-"""""""" nnoremap <C-p> :bp<CR>
-
-"""""""" " cycle fast through errors ...
-"""""""" map <m-n> :cn<cr>
-"""""""" map <m-p> :cp<cr>
-
-" <Leader><Leader>で変更があれば保存
-noremap <Leader><Leader> :up<CR>
+" Save when something is changed:
+" I used to define <Leader><Leader> for this, but it conflicts with easy-motion
+noremap \\ :up<CR>
 
 " Edit .vimrc
 nnoremap <Leader>E :e $MYVIMRC<CR>
@@ -122,9 +40,6 @@ vnoremap v $h
 " ヘルプを引きやすくする
 nnoremap <C-h> :<C-u>help<Space>
 nnoremap <C-h><C-h> :<C-u>help<Space><C-r><C-w><Enter>
-
-" toggle <s>pell   URL: http://d.hatena.ne.jp/h1mesuke/20100803/p1
-nnoremap <silent> <Leader>s :<C-u>setlocal spell! spelllang=en_us<CR>:setlocal spell?<CR>
 
 " Exコマンドを実行しやすくする
 nnoremap ;   :
@@ -148,38 +63,9 @@ command! -count -nargs=1 ContinuousNumber let c = col('.')|for n in range(1, <co
 " 空白以降の文字列を全削除 (プロンプトは出す)
 nnoremap <C-F7> :%s/\s\+.*$//gc<CR>
 
-" カッコを入力した後、左に戻る
-" (http://www.e2esound.com/wp/2010/11/07/add_vimrc_settings/)
-"
-" これは、Function() みたいな記述をするときに煩わしいので、無効化した。
-"" imap {} {}<Left>
-"" imap [] []<Left>
-"" imap () ()<Left>
-"" imap “” “”<Left>
-"" imap ” ”<Left>
-"" imap <> <><Left>
-"" imap “ “<Left>
-
-"### 括弧類を自動で閉じる ###"
-" inoremap { {}<LEFT>
-" inoremap [ []<LEFT>
-" inoremap ( ()<LEFT>
-" inoremap " ""<LEFT>
-" inoremap ' ''<LEFT>
-" vnoremap { "zdi^V{<C-R>z}<ESC>
-" vnoremap [ "zdi^V[<C-R>z]<ESC>
-" vnoremap ( "zdi^V(<C-R>z)<ESC>
-" vnoremap " "zdi^V"<C-R>z^V"<ESC>
-" vnoremap ' "zdi'<C-R>z'<ESC>
-
-" Toggle highlight
-nnoremap <silent><Esc><Esc>     :<C-u>set hlsearch!<CR>
-
 " カーソル下のファイルを開き、さらにウィンドウを縦分割する
 nnoremap <Leader>f :vsp<CR>gf
 
-""""""""""""" """ " Open man in a new tab ==> I installed "thinca/vim-ref" on 4/11/2016
-""""""""""""" nnoremap K :execute 'tabnew <bar> read !' . &keywordprg . ' ' . expand("<cword>")<CR>gg:set syntax=man<CR>
 
 " For QuickFix
 nnoremap <C-k>  :cp<CR>
