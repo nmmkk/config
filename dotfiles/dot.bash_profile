@@ -5,12 +5,6 @@ export XDG_DATA_HOME=${HOME}/.local/share
 export XDG_CONFIG_HOME=${HOME}/.config
 export XDG_CACHE_HOME=${HOME}/.cache
 
-# Get the aliases and functions
-if [ -f ~/.bashrc ]; then
-    # shellcheck disable=SC1090
-	. ~/.bashrc
-fi
-
 export PATH=${HOME}/.local/bin:${HOME}/bin:${HOME}/tools:${PATH}
 
 export EDITOR="vim"
@@ -81,6 +75,11 @@ fi
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_EMOJI=1
 
+# Get the aliases and functions
+if [ -f ~/.bashrc ]; then
+    # shellcheck disable=SC1090
+	. ~/.bashrc
+fi
 disable_linuxbrew
 
 #------------------------------------------------------------------------------
