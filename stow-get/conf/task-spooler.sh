@@ -17,11 +17,11 @@ before_configure() {
     # First, make a backup
     cp -av Makefile Makefile-original
     # To make the renaming work easier, temporary rename "tsretry"
-    sed -i 's/tsretry/TMPTSRETRY/g' Makefile
+    sed -i.bak 's/tsretry/TMPTSRETRY/g' Makefile
     # Now all strings "ts" can be renamed to "tsp"
-    sed -i 's/ts/tsp/g' Makefile
+    sed -i.bak 's/ts/tsp/g' Makefile
     # Finally restore the name "tsretry"
-    sed -i 's/TMPTSRETRY/tsretry/g' Makefile
+    sed -i.bak 's/TMPTSRETRY/tsretry/g' Makefile
 }
 
 configure_cmd() {
