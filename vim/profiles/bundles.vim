@@ -77,6 +77,7 @@ NeoBundle 'tpope/vim-unimpaired' " unimpaired.vim: pairs of handy bracket mappin
 
 NeoBundle 'LucHermitte/lh-vim-lib', {'name': 'lh-vim-lib'} " Library of Vim functions
 NeoBundle 'LucHermitte/local_vimrc', {'depends': 'lh-vim-lib'} " Per project/tree configuration plugins
+NeoBundle 'kana/vim-submode' " Vim plugin: Create your own submodes
 
 " You can specify revision/branch/tag.
 " NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }

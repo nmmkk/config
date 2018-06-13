@@ -84,6 +84,40 @@ endfor
 " " tp 前のタブ
 " map <silent> [TabHandling]p :tabprevious<CR>
 
+" Ref: [Vimの便利な画面分割＆タブページと、それを更に便利にする方法 - Qiita](http://qiita.com/tekkoc/items/98adcadfa4bdc8b5a6ca)
+" With the following mappings, 's' is used as the precedence key.
+" For the default behavior of 's', use 'cl' instead.
+nnoremap s <Nop>
+nnoremap [MyKey] <Nop>
+nmap     s [MyKey]
+
+" Windows
+nnoremap <silent> [MyKey]j <C-w>j
+nnoremap <silent> [MyKey]k <C-w>k
+nnoremap <silent> [MyKey]l <C-w>l
+nnoremap <silent> [MyKey]h <C-w>h
+nnoremap <silent> [MyKey]J <C-w>J
+nnoremap <silent> [MyKey]K <C-w>K
+nnoremap <silent> [MyKey]L <C-w>L
+nnoremap <silent> [MyKey]H <C-w>H
+nnoremap <silent> [MyKey]r <C-w>r
+nnoremap <silent> [MyKey]= <C-w>=
+nnoremap <silent> [MyKey]w <C-w>w
+nnoremap <silent> [MyKey]o <C-w>_<C-w>\|
+nnoremap <silent> [MyKey]O <C-w>=
+nnoremap <silent> [MyKey]s :<C-u>split<CR>
+nnoremap <silent> [MyKey]v :<C-u>vsplit<CR>
+nnoremap <silent> [MyKey]q :<C-u>q<CR>
+
+" Tabs
+nnoremap <silent> [MyKey]tc :<C-u>tabnew<CR>
+" nnoremap <silent> [MyKey]T :<C-u>Unite tab<CR>
+
+" Buffers
+nnoremap <silent> [MyKey]Q :<C-u>bdelete<CR>
+" nnoremap <silent> [MyKey]b :<C-u>Unite buffer_tab -buffer-name=file<CR>
+nnoremap <silent> [MyKey]B :<C-u>Unite buffer -buffer-name=file<CR>
+
 " For QuickFix
 nnoremap <C-k>  :cp<CR>
 " I don't know why but I need to hit Shift-Ctrl-j to take effect the following.
