@@ -2,7 +2,7 @@
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
-    . /etc/bashrc
+    source /etc/bashrc
 fi
 
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
@@ -10,13 +10,13 @@ fi
 
 # Define ANSI colors and formatting
 if [ "${TERM:-dumb}" != "dumb" ]; then
-    TXTUNDERLINE="\e[4m"
-    TXTBOLD="\e[1m"
-    TXTRED="\e[31m"
-    TXTGREEN="\e[32m"
-    TXTYELLOW="\e[33m"
-    TXTBLUE="\e[34m"
-    TXTRESET="\e[0m"
+    TXTUNDERLINE='\e[4m'
+    TXTBOLD='\e[1m'
+    TXTRED='\e[31m'
+    TXTGREEN='\e[32m'
+    TXTYELLOW='\e[33m'
+    TXTBLUE='\e[34m'
+    TXTRESET='\e[0m'
 else
     # shellcheck disable=SC2034
     TXTUNDERLINE=""
@@ -45,6 +45,7 @@ jm_shell_ps1="${HOME}/.local/lib/bash/ps1"
 if [ -r "${jm_shell_ps1}" ]; then
     # shellcheck disable=SC2034
     prompt_style=extensive
+    # shellcheck disable=SC1090
     source "${jm_shell_ps1}"
 else
     PS1="\$(\
@@ -82,7 +83,7 @@ is_os()
             return 0
             ;;
         * )
-            echo "$(get_caller_line) | You are not on ${this}" 1>&2
+            # echo "$(get_caller_line) | You are not on ${this}" 1>&2
             return 1
             ;;
     esac
@@ -119,7 +120,8 @@ enable_linuxbrew ()
     #   Bash completion has been installed to:
     #     /home/username/.linuxbrew/etc/bash_completion.d
     if [ -f "${LB_TOP}"/etc/bash_completion ]; then
-        . "${LB_TOP}"/etc/bash_completion
+        # shellcheck disable=SC1090
+        source "${LB_TOP}"/etc/bash_completion
     fi
 
     export LB_ENABLED=1
@@ -147,6 +149,13 @@ disable_linuxbrew()
     export LB_ENABLED=
 }
 
+enable_linuxbrew
+if [ -f "$(brew --prefix)/etc/brew-wrap" ]; then
+    # shellcheck disable=SC1090
+    source "$(brew --prefix)/etc/brew-wrap"
+fi
+disable_linuxbrew
+
 #------------------------------------------------------------------------------
 # Alias
 #------------------------------------------------------------------------------
@@ -166,5 +175,6 @@ shopt | grep direxpand > /dev/null && shopt -s direxpand
 # Lastly, source the local configuration file
 #------------------------------------------------------------------------------
 if [ -f "${XDG_CONFIG_HOME}/bash/local.bashrc" ]; then
+    # shellcheck disable=SC1090
     source "${XDG_CONFIG_HOME}/bash/local.bashrc"
 fi
