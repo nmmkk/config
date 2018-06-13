@@ -21,7 +21,6 @@ NeoBundle 'Shougo/neosnippet.vim' " neo-snippet plugin contains neocomplcache sn
 NeoBundle 'Shougo/neosnippet-snippets' " The standard snippets repository for neosnippet
 NeoBundle 'tpope/vim-fugitive' " fugitive.vim: a Git wrapper so awesome, it should be illegal
 NeoBundle 'kien/ctrlp.vim' " Fuzzy file, buffer, mru, tag, etc finder.
-NeoBundle 'flazz/vim-colorschemes' " one colorscheme pack to rule them all!
 
 NeoBundle 'vim-scripts/gtags.vim' " Integrates GNU GLOBAL source code tag system with VIM.
 NeoBundle 'Shougo/unite.vim' " :dragon: Unite and create user interfaces
@@ -49,7 +48,6 @@ NeoBundle 'mzlogin/vim-markdown-toc' " :package: A vim 7.4+ plugin to generate t
 NeoBundle 'kannokanno/previm' " Realtime preview by Vim. (Markdown, reStructuredText, textile)
 NeoBundle 'tyru/open-browser.vim' " Open URI with your favorite browser from your most favorite editor
 NeoBundle 'xolox/vim-misc' " Miscellaneous auto-load Vim scripts
-NeoBundle 'xolox/vim-colorscheme-switcher' " Makes it easy to quickly switch between color schemes in Vim
 NeoBundle 'thinca/vim-quickrun' " Run commands quickly.
 NeoBundle 'w0rp/ale' " Asynchronous Lint Engine
 NeoBundle 'maximbaz/lightline-ale' " ALE indicator for the lightline vim plugin
@@ -68,8 +66,6 @@ NeoBundle 'tpope/vim-surround' " surround.vim: quoting/parenthesizing made simpl
 NeoBundle 'tpope/vim-repeat' " repeat.vim: enable repeating supported plugin maps with .
 NeoBundle 'dag/vim-fish' " Vim support for editing fish scripts
 NeoBundle 'davidhalter/jedi-vim' " Using the jedi autocompletion library for VIM.
-NeoBundle 'dracula/vim' " :scream: A dark theme for Vim
-NeoBundle 'ujihisa/unite-colorscheme' " A unite.vim plugin
 NeoBundle 'KabbAmine/zeavim.vim' " Zeal for Vim
 NeoBundle 'cespare/vim-toml' " Vim syntax for TOML
 
@@ -82,6 +78,12 @@ NeoBundle 'haya14busa/incsearch.vim' " :flashlight: Improved incremental searchi
 NeoBundle 'glidenote/memolist.vim' " simple memo plugin for Vim.
 NeoBundle 'kana/vim-submode' " Vim plugin: Create your own submodes
 NeoBundle 'easymotion/vim-easymotion' " Vim motions on speed!
+
+" Color schemes
+NeoBundle 'ujihisa/unite-colorscheme' " A unite.vim plugin
+NeoBundle 'flazz/vim-colorschemes' " one colorscheme pack to rule them all!
+NeoBundle 'xolox/vim-colorscheme-switcher' " Makes it easy to quickly switch between color schemes in Vim
+NeoBundle 'dracula/vim' " :scream: A dark theme for Vim
 
 " You can specify revision/branch/tag.
 " NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
