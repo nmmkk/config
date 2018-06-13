@@ -66,6 +66,23 @@ nnoremap <C-F7> :%s/\s\+.*$//gc<CR>
 " カーソル下のファイルを開き、さらにウィンドウを縦分割する
 nnoremap <Leader>f :vsp<CR>gf
 
+" Tab handling - http://qiita.com/wadako111/items/755e753677dd72d8036d
+nnoremap    [TabHandling]   <Nop>
+nmap        t [TabHandling]
+
+" Tab jump - t1 で1番左のタブ、t2 で1番左から2番目のタブにジャンプ
+for n in range(1, 9)
+  execute 'nnoremap <silent> [TabHandling]'.n  ':<C-u>tabnext'.n.'<CR>'
+endfor
+
+" " tc 新しいタブを一番右に作る
+" map <silent> [TabHandling]c :tablast <bar> tabnew<CR>
+" " tx タブを閉じる
+" map <silent> [TabHandling]x :tabclose<CR>
+" " tn 次のタブ
+" map <silent> [TabHandling]n :tabnext<CR>
+" " tp 前のタブ
+" map <silent> [TabHandling]p :tabprevious<CR>
 
 " For QuickFix
 nnoremap <C-k>  :cp<CR>
