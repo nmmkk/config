@@ -75,9 +75,13 @@ NeoBundle 'cespare/vim-toml' " Vim syntax for TOML
 
 NeoBundle 'tpope/vim-unimpaired' " unimpaired.vim: pairs of handy bracket mappings
 
+NeoBundle 'tpope/vim-speeddating' " speeddating.vim: use CTRL-A/CTRL-X to increment dates, times, and more
 NeoBundle 'LucHermitte/lh-vim-lib', {'name': 'lh-vim-lib'} " Library of Vim functions
 NeoBundle 'LucHermitte/local_vimrc', {'depends': 'lh-vim-lib'} " Per project/tree configuration plugins
+NeoBundle 'haya14busa/incsearch.vim' " :flashlight: Improved incremental searching for Vim
+NeoBundle 'glidenote/memolist.vim' " simple memo plugin for Vim.
 NeoBundle 'kana/vim-submode' " Vim plugin: Create your own submodes
+NeoBundle 'easymotion/vim-easymotion' " Vim motions on speed!
 
 " You can specify revision/branch/tag.
 " NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
