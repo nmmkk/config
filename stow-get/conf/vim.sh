@@ -1,6 +1,13 @@
 inst_type=github
 # configure_options="--enable-luainterp=yes --enable-perlinterp=yes --enable-pythoninterp=yes --enable-python3interp=yes --enable-cscope --enable-multibyte"
-configure_options="--enable-luainterp=yes --enable-perlinterp=yes --enable-pythoninterp=yes --enable-cscope --enable-multibyte"
+configure_options="\
+    --enable-luainterp=yes \
+    --with-lua-prefix=${XDG_DATA_HOME}/stow-get/usr/local \
+    --enable-perlinterp=yes \
+    --enable-pythoninterp=yes \
+    --enable-cscope \
+    --enable-multibyte \
+"
 lib_dep=(readline termcap lua ncurses)
 ncurses_check=$(check_lib libncurses 2)
 if [ -n "$ncurses_check" ];then
