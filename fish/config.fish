@@ -114,7 +114,7 @@ if set -q XDG_CACHE_HOME
 end
 
 #
-# Workarond for xsel error upon <C-w>, <C-u> ... etc.
+# Workaround for xsel error upon <C-w>, <C-u> ... etc.
 # The issue was observed on SSH sessions after some moment passes on the session.
 # The workaround below is from:
 #   [Kill to the clipboard is frustrating · Issue #772 · fish-shell/fish-shell](https://github.com/fish-shell/fish-shell/issues/772)
