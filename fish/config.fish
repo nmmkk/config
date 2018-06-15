@@ -35,12 +35,13 @@ case Linux
     # Be warn that bash might have already enabled linuxbrew. So rather take a
     # backup of environment variables named "ORIG_*" than of the real ones
     # (like $PATH, $MANPATH, ... etc).
+    # Also, note that we should not convert ":" in $PATH or $ORIG_PATH at this
+    # moment. $ORIG_PATH should keep using ":" as delimiter so that we can
+    # invoke bash or zsh from current fish environment.
     if not set -q ORIG_PATH
-        # Use eval to expand the value. Otherwise whole contents of "(echo
-        # $PATH | sed 's/:/ /g')" is packed into a single element.
-        eval set -gx ORIG_PATH (echo $PATH | sed 's/:/ /g')
+        set -gx ORIG_PATH $PATH
     else
-        eval set -gx ORIG_PATH (echo $ORIG_PATH | sed 's/:/ /g')
+        set -gx ORIG_PATH $ORIG_PATH
     end
 
     if not set -q ORIG_MANPATH
@@ -80,12 +81,13 @@ case Linux
         end
     end
 
-    # Use eval to expand the value. Otherwise whole contents of $ORIG_PATH goes
-    # into an element.
-    eval set -gx LB_PATH $LB_TOP/sbin $LB_TOP/bin (echo $ORIG_PATH | sed 's/:/ /g')
-    set -gx LB_MANPATH $LB_TOP/share/man $MANPATH
-    set -gx LB_INFOPATH $LB_TOP/share/info $INFOPATH
-    set -gx LB_PKG_CONFIG_PATH  $LB_TOP/opt/isl@0.18/lib/pkgconfig /usr/share/pkgconfig $ORIG_PKG_CONFIG_PATH
+    # Note that we should not convert ":" in $LB_PATH at this moment. $LB_PATH
+    # should keep using ":" as delimiter so that we can invoke bash or zsh from
+    # current fish environment.
+    set -gx LB_PATH "$LB_TOP/sbin:$LB_TOP/bin:$ORIG_PATH"
+    set -gx LB_MANPATH "$LB_TOP/share/man:$MANPATH"
+    set -gx LB_INFOPATH "$LB_TOP/share/info:$INFOPATH"
+    set -gx LB_PKG_CONFIG_PATH "$LB_TOP/opt/isl@0.18/lib/pkgconfig:/usr/share/pkgconfig:$ORIG_PKG_CONFIG_PATH"
 
     set -gx LB_PERL5_TOP $XDG_DATA_HOME/perl5-LB
     set -gx LB_PERL5LIB $LB_PERL5_TOP/lib/perl5
@@ -133,7 +135,12 @@ function enable_linuxbrew
         return 0
     end
 
-    set -gx PATH $LB_PATH
+    # PATH is special. The delimiter is different between bash/zsh and fish. So
+    # replace all ";" into " " here.
+    # Note that the following line uses eval to expand the value. Otherwise
+    # whole contents of "(echo $PATH | sed 's/:/ /g')" are packed into a single
+    # element.
+    eval set -gx PATH (echo $LB_PATH | sed 's/:/ /g')
     set -gx MANPATH $LB_MANPATH
     set -gx INFOPATH $LB_INFOPATH
 
@@ -146,7 +153,8 @@ function disable_linuxbrew
         return 0
     end
 
-    set -gx PATH $ORIG_PATH
+    # PATH is special. See the comment in enable_linuxbrew().
+    eval set -gx PATH (echo $ORIG_PATH | sed 's/:/ /g')
     set -gx MANPATH $ORIG_MANPATH
     set -gx INFOPATH $ORIG_INFOPATH
 
