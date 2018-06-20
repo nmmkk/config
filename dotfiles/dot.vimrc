@@ -29,7 +29,6 @@ noremap \ ,
 let s:profiles_dir_path = expand('<sfile>:h:h') . '/vim/profiles/'
 let s:profile_names = [
 \   'basic_set',
-\   'neocomplete',
 \   'neosnippet',
 \   'vimshell',
 \   'map',
@@ -42,10 +41,7 @@ let s:profile_names = [
 \   'markdown',
 \   'colorscheme-switcher',
 \   'kernel-coding-style',
-\   'gnuglobal',
 \   'taglist',
-\   'ale',
-\   'lightline',
 \   'quickrun',
 \   'align',
 \   'ctrlp',
@@ -123,10 +119,11 @@ augroup END
 "}}}1
 
 " Source settings {{{1
-" First, source bundles{{{2
-"    I decided to stick with NeoBundle as some my working environments are
-"    CentOS 7 where Python3 is not installed by default.
-call s:source_profile('bundles')
+" First, source plugin manager {{{2
+"   I used to stick with NeoBundle, which does not require pyhon3. As my
+"   recent environment installs both vim and python3 via stow-get, I don't
+"   have to worry about requirement about python3 anymore. So use dein.
+call s:source_profile('dein')
 "}}}2
 " Then, source profiles defined above {{{2
 call s:source_profiles(s:profile_names)
