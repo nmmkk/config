@@ -1,6 +1,18 @@
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
+[[plugins]] # Dark powered asynchronous unite all interfaces for Neovim/Vim8
+repo = 'Shougo/denite.nvim'
+hook_add = '''
+    nnoremap <silent> [MyKey]B :<C-u>Denite buffer -buffer-name=file<CR>
+'''
+
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+hook_add = '''
+    let g:deoplete#enable_at_startup = 1
+'''
+
 ### [[plugins]]
 ### repo = 'Shougo/unite.vim'
 ### hook_add = '''
@@ -289,7 +301,6 @@ hook_add = '''
     " last line string pattern of yaml front matter (default "- - -")
     let g:memolist_delimiter_yaml_end  = "---"
 '''
-
 
 [[plugins]] # Vim plugin: Create your own submodes
 repo = 'kana/vim-submode'
