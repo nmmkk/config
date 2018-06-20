@@ -24,8 +24,7 @@ NeoBundle 'kien/ctrlp.vim' " Fuzzy file, buffer, mru, tag, etc finder.
 
 NeoBundle 'vim-scripts/gtags.vim' " Integrates GNU GLOBAL source code tag system with VIM.
 NeoBundle 'Shougo/unite.vim' " :dragon: Unite and create user interfaces
-NeoBundle 'Shougo/neocomplcache.vim' " Ultimate auto-completion system for Vim.
-" NeoBundle 'Shougo/neocomplete.vim'
+NeoBundle 'Shougo/neocomplete.vim' " Next generation completion framework after neocomplcache
 NeoBundle 'Shougo/vimshell.vim' " :shell: Powerful shell implemented by vim.
 NeoBundle 'Shougo/vimproc.vim' " Interactive command execution in Vim.
 NeoBundle 'mark'
