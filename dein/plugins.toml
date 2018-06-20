@@ -65,9 +65,47 @@ repo = 'tyru/open-browser.vim'
 [[plugins]] # A light and configurable statusline/tabline for Vim
 repo = 'itchyny/lightline.vim'
 hook_add = '''
-    let g:lightline = {
-    \   'colorscheme': 'wombat'
-    \}
+    " (https://github.com/itchyny/lightline.vim)
+    let g:lightline = {}
+
+    let g:lightline.component_expand = {
+        \ 'linter_checking': 'lightline#ale#checking',
+        \ 'linter_warnings': 'lightline#ale#warnings',
+        \ 'linter_errors': 'lightline#ale#errors',
+        \ 'linter_ok': 'lightline#ale#ok',
+        \ }
+
+    let g:lightline.component_type = {
+        \ 'linter_chekcing': 'left',
+        \ 'linter_warnings': 'warning',
+        \ 'linter_errors': 'error',
+        \ 'linter_ok': 'left',
+        \ }
+
+    let g:lightline.active = {
+        \ 'right': [
+        \       [ 'lineinfo' ],
+        \       [ 'percent' ],
+        \       [ 'fileformat', 'fileencoding', 'filetype', 'charvaluehex' ],
+        \       [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ]
+        \ ],
+        \ 'left': [
+        \   [ 'mode', 'paste' ],
+        \   [ 'fugitive', 'readonly', 'filename', 'modified' ]
+        \ ]
+        \ }
+
+    let g:lightline.colorscheme = 'wombat'
+
+    " As I haven't installed patched fonts, my setting below is just to show git
+    " brnach addtionally.
+    let g:lightline.component = {
+        \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
+        \ }
+
+    let g:lightline.component_visible_condition = {
+        \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
+        \ }
 '''
 
 [[plugins]] # Highlights trailing whitespace in red and provides :FixWhitespace to fix it.
@@ -252,36 +290,40 @@ hook_add = '''
     let g:memolist_delimiter_yaml_end  = "---"
 '''
 
-[[plugins]] #  Syntax checking hacks for vim
-repo = 'vim-syntastic/syntastic'
-hook_add = '''
-    set statusline+=%#warningmsg#
-    set statusline+=%{SyntasticStatuslineFlag()}
-    set statusline+=%*
-
-    let g:syntastic_always_populate_loc_list = 1
-    let g:syntastic_auto_loc_list = 1
-    let g:syntastic_check_on_open = 0
-    let g:syntastic_check_on_wq = 0
-
-    nnoremap [Syntastic] <nop>
-    nmap <Leader>s [Syntastic]
-
-    nnoremap <silent> [Syntastic]c :SyntasticCheck<CR>
-    nnoremap <silent> [Syntastic]t :SyntasticToggleMode<CR>
-'''
 
 [[plugins]] # Vim plugin: Create your own submodes
 repo = 'kana/vim-submode'
 hook_add = '''
-    call submode#enter_with('bufmove', 'n', '', '[MyKey]>', '<C-w>>')
-    call submode#enter_with('bufmove', 'n', '', '[MyKey]<', '<C-w><')
-    call submode#enter_with('bufmove', 'n', '', '[MyKey]+', '<C-w>+')
-    call submode#enter_with('bufmove', 'n', '', '[MyKey]-', '<C-w>-')
-    call submode#map('bufmove', 'n', '', '>', '<C-w>>')
-    call submode#map('bufmove', 'n', '', '<', '<C-w><')
-    call submode#map('bufmove', 'n', '', '+', '<C-w>+')
-    call submode#map('bufmove', 'n', '', '-', '<C-w>-')
+    call submode#enter_with('undo/redo', 'n', '', 'g-', 'g-')
+    call submode#enter_with('undo/redo', 'n', '', 'g+', 'g+')
+    call submode#leave_with('undo/redo', 'n', '', '<Esc>')
+    call submode#map('undo/redo', 'n', '', '-', 'g-')
+    call submode#map('undo/redo', 'n', '', '+', 'g+')
+
+    call submode#enter_with('winresize', 'n', '', '<C-w>>', '<C-w>>')
+    call submode#enter_with('winresize', 'n', '', '<C-w><', '<C-w><')
+    call submode#enter_with('winresize', 'n', '', '<C-w>+', '<C-w>+')
+    call submode#enter_with('winresize', 'n', '', '<C-w>-', '<C-w>-')
+    call submode#leave_with('winresize', 'n', '', '<Esc>')
+    call submode#map('winresize', 'n', '', '>', '<C-w>>')
+    call submode#map('winresize', 'n', '', '<', '<C-w><')
+    call submode#map('winresize', 'n', '', '+', '<C-w>+')
+    call submode#map('winresize', 'n', '', '-', '<C-w>-')
+
+    call submode#enter_with('buf', 'n', '', '[MyKey]bj', ':bnext<CR>')
+    call submode#enter_with('buf', 'n', '', '[MyKey]bk', ':bprevious<CR>')
+    call submode#map('buf', 'n', '', 'j', ':bnext<CR>')
+    call submode#map('buf', 'n', '', 'k', ':bprevious<CR>')
+
+    call submode#enter_with('err', 'n', '', '[MyKey]cj', ':cnext<CR>')
+    call submode#enter_with('err', 'n', '', '[MyKey]ck', ':cprevious<CR>')
+    call submode#map('err', 'n', '', 'j', ':cnext<CR>')
+    call submode#map('err', 'n', '', 'k', ':cprevious<CR>')
+
+    call submode#enter_with('tab', 'n', '', '[MyKey]tj', 'gt')
+    call submode#enter_with('tab', 'n', '', '[MyKey]tk', 'gT')
+    call submode#map('tab', 'n', '', 'j', 'gt')
+    call submode#map('tab', 'n', '', 'k', 'gT')
 '''
 
 [[plugins]] # Vim plugin: Turn :cd into :tabpagecd, to use one tab page per project
@@ -305,9 +347,41 @@ repo = 'godlygeek/tabular'
 [[plugins]] # Vim motions on speed!
 repo = 'easymotion/vim-easymotion'
 
+[[pluings]] # Asynchronous Lint Engine
+repo = 'w0rp/ale'
+hook_add = '''
+    let g:ale_sign_column_always = 1
+
+    let g:ale_c_gcc_options = '-Wall -Wcast-qual -Wmissing-prototypes -Wpointer-arith -Wshadow -Wstrict-prototypes'
+    let g:ale_c_cppcheck_options = '--enable=style,performance,portability,information,missingInclude --std=c11'
+    let g:ale_cpp_gcc_options = '-std=c++11 -Wall -Wcast-qual -Wmissing-prototypes -Wpointer-arith -Wshadow -Wstrict-prototypes'
+    let g:ale_cpp_cppcheck_options = '--enable=style,performance,portability,information,missingInclude --std=c11'
+
+    " let g:ale_echo_msg_error_str = 'E'
+    " let g:ale_echo_msg_warning_str = 'W'
+    " let g:ale_echo_msg_info_str = 'I'
+    let g:ale_echo_msg_format = '[%linter%] %(code): %%s [%severity%]'
+
+    " Key map
+    nnoremap [ALE] <nop>
+    nmap <Space>a [ALE]
+
+    nmap <silent> [ALE]k <Plug>(ale_previous_wrap)
+    nmap <silent> [ALE]j <Plug>(ale_next_wrap)
+'''
+
+[[plugins]] # ALE indicator for the lightline vim plugin
+repo = 'maximbaz/lightline-ale'
+
+[[plugins]] # Fuzzy file, buffer, mru, tag, etc finder.
+repo = 'kien/ctrlp.vim'
+
 #==================================================
 # Colors
 #==================================================
+[[plugins]] # A dark, low-contrast, Vim colorscheme.
+repo = 'romainl/Apprentice'
+
 [[plugins]] # hybrid
 repo = 'w0ng/vim-hybrid'
 
@@ -319,4 +393,17 @@ repo = 'dracula/vim'
 
 [[plugins]] # molokai
 repo = 'tomasr/molokai'
+
+[[plugins]] # A unite.vim plugin
+repo = 'ujihisa/unite-colorscheme'
+
+[[plugins]] # one colorscheme pack to rule them all!
+repo = 'flazz/vim-colorschemes'
+
+[[plugins]] # Makes it easy to quickly switch between color schemes in Vim
+repo = 'xolox/vim-colorscheme-switcher'
+depends = ['vim-misc']
+
+[[plugins]] # Miscellaneous auto-load Vim scripts
+repo = 'xolox/vim-misc'
 

@@ -1,5 +1,9 @@
 " Dein configuration
 
+if &compatible
+ set nocompatible
+endif
+
 let s:dein_cache_dir = g:cache_home . '/dein'
 
 if &runtimepath !~# '/dein.vim'
@@ -24,8 +28,13 @@ let g:dein#install_log_filename = '~/log/dein.log'
 if dein#load_state(s:dein_cache_dir)
     call dein#begin(s:dein_cache_dir)
 
+    call dein#add(s:dein_cache_dir)
+    call dein#add('Shougo/deoplete.nvim')
     let s:toml_dir = g:config_home . '/dein'
 
+    if !has('nvim')
+        call dein#load_toml(s:toml_dir . '/vim.toml', {'lazy': 0})
+    endif
     call dein#load_toml(s:toml_dir . '/plugins.toml', {'lazy': 0})
     call dein#load_toml(s:toml_dir . '/lazy.toml', {'lazy': 1})
     if has('nvim')
@@ -52,4 +61,3 @@ filetype plugin indent on
 if dein#check_install()
     call dein#install()
 endif
-
