@@ -95,6 +95,14 @@ enable_linuxbrew ()
 {
     is_os "Linux" || return 0
 
+    if [ x"${LB_PATH}" = x"" ]; then
+        # We should not print out anything in bashrc. Otherwise rsync via ssh
+        # complains about protocol version. See "DIAGNOSTICS" section in man
+        # rsync.
+        ### # echo "Linuxbrew is not set up"
+        return 1
+    fi
+
     export PATH="${LB_PATH}"
     export MANPATH="${LB_MANPATH}"
     export INFOPATH="${LB_INFOPATH}"
@@ -131,6 +139,11 @@ disable_linuxbrew()
 {
     is_os "Linux" || return 0
 
+    if [ x"${ORIG_PATH}" = x"" ]; then
+        echo "ORIG_PATH is not set up"
+        return 1
+    fi
+
     export PATH="${ORIG_PATH}"
     export MANPATH="${ORIG_MANPATH}"
     export INFOPATH="${ORIG_INFOPATH}"
@@ -149,12 +162,13 @@ disable_linuxbrew()
     export LB_ENABLED=
 }
 
-enable_linuxbrew
-if [ -f "$(brew --prefix)/etc/brew-wrap" ]; then
-    # shellcheck disable=SC1090
-    source "$(brew --prefix)/etc/brew-wrap"
+if enable_linuxbrew; then
+    if [ -f "$(brew --prefix)/etc/brew-wrap" ]; then
+        # shellcheck disable=SC1090
+        source "$(brew --prefix)/etc/brew-wrap"
+    fi
+    disable_linuxbrew
 fi
-disable_linuxbrew
 
 #------------------------------------------------------------------------------
 # Alias
