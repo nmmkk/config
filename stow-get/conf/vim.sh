@@ -4,7 +4,7 @@ configure_options="\
     --enable-luainterp=yes \
     --with-lua-prefix=${XDG_DATA_HOME}/stow-get/usr/local \
     --enable-perlinterp=yes \
-    --enable-pythoninterp=yes \
+    --enable-python3interp=yes \
     --enable-cscope \
     --enable-multibyte \
 "
