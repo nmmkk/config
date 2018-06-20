@@ -18,6 +18,9 @@ get_latest () {
   version="$(echo "${tarfile_name}" | cut -d "-" -f2 | sed 's/.tar.gz//')"
   if [ -z "$version" ];then
     err "Failed to get the latest version for $package."
+    warn "zsh_download_url=${zsh_download_url}"
+    warn "params=${params}"
+    warn "tarfile_name=${tarfile_name}"
     return $EXIT_NO_VERSION
   fi
   if [ "$output_detail" -eq 1 ];then
