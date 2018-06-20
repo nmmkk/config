@@ -78,6 +78,8 @@ NeoBundle 'haya14busa/incsearch.vim' " :flashlight: Improved incremental searchi
 NeoBundle 'glidenote/memolist.vim' " simple memo plugin for Vim.
 NeoBundle 'kana/vim-submode' " Vim plugin: Create your own submodes
 NeoBundle 'easymotion/vim-easymotion' " Vim motions on speed!
+NeoBundle 'kana/vim-gf-user' " Vim plugin: A framework to open a file by context
+NeoBundle 'kana/vim-gf-diff' " Vim plugin: Go to the changed block under the cursor from diff output
 
 " Color schemes
 NeoBundle 'ujihisa/unite-colorscheme' " A unite.vim plugin
