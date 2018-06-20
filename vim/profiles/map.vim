@@ -116,7 +116,7 @@ nnoremap <silent> [MyKey]tc :<C-u>tabnew<CR>
 " Buffers
 nnoremap <silent> [MyKey]Q :<C-u>bdelete<CR>
 " nnoremap <silent> [MyKey]b :<C-u>Unite buffer_tab -buffer-name=file<CR>
-nnoremap <silent> [MyKey]B :<C-u>Unite buffer -buffer-name=file<CR>
+" nnoremap <silent> [MyKey]B :<C-u>Unite buffer -buffer-name=file<CR>
 
 " For QuickFix
 nnoremap <C-k>  :cp<CR>

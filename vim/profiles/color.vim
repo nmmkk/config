@@ -33,7 +33,5 @@ set background=dark
 
 " diff の色設定
 if &diff
-    set background=dark
-    highlight DiffAdd ctermbg=lightgreen
-    colorscheme stackoverflow
+    colorscheme apprentice
 endif

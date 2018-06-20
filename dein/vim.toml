@@ -1,0 +1,7 @@
+# Required for dein
+[[plugins]]
+repo = 'roxma/nvim-yarp'
+
+# Required for dein
+[[plugins]]
+repo = 'roxma/vim-hug-neovim-rpc'

@@ -1,0 +1,1 @@
+../../nvim/profiles/dein.vim
