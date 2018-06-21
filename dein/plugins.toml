@@ -17,6 +17,38 @@ hook_add = '''
 repo = 'Shougo/vimproc.vim'
 build = 'make'
 
+[[plugins]]
+repo = 'Shougo/neco-vim'
+depends = ['deoplete']
+
+[[plugins]]
+repo = 'Shougo/neoinclude.vim'
+depends = ['deoplete']
+
+[[plugins]]
+repo = 'Shougo/neco-syntax'
+depends = ['deoplete']
+
+[[plugins]]
+repo = 'Rip-Rip/clang_complete'
+depends = ['deoplete']
+
+[[plugins]]
+repo = 'wellle/tmux-complete.vim'
+depends = ['deoplete']
+
+[[plugins]]
+repo = 'zchee/deoplete-zsh'
+depends = ['deoplete']
+
+[[plugins]]
+repo = 'ponko2/deoplete-fish'
+depends = ['deoplete']
+
+[[plugins]]
+repo = 'zchee/deoplete-asm'
+depends = ['deoplete']
+
 [[plugins]] # The standard snippets repository for neosnippet
 repo = 'Shougo/neosnippet.vim'
 
