@@ -472,9 +472,6 @@ repo = 'romainl/Apprentice'
 [[plugins]] # hybrid
 repo = 'w0ng/vim-hybrid'
 
-[[plugins]] # solarized
-repo = 'altercation/vim-colors-solarized'
-
 [[plugins]] # dracula
 repo = 'dracula/vim'
 
@@ -483,9 +480,6 @@ repo = 'tomasr/molokai'
 
 [[plugins]] # A unite.vim plugin
 repo = 'ujihisa/unite-colorscheme'
-
-[[plugins]] # one colorscheme pack to rule them all!
-repo = 'flazz/vim-colorschemes'
 
 [[plugins]] # Makes it easy to quickly switch between color schemes in Vim
 repo = 'xolox/vim-colorscheme-switcher'
