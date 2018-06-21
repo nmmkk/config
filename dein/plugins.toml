@@ -25,6 +25,9 @@ repo = 'Shougo/vimproc.vim'
 build = 'make'
 
 [[plugins]] # The standard snippets repository for neosnippet
+repo = 'Shougo/neosnippet.vim'
+
+[[plugins]] # The standard snippets repository for neosnippet
 repo = 'Shougo/neosnippet-snippets'
 
 [[plugins]] # Integrates GNU GLOBAL source code tag system with VIM.
@@ -462,6 +465,9 @@ repo = 'LucHermitte/lh-vim-lib'
 [[plugins]] # Per project/tree configuration plugins
 repo = 'LucHermitte/local_vimrc'
 depends = ['lh-vim-lib']
+
+[[plugins]]  # A tree explorer plugin for vim.
+repo = 'scrooloose/nerdtree'
 
 #==================================================
 # Colors
