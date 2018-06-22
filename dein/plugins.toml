@@ -517,6 +517,9 @@ hook_add = '''
     let g:table_mode_corner='|'
 '''
 
+[[plugins]] # vim interface for taskwarrior
+repo = 'blindFS/vim-taskwarrior'
+
 #==================================================
 # Colors
 #==================================================
