@@ -30,7 +30,9 @@ export PERL5LIB="${PERL5LIB:-${PERL_LOCAL_LIB_ROOT}/lib/perl5}"
 export STOW_TOP="${XDG_DATA_HOME}/stow-get/usr/local"
 export PATH="${STOW_TOP}/bin:${PATH}"
 export LD_LIBRARY_PATH="${STOW_TOP}/lib64:${STOW_TOP}/lib:${LD_LIBRARY_PATH}"
-export PYTHONPATH="${STOW_TOP}/lib64:${STOW_TOP}/lib:${PYTHONPATH}"
+__EXTRA_PPATH="${STOW_TOP}/lib64:${STOW_TOP}/lib"
+export PYTHONPATH="${__EXTRA_PPATH}${PYTHONPATH:+:${PYTHONPATH}}"
+unset __EXTRA_PPATH
 
 #------------------------------------------------------------------------------
 # Linuxbrew
@@ -81,6 +83,14 @@ if [ -f ~/.bashrc ]; then
 	. ~/.bashrc
 fi
 disable_linuxbrew
+
+if is_os "Darwin" -a which -s pip3; then
+    __EXTRA_PPATH="$(pip3 show neovim | grep Location | awk '{print $2}')"
+    if [ -n "${__EXTRA_PPATH}" ]; then
+        PYTHONPATH="${PYTHONPATH}:${__EXTRA_PPATH}"
+    fi
+    unset __EXTRA_PPATH
+fi
 
 #------------------------------------------------------------------------------
 # Lastly, source the local configuration file
