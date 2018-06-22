@@ -1,23 +1,10 @@
-"================================================ 
-" ファイルタイプ
-"   [TODO]
-"     $HOME/rc/filetype.vim との棲み分けは？
-"================================================ 
-" ファイルタイプのプラグインを有効化
+" filetype
+
 filetype plugin on
 
-" c, perl では構文に従って折り畳む
-""" autocmd VimrcAutoCmd FileType c,perl set foldmethod=syntax cindent
-
-""""""" "------------------------------------------------
-""""""" " 辞書ファイルの設定
-""""""" "------------------------------------------------
-""""""" " ファイルタイプ毎に辞書ファイルを指定
-""""""" autocmd VimrcAutoCmd FileType perl :set dictionary+=~/.vim/dict/perl_functions.dict
-""""""" " Windows では下記と書いていた。
-""""""" autocmd VimrcAutoCmd FileType perl :set dictionary+=perl_functions.dict
-""""""" " 辞書ファイルを使用する設定に変更
-""""""" set complete+=k
+" Note that my configuration with dein installs Editorconfig. When setting up
+" items like "shiftwidth", the settings would be overwritten by the items
+" defined in my dot.editorconfig file.
 
 " Lastly, source local settings
 ResourceLocalProfile local_filetype

@@ -1,4 +1,15 @@
 " My vimrc
+"
+"==============================================================================
+" Useful Tips to Debug Script Loading
+" https://stackoverflow.com/questions/48933/how-do-i-list-loaded-plugins-in-vim
+"------------------------------------------------------------------------------
+" where was an option set
+" :scriptnames            : list all plugins, _vimrcs loaded (super)
+" :verbose set history?   : reveals value of history and where set
+" :function               : list functions
+" :func SearchCompl       : List particular function
+"==============================================================================
 
 " For Windows {{{1
 if has('win32') || has('win64')
