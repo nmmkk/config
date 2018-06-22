@@ -431,6 +431,9 @@ hook_add = '''
 [[plugins]] # Vim plugin: Turn :cd into :tabpagecd, to use one tab page per project
 repo = 'kana/vim-tabpagecd'
 
+[[plugins]] # Vim plugin: Switch to the missing file without interaction
+repo = 'kana/vim-altr'
+
 [[plugins]] # Vim script for text filtering and alignment
 repo = 'godlygeek/tabular'
 
@@ -493,6 +496,13 @@ depends = ['lh-vim-lib']
 
 [[plugins]]  # A tree explorer plugin for vim.
 repo = 'scrooloose/nerdtree'
+
+[[plugins]] # VIM Table Mode for instant table creation.
+repo = 'dhruvasagar/vim-table-mode'
+hook_add = '''
+    " For Markdown-compatible tables use
+    let g:table_mode_corner='|'
+'''
 
 #==================================================
 # Colors
