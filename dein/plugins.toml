@@ -433,6 +433,19 @@ repo = 'kana/vim-tabpagecd'
 
 [[plugins]] # Vim plugin: Switch to the missing file without interaction
 repo = 'kana/vim-altr'
+hook_add = '''
+    nmap <F2>   <Plug>(altr-forward)
+    nmap <S-F2> <Plug>(altr-back)
+
+    call altr#reset()
+    " Custom rules for ansible
+    call altr#define('tasks/%.yml',
+    \                'handlers/%.yml',
+    \                'vars/%.yml',
+    \                'defaults/%.yml',
+    \                'meta/%.yml',
+    \                'tests/%.yml')
+'''
 
 [[plugins]] # Vim script for text filtering and alignment
 repo = 'godlygeek/tabular'
@@ -531,6 +544,9 @@ hook_add = '''
     " For Markdown-compatible tables use
     let g:table_mode_corner='|'
 '''
+
+[[plugins]] # vim interface for taskwarrior
+repo = 'blindFS/vim-taskwarrior'
 
 #==================================================
 # Colors

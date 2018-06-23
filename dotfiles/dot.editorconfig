@@ -21,12 +21,12 @@ charset = utf-8
 indent_size = 4
 
 # 2 space indentation
-[*.yml]
+[*.{yaml,yml}]
 indent_size = 2
 
 # Limit line length
 [*.{c,h,cpp,hpp,py}]
-max_line_length = 80
+max_line_length = 79
 
 # Tab indentation (no size specified)
 [{Makefile,*.mk}]
