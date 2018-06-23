@@ -23,11 +23,24 @@ if type nodebrew >/dev/null ^/dev/null
     set -gx PATH $HOME/.nodebrew/current/bin $PATH
 end
 
+if test -d /Library/TeX/texbin >/dev/null ^/dev/null
+    set -gx PATH /Library/TeX/texbin $PATH
+end
+
 # For stow
 set -gx STOW_TOP $XDG_DATA_HOME/stow-get/usr/local
 set -gx PATH $STOW_TOP/bin $PATH
 set -gx LD_LIBRARY_PATH $STOW_TOP/lib64 $STOW_TOP/lib $LD_LIBRARY_PATH
-set -gx PYTHONPATH $STOW_TOP/lib64 $STOW_TOP/lib $PYTHONPATH
+set -gx PYTHONPATH $STOW_TOP/lib64:$STOW_TOP/lib:$PYTHONPATH
+if [ x"$os" = x"Darwin" ]
+    if type -q pip3
+        set __EXTRA_PPATH (pip3 show neovim | grep Location | awk '{print $2}')
+        if [ x"$__EXTRA_PPATH" != x"" ]
+            set -gx PYTHONPATH $PYTHONPATH:$__EXTRA_PPATH
+        end
+        unset __EXTRA_PPATH
+    end
+end
 
 switch $os
 case Linux
