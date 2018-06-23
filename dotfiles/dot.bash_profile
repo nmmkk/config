@@ -84,7 +84,7 @@ if [ -f ~/.bashrc ]; then
 fi
 disable_linuxbrew
 
-if is_os "Darwin" -a which -s pip3; then
+if is_os "Darwin" -a which pip3 >/dev/null; then
     __EXTRA_PPATH="$(pip3 show neovim | grep Location | awk '{print $2}')"
     if [ -n "${__EXTRA_PPATH}" ]; then
         PYTHONPATH="${PYTHONPATH}:${__EXTRA_PPATH}"
