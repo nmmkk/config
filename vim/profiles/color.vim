@@ -11,7 +11,6 @@
 
 
 colorscheme dracula
-set background=dark
 
 if &diff
     colorscheme apprentice
