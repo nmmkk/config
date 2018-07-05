@@ -465,7 +465,7 @@ repo = 'godlygeek/tabular'
 [[plugins]] # Vim motions on speed!
 repo = 'easymotion/vim-easymotion'
 
-[[pluings]] # Asynchronous Lint Engine
+[[plugins]] # Asynchronous Lint Engine
 repo = 'w0rp/ale'
 hook_add = '''
     let g:ale_sign_column_always = 1
