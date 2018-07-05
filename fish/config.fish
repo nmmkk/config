@@ -138,6 +138,14 @@ set FISH_CLIPBOARD_CMD "cat" # Stop that.
 set -gx theme_powerline_fonts no
 set -gx theme_color_scheme solarized
 
+set -gx theme_display_git yes
+set -gx theme_display_git_dirty yes
+# The following makes fish slow down under a large git repository
+set -gx theme_display_git_untracked no
+set -gx theme_display_git_ahead_verbose yes
+set -gx theme_display_git_dirty_verbose yes
+set -gx theme_display_git_master_branch yes
+
 #
 # Functions
 #
