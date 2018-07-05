@@ -44,7 +44,7 @@ fi
 jm_shell_ps1="${HOME}/.local/lib/bash/ps1"
 if [ -r "${jm_shell_ps1}" ]; then
     # shellcheck disable=SC2034
-    prompt_style=extensive
+    prompt_style=default
     # shellcheck disable=SC1090
     source "${jm_shell_ps1}"
 else
