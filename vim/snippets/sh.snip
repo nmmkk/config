@@ -105,10 +105,13 @@ options     head
 	if [ "${TERM:-dumb}" != "dumb" ]; then
 	    TXTUNDERLINE="\e[4m"
 	    TXTBOLD="\e[1m"
-	    TXTRED="\e[31m"
-	    TXTGREEN="\e[32m"
-	    TXTYELLOW="\e[33m"
-	    TXTBLUE="\e[34m"
+	    TXTRED="\e[41m\e[37m"
+	    TXTGREEN="\e[42m\e[30m"
+	    TXTYELLOW="\e[43m\e[30m"
+	    TXTBLUE="\e[44m\e[37m"
+	    TXTMAGENTA="\e[45m\e[37m"
+	    TXTCYAN="\e[46m\e[30m"
+	    TXTDARKGRAY="\e[100m\e[37m"
 	    TXTRESET="\e[0m"
 	else
 	    # shellcheck disable=SC2034
@@ -122,7 +125,9 @@ options     head
 	    # shellcheck disable=SC2034
 	    TXTYELLOW=""
 	    # shellcheck disable=SC2034
-	    TXTBLUE=$""
+	    TXTBLUE=""
+	    # shellcheck disable=SC2034
+	    TXTMAGENTA=""
 	    # shellcheck disable=SC2034
 	    TXTRESET=""
 	fi
