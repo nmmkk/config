@@ -16,6 +16,18 @@ data.location=~/.config/taskwarrior
 # Color theme
 include ~/.config/taskwarrior/color.theme
 
+# Taskserver
+include ~/.config/taskwarrior/taskserver.rc
+
+# Format -- list : Show URL
+report.list.columns=id,start.age,entry.age,depends.indicator,priority,project,tags,recur.indicator,scheduled.countdown,due,until.remaining,description.count,urgency,url
+report.list.labels=ID,Active,Age,D,P,Project,Tags,R,Sch,Due,Until,Description,Urg,URL
+
+# Format -- next : Show URL
+report.next.columns=id,start.age,entry.age,depends,priority,project,tags,recur,scheduled.countdown,due.relative,until.remaining,description,urgency,url
+report.next.labels=ID,Active,Age,Deps,P,Project,Tag,Recur,S,Due,Until,Description,Urg,URL
+
+# UDA -- reviewed
 uda.reviewed.type=date
 uda.reviewed.label=Reviewed
 report._reviewed.description=Tasksh review report.  Adjust the filter to your needs.
@@ -23,5 +35,6 @@ report._reviewed.columns=uuid
 report._reviewed.sort=reviewed+,modified+
 report._reviewed.filter=( reviewed.none: or reviewed.before:now-6days ) and ( +PENDING or +WAITING )
 
-# Taskserver
-include ~/.config/taskwarrior/taskserver.rc
+# UDA -- URL
+uda.url.type=string
+uda.url.label=URL
