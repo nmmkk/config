@@ -2,6 +2,7 @@ include $(CURDIR)/../build/make-defs.mk
 
 SRC_DIR := $(CURDIR)
 INSTALL_DIR := $(INSTALL_BASE)/.config/nvim
+CACHE_DIR := ${XDG_CACHE_HOME}/nvim
 
 .PHONY: default all install clean dir
 
@@ -18,6 +19,11 @@ dir:
 	@if [ ! -d $(INSTALL_DIR)/local ]; then \
 	    mkdir -pv $(INSTALL_DIR)/local; \
 	fi
+	@for dir in backupfiles swapfiles undofiles; do \
+	    if [ ! -d $(CACHE_DIR)/$${dir} ]; then \
+	        mkdir -pv $(CACHE_DIR)/$${dir}; \
+	    fi; \
+	done
 
 setup-init: dir
 	@# Make init.vim if it does not exist yet
