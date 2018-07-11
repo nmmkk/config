@@ -144,8 +144,3 @@ nnoremap <Leader>b :call ToggleBgcolorColumns(80)<CR>
 " And the actual settings are defined in separate files like "vimrc_gnuglobal".
 "================================================================================
 
-"--------------------------------------------------------------------------------
-" for NERDTree
-"
-nnoremap <silent><C-e> :NERDTreeToggle<CR>
-let g:NERDTreeBookmarksFile=$HOME . '/rc/vim/NERDTreeBookmarks'

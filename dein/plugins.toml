@@ -503,6 +503,10 @@ depends = ['lh-vim-lib']
 
 [[plugins]] # A tree explorer plugin for vim.
 repo = 'scrooloose/nerdtree'
+hook_add = '''
+    nnoremap <silent><C-e> :NERDTreeToggle<CR>
+    let g:NERDTreeBookmarksFile=$HOME . '/.config/dein/nerdtree/NERDTreeBookmarks'
+'''
 
 [[plugins]] # Vim plugin for intensely orgasmic commenting
 repo = 'scrooloose/nerdcommenter'
