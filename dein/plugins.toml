@@ -551,6 +551,9 @@ repo = 'blindFS/vim-taskwarrior'
 [[plugins]] # Help folks to align text, eqns, declarations, tables, etc
 repo = 'vim-scripts/Align'
 
+[[plugins]] # obsession.vim: continuously updated session files
+repo = 'tpope/vim-obsession'
+
 #==================================================
 # Colors
 #==================================================
