@@ -12,6 +12,11 @@ hook_source = '''
 [[plugins]]
 repo = 'Shougo/context_filetype.vim'
 
+[[plugins]] # The standard snippets repository for neosnippet
+repo = 'Shougo/neosnippet-snippets'
+on_event = 'InsertEnter'
+on_ft = ['snippet']
+
 [[plugins]] # neo-snippet plugin contains neocomplcache snippets source
 repo = 'Shougo/neosnippet'
 on_event = 'InsertEnter'

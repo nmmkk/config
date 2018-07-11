@@ -49,12 +49,6 @@ depends = ['deoplete']
 repo = 'zchee/deoplete-asm'
 depends = ['deoplete']
 
-[[plugins]] # The standard snippets repository for neosnippet
-repo = 'Shougo/neosnippet.vim'
-
-[[plugins]] # The standard snippets repository for neosnippet
-repo = 'Shougo/neosnippet-snippets'
-
 [[plugins]] # Integrates GNU GLOBAL source code tag system with VIM.
 repo = 'vim-scripts/gtags.vim'
 hook_add = '''
