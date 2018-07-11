@@ -548,6 +548,9 @@ hook_add = '''
 [[plugins]] # vim interface for taskwarrior
 repo = 'blindFS/vim-taskwarrior'
 
+[[plugins]] # Help folks to align text, eqns, declarations, tables, etc
+repo = 'vim-scripts/Align'
+
 #==================================================
 # Colors
 #==================================================
