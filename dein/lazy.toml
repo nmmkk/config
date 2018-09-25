@@ -151,3 +151,7 @@ hook_add = '''
    let g:ansible_unindent_after_newline = 1
 '''
 
+[[plugins]]
+repo = 'aklt/plantuml-syntax'
+on_ft = 'plantuml'
+
