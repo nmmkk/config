@@ -614,3 +614,22 @@ options     head
 	    return 0
 	}
 
+snippet     func_put_divider
+options     head
+	put_divider()
+	{
+	    local char="\${1:--}"
+	    local tty_size="$(stty size 2>/dev/null)"
+	    local col="${tty_size#* }"
+
+	    : "${col:=0}"
+
+	    while [ "${col}" -gt 0 ]; do
+	        echo -n "${char}"
+	        (( col -= 1 ))
+	    done
+
+	    echo
+	    return 0
+	}
+
