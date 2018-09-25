@@ -398,12 +398,12 @@ options     head
 	    done
 	    shift "$((OPTIND - 1))" # Shift off the options and optional --.
 
-	    info 1 "verbosity=${OPTS[verbosity]}"
+	    debug 1 "verbosity=${OPTS[verbosity]}"
 
 	    # Dump arguments
-	    info 1 "all_args=" "${all_args[@]}"
+	    debug 1 "all_args=" "${all_args[@]}"
 	    args=( "$@" )
-	    info 1 "args=" "${args[@]}"
+	    debug 1 "args=" "${args[@]}"
 
 	    # Parse positional arguments
 	    ARGS[sample]=\$1
