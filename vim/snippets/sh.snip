@@ -425,6 +425,110 @@ options     head
 	parse_args "$@"
 
 
+snippet     func_parse_args_long
+options     head
+	declare -A ARGS
+	declare -A OPTS
+
+	parse_args()
+	{
+	    declare -a all_args=( "$@" )
+	    declare -a args=""  # set after all the options are parsed.
+
+	    # Initialize our own variables:
+	    OPTS[verbosity]=0
+
+	    # Parse options
+	    OPTIND=1 # Reset is necessary if getopts was used previously in the script.
+	             # It is a good idea to make this local in a function.
+	    while getopts "ft:hvV-:" opt; do
+	        case "${opt}" in
+	            f)
+	                OPTS[force]=1
+	                ;;
+	            t)
+	                OPTS[target]="${OPTARG}"
+	                ;;
+	            h)
+	                show_help
+	                exit 0
+	                ;;
+	            v)
+	                (( OPTS[verbosity] += 1 ))
+	                ;;
+	            V)
+	                show_version
+	                exit 0
+	                ;;
+	            -)  # Long options are in the form of "--opt=arg" or "--opt"
+	                LONG_OPTARG="${OPTARG#*=}"
+	                case "${OPTARG}" in
+	                    force )
+	                        OPTS[force]=1
+	                        ;;
+	                    target=?* )
+	                        OPTS[target]="${LONG_OPTARG}"
+	                        ;;
+	                    target* )
+	                        echo "--${OPTARG} requires an argument" >&2
+	                        show_help >&2
+	                        exit 1
+	                        ;;
+	                    help)
+	                        show_help
+	                        exit 0
+	                    verbose)
+	                        (( OPTS[verbosity] += 1 ))
+	                        ;;
+	                    version)
+	                        show_version
+	                        exit 0
+	                        ;;
+	                    '' )  # "--" Denotes the end of the options.
+	                        break
+	                        ;;
+	                    * )
+	                        echo "Illegal option --${OPTARG}" >&2
+	                        show_help >&2
+	                        exit 1
+	                        ;;
+	                esac
+	                ;;
+	            '?')
+	                show_help >&2
+	                exit 1
+	                ;;
+	        esac
+	    done
+	    shift "$((OPTIND - 1))" # Shift off the options and optional --.
+
+	    debug 1 "verbosity=${OPTS[verbosity]}"
+
+	    # Dump arguments
+	    debug 1 "all_args=" "${all_args[@]}"
+	    args=( "$@" )
+	    debug 1 "args=" "${args[@]}"
+
+	    # Parse positional arguments
+	    ARGS[sample]=\$1
+	    if [ x"${ARGS[sample]}" = x"" ]; then
+	        err "No argument is specified"
+	        show_help >&2
+	        exit 2
+	    fi
+	    if [ ! -e "${ARGS[sample]}" ]; then
+	        err "Given name of file does not exist (${ARGS[sample]})"
+	        exit 2
+	    fi
+	    if [ ! -r "${ARGS[sample]}" ]; then
+	        err "Given name of file is not readable (${ARGS[sample]})"
+	        exit 2
+	    fi
+	}
+
+	parse_args "$@"
+
+
 snippet     func_logging_all
 options     head
 	enable_logging_all()
