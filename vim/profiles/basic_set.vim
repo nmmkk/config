@@ -124,6 +124,17 @@ set grepprg=grep\ -nH
 " 構文解析の有効化
 syntax on
 
+"==============================================================================
+" Workarounds for working on terminator. Those were found in:
+" https://github.com/neovim/neovim/wiki/FAQ
+"==============================================================================
+
+" Nvim shows weird symbols (�[2 q) when changing modes
+set guicursor=
+
+" Enabling `termguicolors` on terminator causes color problem.
+set notermguicolors
+
 " Lastly, source local settings
 ResourceLocalProfile local_basic_set
 

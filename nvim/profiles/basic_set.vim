@@ -112,9 +112,6 @@ set path+=/usr/include
 " Ctrl-a でのインクリメントに関する設定
 set nrformats=hex
 
-" 256色表示にする
-set t_Co=256
-
 " 不可視文字を可視化する
 set listchars=eol:$,tab:>=,trail:_
 
@@ -161,5 +158,17 @@ set showtabline=2 " 常にタブラインを表示
 "}}}2
 
 "}}}1
+
+"==============================================================================
+" Workarounds for working on terminator. Those were found in:
+" https://github.com/neovim/neovim/wiki/FAQ
+"==============================================================================
+
+" Nvim shows weird symbols (�[2 q) when changing modes
+set guicursor=
+autocmd OptionSet guicursor noautocmd set guicursor=
+
+" Enabling `termguicolors` on terminator causes color problem.
+set notermguicolors
 
 " vim: foldmethod=marker
