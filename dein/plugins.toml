@@ -355,9 +355,11 @@ repo = 'osyo-manga/shabadou.vim'
 [[plugins]] # simple memo plugin for Vim
 repo = 'glidenote/memolist.vim'
 hook_add = '''
-    nnoremap <Leader>mn  :MemoNew<CR>
-    nnoremap <Leader>ml  :MemoList<CR>
-    nnoremap <Leader>mg  :MemoGrep<CR>
+    nnoremap [MemoList] <nop>
+    nmap <Space>m [MemoList]
+    nnoremap [MemoList]n  :MemoNew<CR>
+    nnoremap [MemoList]l  :MemoList<CR>
+    nnoremap [MemoList]g  :MemoGrep<CR>
 
     let g:memolist_path = "~/Documents/memo"
 
