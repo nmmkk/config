@@ -633,3 +633,14 @@ options     head
 	    return 0
 	}
 
+snippet     func_calc
+options     head
+	calc()
+	{
+	    local scale="\$1"
+	    shift
+	    local exp="$*"
+
+	    echo "scale=${scale} ${exp}" | bc -l
+	}
+
