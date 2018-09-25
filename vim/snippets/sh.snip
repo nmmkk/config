@@ -267,7 +267,7 @@ snippet     func_warn
 options     head
 	warn()
 	{
-	    echo -e "${TXTYELLOW}WARN${TXTRESET} $*" 1>&2
+	    echo -e "${TXTYELLOW} WARN ${TXTRESET} $*" 1>&2
 	    log "$(now) | WARN  | $(get_caller_line) | $*"
 	}
 
@@ -275,7 +275,7 @@ snippet     func_error
 options     head
 	err()
 	{
-	    echo -e "${TXTRED}ERROR${TXTRESET} $*" 1>&2
+	    echo -e "${TXTRED} ERROR ${TXTRESET} $*" 1>&2
 	    log "$(now) | ERROR | $(get_caller_line) | $*"
 	}
 
@@ -291,7 +291,7 @@ snippet     func_info
 options     head
 	info()
 	{
-	    echo -e "${TXTBLUE}INFO${TXTRESET} $*"
+	    echo -e "${TXTBLUE} INFO ${TXTRESET} $*"
 	    log "$(now) | INFO  | $(get_caller_line) | $*"
 	}
 
@@ -317,7 +317,7 @@ options     head
 	    fi
 
 	    if [ "${level}" -le "${OPTS[verbosity]:-0}" ]; then
-	        echo -e "${TXTGREEN}DEBUG${TXTRESET} ${msg}"
+	        echo -e "${TXTGREEN} DEBUG ${TXTRESET} ${msg}"
 	    fi
 
 	    # All messages are saved into the log file regardless of verbosity
