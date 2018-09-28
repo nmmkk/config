@@ -12,10 +12,10 @@ get_latest () {
   local zsh_download_url="http://zsh.sourceforge.net/Arc/source.html"
   # local params="$(get_page https://libexpat.github.io/|grep -v Changelog|grep "Changes" -B1|head -n2)"
   local params="$(get_page "${zsh_download_url}" | \
-                  grep -v 'doc.tar.gz' | \
-                  grep '>zsh-[[:digit:]].*.tar.gz<')"
+                  grep -v 'doc.tar.xz' | \
+                  grep '>zsh-[[:digit:]].*.tar.xz<')"
   local tarfile_name="$(echo "$params" | tail -n1 | cut -d ">" -f2 | cut -d "<" -f1)"
-  version="$(echo "${tarfile_name}" | cut -d "-" -f2 | sed 's/.tar.gz//')"
+  version="$(echo "${tarfile_name}" | cut -d "-" -f2 | sed 's/.tar.xz//')"
   if [ -z "$version" ];then
     err "Failed to get the latest version for $package."
     warn "zsh_download_url=${zsh_download_url}"
@@ -30,4 +30,4 @@ get_latest () {
 }
 get_version
 url_prefix=https://sourceforge.net/projects/zsh/files/zsh/$version
-tarball=${package}-${version}.tar.gz
+tarball=${package}-${version}.tar.xz
