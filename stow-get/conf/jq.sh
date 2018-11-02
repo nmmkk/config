@@ -5,10 +5,11 @@ before_configure () {
 }
 bin_dep=(autoconf)
 lib_dep=(oniguruma)
+configure_options="--with-oniguruma=${inst_dir}"
 if [ -n "$ncurses_check" ];then
-  configure_flags="--disable-maintainer-mode"
+  configure_options="${configure_options} --disable-maintainer-mode"
 fi
 
 # Substitute "jq-" from the version name
 get_version
-target_postfix="${version#jq-}"
+version="${version#jq-}"
