@@ -6,6 +6,28 @@ options     head
     
     ${0:TARGET}
 
+snippet     doc_file
+abbr        """..."""
+options     head
+	"""${1:#:Summary}
+
+	${2:#:Long information}
+
+	Args:
+	    ${3:#:arg1}
+
+	Returns:
+	    ${4:#:return}
+
+	Raises:
+	    ${5:#:raise}
+
+	    Copyright (c) ${6:Year} ${7:Organization}
+	      All rights reserved.
+
+	"""
+	${0}
+
 snippet     doc_func
 abbr        """..."""
 options     head
