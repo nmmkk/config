@@ -42,6 +42,10 @@ if [ x"$os" = x"Darwin" ]
     end
 end
 
+if test -d ~/.cargo/bin >/dev/null ^/dev/null
+    set -gx PATH ~/.cargo/bin $PATH
+end
+
 switch $os
 case Linux
     # Take a backup of environment variables so that we can restore it later.
