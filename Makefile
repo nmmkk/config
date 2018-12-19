@@ -29,6 +29,10 @@ git-setup:
 	make -C git/
 	@echo
 
+tig-setup:
+	make -C tig/
+	@echo
+
 ag-setup:
 	@# Make .agignore if it does not exist yet
 	@if [ ! -f $(INSTALL_BASE)/.agignore ]; then \
