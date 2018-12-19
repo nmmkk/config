@@ -35,7 +35,7 @@ sorendition "= Rk"
 # hardstatus alwayslastline " %-w%{=b bw}%n %t%{-}%+w [%y/%m/%d %c:%s]"
 
 # screen 起動時のシェル
-shell fish
+### shell fish
 
 # ハードコピーしたファイルの保存先ディレクトリ
 hardcopydir "$HOME/log/screenCopy"
@@ -48,6 +48,10 @@ hardcopy_append on
 
 # Bash でベル文字入力時に不要な文字を表示させないようにするため、ビジュアルベルをやめる。
 vbell off
+
+# On Linux, TERM was set to 'screen.xterm-256color' by screen + bash.
+# Such a value was not supported by fish as of version 2.7.1 .
+term screen-256color
 
 ### # As of 7/3/2017, my terminals have a problem with color in screen.
 ### # It does not support 256 colors.
