@@ -29,10 +29,10 @@ nnoremap <Leader>R :<C-u>source $MYVIMRC<Enter>:echo 'INFO: $MYVIMRC is just sou
 " 検索で飛んだ箇所が画面中央にくるようにする
 nnoremap n nzz
 nnoremap N Nzz
-nnoremap * *zz
-nnoremap # #zz
-nnoremap g* g*zz
-nnoremap g# g#zz
+" nnoremap * *zz   " free this for <Plug>(incsearch-nohl-*)
+" nnoremap # #zz   " free this for <Plug>(incsearch-nohl-#)
+" nnoremap g* g*zz " free this for <Plug>(incsearch-nohl-g*)
+" nnoremap g# g#zz " free this for <Plug>(incsearch-nohl-g#)
 
 "ビジュアルモード時vで行末まで選択
 vnoremap v $h
