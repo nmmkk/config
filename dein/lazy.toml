@@ -94,18 +94,33 @@ on_ft = 'toml'
 
 # Markdown
 [[plugins]]
-### repo = 'plasticboy/vim-markdown'
-repo = 'rcmdnk/vim-markdown'
+repo = 'plasticboy/vim-markdown'
+### repo = 'rcmdnk/vim-markdown'
 on_ft = ['markdown','mkd']
 hook_add = '''
+    " Set header folding level
     let g:vim_markdown_folding_level = 6
-    let g:vim_markdown_frontmatter = 1
-    let g:vim_markdown_math = 1
+
+    " Enable TOC window auto-fit
     let g:vim_markdown_toc_autofit = 1
-    let g:vim_markdown_autowrite = 1
-    let g:vim_markdown_no_extensions_in_markdown = 1
+
+    " Syntax Concealing
     let g:vim_markdown_conceal = 0
+
+    " LaTeX math
+    let g:vim_markdown_math = 1
+
+    " YAML Front Matter
+    let g:vim_markdown_frontmatter = 1
+
+    " TOML Front Matter
     let g:vim_markdown_toml_frontmatter = 1
+
+    " Do not require .md extensions for Markdown links
+    let g:vim_markdown_no_extensions_in_markdown = 1
+
+    " Auto-write when following link
+    let g:vim_markdown_autowrite = 1
 '''
 depends = ['vim-markdown-quote-syntax', 'vim-toml']
 
