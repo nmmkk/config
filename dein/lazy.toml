@@ -147,9 +147,16 @@ hook_add = '''
     \}
 '''
 
+[[plugins]]
+repo = 'zchee/deoplete-jedi'
+on_ft = 'python'
+
 [[plugins]] # Using the jedi autocompletion library for VIM.
 repo = 'davidhalter/jedi-vim'
 on_ft = 'python'
+hook_add = '''
+    let g:jedi#completions_enabled = 0
+'''
 
 [[plugins]] # Vim plugin for .tmux.conf
 repo = 'tmux-plugins/vim-tmux'
