@@ -554,6 +554,27 @@ repo = 'vim-scripts/Align'
 [[plugins]] # obsession.vim: continuously updated session files
 repo = 'tpope/vim-obsession'
 
+[[plugins]]
+repo = 'inkarkat/vim-ingo-library'
+
+[[plugins]]
+repo = 'inkarkat/vim-mark'
+depends = ['vim-ingo-library']
+hook_add = '''
+    " Remove the default overriding of * and #:
+    nmap <Plug>IgnoreMarkSearchNext <Plug>MarkSearchNext
+    nmap <Plug>IgnoreMarkSearchPrev <Plug>MarkSearchPrev
+'''
+
+# [[plugins]]
+# repo = 'blueyed/vim-diminactive'
+
+[[plugins]] # VOoM (Vim Outliner of Markups) is a plugin for Vim that emulates a two-pane text outliner
+repo = 'vim-voom/VOoM'
+
+# [[plugins]] # Work fast, think well.
+# repo = 'vimoutliner/vimoutliner'
+
 #==================================================
 # Colors
 #==================================================
