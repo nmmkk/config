@@ -118,6 +118,21 @@ nnoremap <silent> [MyKey]Q :<C-u>bdelete<CR>
 " nnoremap <silent> [MyKey]b :<C-u>Unite buffer_tab -buffer-name=file<CR>
 " nnoremap <silent> [MyKey]B :<C-u>Unite buffer -buffer-name=file<CR>
 
+"
+" Handy keymap to launch command
+"
+vnoremap <silent> [MyKey]<CR>   :!sh<CR>
+nnoremap <silent> [MyKey]<CR>   V:!sh<CR>
+" Before running the above keymap, typing the following key prepare the line
+" as a command block in the form of markdown.
+" e.g.) If a line is constructed as:
+"           date
+"       Then, typing the key `[MyKey]y` on the line generates:
+"           ```date
+"           date
+"           ```
+nnoremap <silent> [MyKey]y      yyI```<ESC>po```<ESC>k
+
 " For QuickFix
 nnoremap <C-k>  :cp<CR>
 " I don't know why but I need to hit Shift-Ctrl-j to take effect the following.
