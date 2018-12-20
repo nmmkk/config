@@ -215,8 +215,46 @@ function bind_dollar
     end
 end
 
+# cdg -- bookmarked directory selector
+# https://dmitryfrank.com/articles/shell_shortcuts
+function fuzzy_finder
+    if type peco >/dev/null ^/dev/null
+        peco --layout=bottom-up $argv
+    end
+end
 
+function cdscuts_list_echo
+    sed 's/#.*//g' $argv[1] | sed '/^\s*$/d'
+end
 
+function cdscuts_glob_echo
+    set -l system_wide_filelist
+    set -l user_filelist
+
+    if [ -r /etc/cdg_paths ]
+        set system_wide_filelist (cdscuts_list_echo /etc/cdg_paths)
+    end
+    if [ -r ~/.cdg_paths ]
+        set user_filelist (cdscuts_list_echo ~/.cdg_paths)
+    end
+
+    for item in $system_wide_filelist $user_filelist
+        echo "$item"
+    end | sed '/^\s*$/d'
+end
+
+function cdg -d 'Bookmarked directory selector'
+    if not type fuzzy_finder >/dev/null ^/dev/null
+        echo "No fuzzy finder is available" ^&1
+        return 1
+    end
+
+    set -l dest_dir (cdscuts_glob_echo | fuzzy_finder)
+    if set -q dest_dir[1]
+        echo cd "$dest_dir"
+        cd "$dest_dir"
+    end
+end
 
 #
 # Define key bindings
