@@ -162,13 +162,15 @@ disable_linuxbrew()
     export LB_ENABLED=
 }
 
-if enable_linuxbrew; then
-    if [ -f "$(brew --prefix)/etc/brew-wrap" ]; then
-        # shellcheck disable=SC1090
-        source "$(brew --prefix)/etc/brew-wrap"
-    fi
-    disable_linuxbrew
-fi
+### Following part takes a couple of seconds. Slow.
+### # Initialize linuxbrew.
+### if enable_linuxbrew; then
+###     if [ -f "$(brew --prefix)/etc/brew-wrap" ]; then
+###         # shellcheck disable=SC1090
+###         source "$(brew --prefix)/etc/brew-wrap"
+###     fi
+###     disable_linuxbrew
+### fi
 
 #------------------------------------------------------------------------------
 # cdg function -- bookmarked directory selector
