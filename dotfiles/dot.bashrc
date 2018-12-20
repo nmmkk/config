@@ -171,6 +171,82 @@ if enable_linuxbrew; then
 fi
 
 #------------------------------------------------------------------------------
+# cdg function -- bookmarked directory selector
+# https://dmitryfrank.com/articles/shell_shortcuts
+
+#-----------------------------------------
+# /usr/bin/cdscuts_list_echo
+#-----------------------------------------
+# #!/bin/bash
+#
+# cat $1 | sed 's/#.*//g' | sed '/^\s*$/d'
+
+#-----------------------------------------
+# /usr/bin/cdscuts_glob_echo
+#-----------------------------------------
+# #!/bin/bash
+#
+# system_wide_filelist=''
+# user_filelist=''
+#
+# if [ -r /etc/cdg_paths ]; then
+#    system_wide_filelist=$(cdscuts_list_echo /etc/cdg_paths)
+# fi
+# if [ -r ~/.cdg_paths ]; then
+#    user_filelist=$(cdscuts_list_echo ~/.cdg_paths)
+# fi
+#
+# echo -e "$system_wide_filelist\n$user_filelist" | sed '/^\s*$/d'
+
+#-----------------------------------------
+# ~/.cdg_paths
+#-----------------------------------------
+# /path/to/first_bookmark    # probably some comment
+# /path/to/second_bookmark
+#
+# /path/to/third_bookmark
+
+cdscuts_list_echo()
+{
+    sed 's/#.*//g' "${1}" | sed '/^\s*$/d'
+}
+
+cdscuts_glob_echo()
+{
+    local system_wide_filelist=''
+    local user_filelist=''
+
+    if [ -r /etc/cdg_paths ]; then
+        system_wide_filelist=$(cdscuts_list_echo /etc/cdg_paths)
+    fi
+    if [ -r ~/.cdg_paths ]; then
+        user_filelist=$(cdscuts_list_echo ~/.cdg_paths)
+    fi
+
+    echo -e "$system_wide_filelist\n$user_filelist" | sed '/^\s*$/d'
+}
+
+unalias cdg 2> /dev/null
+cdg()
+{
+    local fuzzy_finder=
+
+    if type peco >/dev/null 2>&1; then
+        fuzzy_finder="peco --layout=bottom-up"
+    else
+        echo "No fuzzy finder is available" >&2
+        return 1
+    fi
+
+    local dest_dir=$(cdscuts_glob_echo | ${fuzzy_finder})
+    if [[ $dest_dir != '' ]]; then
+        echo cd "$dest_dir"
+        cd "$dest_dir"
+    fi
+}
+# export -f cdg > /dev/null
+
+#------------------------------------------------------------------------------
 # Alias
 #------------------------------------------------------------------------------
 alias p='cd ..'
