@@ -42,8 +42,17 @@ if [ x"$os" = x"Darwin" ]
     end
 end
 
+# For cargo
 if test -d ~/.cargo/bin >/dev/null ^/dev/null
     set -gx PATH ~/.cargo/bin $PATH
+end
+
+# For pyenv and virtualenv
+if type pyenv > /dev/null
+    status --is-interactive; and source (pyenv init -|psub)
+end
+if type pyenv-virtualenv-init > /dev/null
+    status --is-interactive; and source (pyenv virtualenv-init -|psub)
 end
 
 switch $os
