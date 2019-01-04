@@ -61,6 +61,7 @@ Plug 'kana/vim-submode'
 Plug 'kana/vim-tabpagecd'
 Plug 'kana/vim-altr'
 Plug 'kana/vim-smartinput'
+Plug 'kana/vim-smartchr'
 Plug 'thinca/vim-ref'
 Plug 'easymotion/vim-easymotion'
 Plug 'itchyny/lightline.vim'
@@ -70,11 +71,13 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-speeddating'
+Plug 'tpope/vim-dispatch'
+Plug 'janko-m/vim-test'
 Plug 'Yggdroot/indentLine'
 Plug 'tomtom/tcomment_vim'
 Plug 'haya14busa/incsearch.vim'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+"" "Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 
 " Multiple marks -- vim-mark depends on vim-ingo-library
 Plug 'inkarkat/vim-ingo-library'
@@ -91,11 +94,11 @@ endif
 Plug 'Shougo/neco-vim'
 Plug 'Shougo/neoinclude.vim'
 Plug 'Shougo/neco-syntax'
-Plug 'Rip-Rip/clang_complete', { 'for': ['c', 'cpp'] }
+Plug 'Shougo/deoplete-clangx'
 Plug 'wellle/tmux-complete.vim', { 'for': 'tmux' }
+Plug 'zchee/deoplete-jedi', { 'for': 'python' }
 Plug 'zchee/deoplete-zsh', { 'for': 'zsh' }
 Plug 'ponko2/deoplete-fish', { 'for': 'fish' }
-Plug 'zchee/deoplete-asm', { 'for': 'asm' }
 
 " Linter
 Plug 'w0rp/ale'
@@ -119,6 +122,7 @@ Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'aklt/plantuml-syntax', { 'for': 'plantuml' }
 Plug 'pearofducks/ansible-vim', { 'for': 'yaml.ansible' }
+Plug 'aliou/bats.vim'
 
 " Quickrun
 Plug 'thinca/vim-quickrun'
