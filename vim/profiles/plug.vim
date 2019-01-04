@@ -338,9 +338,9 @@ map g# <Plug>(incsearch-nohl-g#)
 let g:ale_sign_column_always = 1
 
 let g:ale_c_gcc_options = '-Wall -Wcast-qual -Wmissing-prototypes -Wpointer-arith -Wshadow -Wstrict-prototypes'
-let g:ale_c_cppcheck_options = '--enable=style,performance,portability,information,missingInclude --std=c11'
+let g:ale_c_cppcheck_options = '--enable=style,performance,portability,information,missingInclude --force --std=c11'
 let g:ale_cpp_gcc_options = '-std=c++11 -Wall -Wcast-qual -Wmissing-prototypes -Wpointer-arith -Wshadow -Wstrict-prototypes'
-let g:ale_cpp_cppcheck_options = '--enable=style,performance,portability,information,missingInclude --std=c11'
+let g:ale_cpp_cppcheck_options = '--enable=style,performance,portability,information,missingInclude --force --std=c++11'
 
 " let g:ale_echo_msg_error_str = 'E'
 " let g:ale_echo_msg_warning_str = 'W'
