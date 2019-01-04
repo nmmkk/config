@@ -131,11 +131,14 @@ Plug 'w0ng/vim-hybrid'
 call plug#end()
 
 
-" deoplete {{{1
-let g:deoplete#enable_at_startup = 1
-"}}}1
 
-" vim-submode {{{1
+" Post-install settings for the plugins {{{1
+
+" deoplete {{{2
+let g:deoplete#enable_at_startup = 1
+"}}}2
+
+" vim-submode {{{2
 call submode#enter_with('undo/redo', 'n', '', 'g-', 'g-')
 call submode#enter_with('undo/redo', 'n', '', 'g+', 'g+')
 call submode#leave_with('undo/redo', 'n', '', '<Esc>')
@@ -166,9 +169,9 @@ call submode#enter_with('tab', 'n', '', '[MyKey]tj', 'gt')
 call submode#enter_with('tab', 'n', '', '[MyKey]tk', 'gT')
 call submode#map('tab', 'n', '', 'j', 'gt')
 call submode#map('tab', 'n', '', 'k', 'gT')
-"}}}1
+"}}}2
 
-" vim-altr {{{1
+" vim-altr {{{2
 nmap <F2>   <Plug>(altr-forward)
 nmap <S-F2> <Plug>(altr-back)
 
@@ -180,9 +183,9 @@ call altr#define('tasks/%.yml',
 \                'defaults/%.yml',
 \                'meta/%.yml',
 \                'tests/%.yml')
-" }}}
+" }}}2
 
-" vim-ref {{{1
+" vim-ref {{{2
 " There settings are basically from
 " https://github.com/thinca/config/blob/master/dotfiles/dot.vim/vimrc , which
 " is written by the author of vim-ref.
@@ -243,9 +246,9 @@ endif
 function! g:ref_detect_filetype._(ft)
     return &keywordprg ==# ':help' ? '' : 'man'
 endfunction
-"}}}
+"}}}2
 
-" lightline {{{1
+" lightline {{{2
 " (https://github.com/itchyny/lightline.vim)
 let g:lightline = {}
 
@@ -287,9 +290,9 @@ let g:lightline.component = {
 let g:lightline.component_visible_condition = {
     \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
     \ }
-"}}}
+"}}}2
 
-" incsearch {{{1
+" incsearch {{{2
 " Replace default search commands
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
@@ -306,9 +309,9 @@ map *  <Plug>(incsearch-nohl-*)
 map #  <Plug>(incsearch-nohl-#)
 map g* <Plug>(incsearch-nohl-g*)
 map g# <Plug>(incsearch-nohl-g#)
-"}}}
+"}}}2
 
-" ale "{{{1
+" ale "{{{2
 let g:ale_sign_column_always = 1
 
 let g:ale_c_gcc_options = '-Wall -Wcast-qual -Wmissing-prototypes -Wpointer-arith -Wshadow -Wstrict-prototypes'
@@ -327,9 +330,9 @@ nmap <Space>a [ALE]
 
 nmap <silent> [ALE]k <Plug>(ale_previous_wrap)
 nmap <silent> [ALE]j <Plug>(ale_next_wrap)
-"}}}1
+"}}}2
 
-" ultisnips "{{{1
+" ultisnips "{{{2
 " Trigger configuration. Do not use <tab> if you use
 " https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<C-k>"
@@ -338,9 +341,9 @@ let g:UltiSnipsJumpBackwardTrigger="<C-z>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
-"}}}1
+"}}}2
 
-" gtags "{{{1
+" gtags "{{{2
 " for GNU GLOBAL (gtags)
 nnoremap [GnuGlobal] <nop>
 nmap <Space>g [GnuGlobal]
@@ -374,13 +377,11 @@ nnoremap <silent> [GnuGlobal]k     :Gtags -r <C-r><C-w><CR>
 " Jump to the previous item in quickfix.
 """ nnoremap <silent> [GnuGlobal]p     :cp<CR>
 """ nnoremap <C-k>  :cp<CR>  " ==> I should use '[q' from unimpaired.
-"}}}1
+"}}}2
 
-" nerdtree "{{{1
+" nerdtree "{{{2
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
 let g:NERDTreeBookmarksFile=$HOME . '/.config/vim/nerdtree/NERDTreeBookmarks'
-"}}}1
+"}}}2
 
-" ultisnips "{{{1
-let g:UltiSnipsSnippetsDir = expand('~/Documents/vim/snippets')
-"}}}1
+"}}}1 " Post-install settings for the plugins
