@@ -1,11 +1,11 @@
 " Basic settings for Vim
 
 " Where to store temporary files
-set backupdir=$XDG_CACHE_HOME/vim/backupfiles/
+execute 'set backupdir=' . g:cache_home . '/vim/backupfiles/'
 set backup
-set directory=$XDG_CACHE_HOME/vim/swapfiles/
+execute 'set directory=' . g:cache_home . '/vim/swapfiles/'
 set swapfile
-set undodir=$XDG_CACHE_HOME/vim/undofiles/
+execute 'set undodir=' . g:cache_home . '/vim/undofiles/'
 set undofile
 
 " Following is listed as a anti-pattern, so it is commented out.
