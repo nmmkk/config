@@ -10,12 +10,25 @@ endif
 " Automatic installation -- the following must be done before plug#begin().
 "
 "==============================================================================
-if empty(glob('~/.vim/autoload/plug.vim'))
-    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
+function! s:install_vim_plug_if_not()
+    if has('nvim')
+        let l:install_location = expand('$HOME/.local/share/nvim/site/autoload/plug.vim')
+    else
+        if has('win32') || has('win64')
+            let l:install_location = expand('$HOME/vimfiles/autoload/plug.vim')
+        else
+            let l:install_location = expand('$HOME/.vim/autoload/plug.vim')
+        endif
+    endif
 
+    if !filereadable(l:install_location)
+        let l:vim_plug_github = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+        execute printf('silent !curl -fLo %s --create-dirs %s', l:install_location, l:vim_plug_github)
+        autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+    endif
+endfunction
+
+call s:install_vim_plug_if_not()
 
 "==============================================================================
 "
