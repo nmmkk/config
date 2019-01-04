@@ -76,6 +76,10 @@ Plug 'haya14busa/incsearch.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 
+" Multiple marks -- vim-mark depends on vim-ingo-library
+Plug 'inkarkat/vim-ingo-library'
+Plug 'inkarkat/vim-mark'
+
 " Completion
 if has('nvim')
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -304,6 +308,12 @@ let g:lightline.component_visible_condition = {
     \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
     \ }
 "}}}2
+
+" vim-mark {{{2
+" Remove the default overriding of * and #:
+nmap <Plug>IgnoreMarkSearchNext <Plug>MarkSearchNext
+nmap <Plug>IgnoreMarkSearchPrev <Plug>MarkSearchPrev
+" }}}2
 
 " incsearch {{{2
 " Replace default search commands
