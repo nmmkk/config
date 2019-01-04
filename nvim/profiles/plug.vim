@@ -1,0 +1,1 @@
+../../vim/profiles/plug.vim
