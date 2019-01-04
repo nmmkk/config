@@ -270,3 +270,5 @@ if [ -f "${XDG_CONFIG_HOME}/bash/local.bashrc" ]; then
     # shellcheck disable=SC1090
     source "${XDG_CONFIG_HOME}/bash/local.bashrc"
 fi
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
