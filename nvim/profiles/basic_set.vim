@@ -171,4 +171,11 @@ autocmd OptionSet guicursor noautocmd set guicursor=
 " Enabling `termguicolors` on terminator causes color problem.
 set notermguicolors
 
+"==============================================================================
+" Use Python 3 from pyenv
+"   With using pyenv, it gets easy to install new versions of Python 3 on any
+"   environments.
+"==============================================================================
+let g:python3_host_prog = expand('$HOME/.pyenv/versions/neovim-p3/bin/python3')
+
 " vim: foldmethod=marker
