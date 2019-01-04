@@ -413,4 +413,24 @@ nnoremap <silent><C-e> :NERDTreeToggle<CR>
 let g:NERDTreeBookmarksFile=$HOME . '/.config/vim/nerdtree/NERDTreeBookmarks'
 "}}}2
 
+" vim-markdown "{{{2
+
+" Set header folding level
+let g:vim_markdown_folding_level = 6
+" Enable TOC window auto-fit
+let g:vim_markdown_toc_autofit = 1
+" Syntax Concealing
+let g:vim_markdown_conceal = 0
+" LaTeX math
+let g:vim_markdown_math = 1
+" YAML Front Matter
+let g:vim_markdown_frontmatter = 1
+" TOML Front Matter
+let g:vim_markdown_toml_frontmatter = 1
+" Do not require .md extensions for Markdown links
+let g:vim_markdown_no_extensions_in_markdown = 1
+" Auto-write when following link
+let g:vim_markdown_autowrite = 1
+
+"}}}2
 "}}}1 " Post-install settings for the plugins
