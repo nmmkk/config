@@ -6,8 +6,7 @@ default: linux
 
 linux: vim-setup
 
-vim-setup: vim-setup-vimrc vim-install-bundle vim-install-plugins
-#vim-setup: vim-setup-vimrc vim-install-dein
+vim-setup: vim-setup-vimrc
 
 vim-setup-vimrc: vim-locate-snippets
 	@# Make vimrc if it does not exist yet
@@ -52,11 +51,4 @@ vim-install-dein:
 	    sh $(INSTALL_BASE)/.dein/installer.sh $(INSTALL_BASE)/.dein; \
 	fi
 
-vim-make-vimproc-linux:
-	cd $(INSTALL_BASE)/.bundle/vimproc/ && make -f make_gcc.mak
-
 # install: vim-install-plugins
-
-vim-install-plugins:
-	vim -u $(CURDIR)/profiles/bundles.vim +NeoBundleInstall +q
-
