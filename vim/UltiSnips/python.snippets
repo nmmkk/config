@@ -1,0 +1,127 @@
+snippet doc_file "Docstring for file"
+"""${1:#Summary}
+
+${2:#Long information}
+
+Args:
+    ${3:#Arg1}
+
+Returns:
+    ${4:#Return}
+
+Raises:
+    ${5:#Raise}
+
+    Copyright (c) `date '+%Y'` ${6:#Organization}
+      All rights reserved.
+
+"""
+${7}
+
+endsnippet
+
+
+snippet doc_func "Docstring for function"
+"""${1:#Summary}
+
+${2:#Long information}
+
+Args:
+    ${3:#Arg1}
+
+Returns:
+    ${4:#Return}
+
+Raises:
+    ${5:#Raise}
+"""
+endsnippet
+
+
+snippet doc_class "Docstring for class"
+"""${1:#Summary}
+
+${2:#Long information}
+
+Attributes:
+    ${3:#Public attribute1}
+"""
+endsnippet
+
+
+snippet todo "mark todo"
+TODO(sc): ${1:#What to do}
+endsnippet
+
+
+snippet header_vars
+#------------------------------------------------------------------------------
+# Global variables
+#------------------------------------------------------------------------------
+
+__version__='1.0.0'
+
+endsnippet
+
+
+snippet header_routines
+#------------------------------------------------------------------------------
+# Sub routines
+#------------------------------------------------------------------------------
+
+endsnippet
+
+
+snippet header_main
+#------------------------------------------------------------------------------
+# Main routine
+#------------------------------------------------------------------------------
+
+endsnippet
+
+
+snippet func_parse_args
+import argparse
+
+def parse_arguments():
+    parser = argparse.ArgumentParser(
+        prog='${1:#program name}',
+        description='${2:#description}'
+    )
+
+    # Positional arguments
+    parser.add_argument('target_device', type=str,
+                        help='A block special file name of the target device',
+                        )
+
+    # Optional arguments
+    parser.add_argument('--version',
+                        action='version',
+                        version='%(prog)s {}'.format(__version__)
+                        )
+    parser.add_argument('--verbose', '-v',
+                        dest='verbose',
+                        action='store_true',
+                        help='verbose mode'
+                        )
+
+    return parser.parse_args()
+
+
+args = parse_arguments()
+
+def parse_arguments():
+    parser = argparse.ArgumentParser(
+        description="Isotonic Regression benchmark tool")
+    parser.add_argument('--iterations', type=int, required=True,
+                        help="Number of iterations to average timings over "
+                        "for each problem size")
+    parser.add_argument('--log_min_problem_size', type=int, required=True,
+                        help="Base 10 logarithm of the minimum problem size")
+    parser.add_argument('--show_plot', action='store_true',
+                        help="Plot timing output with matplotlib")
+    parser.add_argument('--dataset', choices=DATASET_GENERATORS.keys(),
+                        required=True)
+
+    return parser.parse_args()
+endsnippet

@@ -34,6 +34,10 @@ vim-locate-snippets:
 		mkdir -pv $(INSTALL_BASE)/Documents/vim/; \
 		ln -sfv $(CURDIR)/snippets $(INSTALL_BASE)/Documents/vim/; \
 	fi
+	@if [ ! -e $(INSTALL_BASE)/Documents/vim/UltiSnips ]; then \
+		mkdir -pv $(INSTALL_BASE)/Documents/vim/; \
+		ln -sfv $(CURDIR)/UltiSnips $(INSTALL_BASE)/Documents/vim/; \
+	fi
 
 vim-install-bundle:
 	@if [ ! -d $(INSTALL_BASE)/.vim/bundle/neobundle.vim ]; then \

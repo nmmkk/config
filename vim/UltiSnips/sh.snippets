@@ -1,0 +1,11 @@
+snippet myname "Define SCRIPT_* variables"
+SCRIPT_NAME="$(basename "${BASH_SOURCE:-${(%):-%N}}")"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE:-${(%):-%N}}")"; pwd)"
+SCRIPT_VERSION="0.0.1"
+endsnippet
+
+snippet myhere "here document (here)"
+<<-${2:'${1:TOKEN}'}
+    $0
+${1/['"`](.+)['"`]/$1/}
+endsnippet

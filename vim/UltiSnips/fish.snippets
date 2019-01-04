@@ -1,0 +1,6 @@
+snippet myname "Define SCRIPT_* variables"
+set -l SCRIPT_NAME (status --current-filename)
+set -l SCRIPT_DIR (cd (dirname $SCRIPT_NAME); and pwd)
+set -l SCRIPT_VERSION "0.0.1"
+endsnippet
+

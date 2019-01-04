@@ -1,0 +1,6 @@
+snippet macro_dbg "Macro for debug print"
+#define DBG(fmt, ...) do{\
+    printf("\tDBG | %s | %d | ", __func__, __LINE__); \
+    printf(fmt, ##__VA_ARGS__); \
+} while(0);
+endsnippet
