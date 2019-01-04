@@ -64,8 +64,6 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 
 " Completion
-""" Plug 'Valloric/YouCompleteMe', { 'do': function('PP_YCM') }
-""" Plug 'Valloric/YouCompleteMe'
 if has('nvim')
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
