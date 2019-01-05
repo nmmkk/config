@@ -370,9 +370,11 @@ function fish_user_key_bindings
     bind ! bind_bang
     bind '$' bind_dollar
 
-    # Disable the following key binding for peco. Now I use fzf.
-    # # [fish shell を使いたい人生だった ｜ Developers.IO](http://dev.classmethod.jp/etc/fish-shell-life/)
-    # bind \cr 'peco_select_history (commandline -b)'
+    # Ctrl-G conflicts with fzf. Assign ghq to Ctrl-G.
+    bind \cg '__ghq_crtl_g'
+    if bind -M insert >/dev/null 2>/dev/null
+        bind -M insert \cg '__ghq_crtl_g'
+    end
 end
 
 
