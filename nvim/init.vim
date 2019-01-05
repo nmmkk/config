@@ -19,6 +19,7 @@ let s:profile_names = [
 \   'binary_mode',
 \   'coding_style',
 \   'vim-ref',
+\   'local_vimrc',
 \   'local',
 \]
 "}}}3
