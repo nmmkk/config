@@ -14,5 +14,5 @@ function bakd
     for f in $argv
         set timestamp ( eval $ls_cmd --full-time {$f} | awk '{print $6"T"$7}' )
         mv {$f} {$directory}/{$f}.{$timestamp}; and cp -a {$directory}/{$f}.{$timestamp} {$f};
-    end for
+    end
 end
