@@ -1,0 +1,20 @@
+snippet CC
+CC := ${1:gcc}
+endsnippet
+
+snippet BIN
+$(BIN): $(OBJS)
+	$(CC) $(CFLAGS) -o $(BIN) $(OBJS)
+endsnippet
+
+snippet initme "A template for a new Makefile"
+CFLAGS := -m32 -O2 -Wall
+BINS := ${0}
+
+.PHONY : all clean
+
+all: $(BINS)
+
+clean:
+	$(RM) $(BINS)
+endsnippet
