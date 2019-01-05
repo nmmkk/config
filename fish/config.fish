@@ -48,10 +48,11 @@ if test -d ~/.cargo/bin >/dev/null ^/dev/null
 end
 
 # For pyenv and virtualenv
-if type pyenv > /dev/null
+set -gx PATH "$HOME/.pyenv/bin" $PATH
+if type pyenv >/dev/null ^/dev/null
     status --is-interactive; and source (pyenv init -|psub)
 end
-if type pyenv-virtualenv-init > /dev/null
+if type pyenv-virtualenv-init >/dev/null ^/dev/null
     status --is-interactive; and source (pyenv virtualenv-init -|psub)
 end
 
