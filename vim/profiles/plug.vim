@@ -53,14 +53,14 @@ call s:install_vim_plug_if_not()
 let s:plug_cache_dir = g:cache_home . '/vim-plug'
 call plug#begin(s:plug_cache_dir)
 
+" Fuzzy finder  {{{
 Plug 'junegunn/fzf', { 'dir': g:data_home . '/fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+"}}}
 
-" Plug 'kana/vim-submode', { 'do': function('PP_submode') }
 Plug 'kana/vim-submode'
 Plug 'kana/vim-tabpagecd'
 Plug 'kana/vim-altr'
-Plug 'cohama/lexima.vim'
 Plug 'kana/vim-smartchr'
 Plug 'thinca/vim-ref'
 Plug 'easymotion/vim-easymotion'
@@ -79,11 +79,12 @@ Plug 'haya14busa/incsearch.vim'
 Plug 'editorconfig/editorconfig-vim'
 "" "Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 
-" Multiple marks -- vim-mark depends on vim-ingo-library
+" Multiple marks -- vim-mark depends on vim-ingo-library  {{{
 Plug 'inkarkat/vim-ingo-library'
 Plug 'inkarkat/vim-mark'
+"}}}
 
-" Completion
+" Completion  {{{
 if has('nvim')
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
@@ -99,21 +100,26 @@ Plug 'wellle/tmux-complete.vim', { 'for': 'tmux' }
 Plug 'zchee/deoplete-jedi', { 'for': 'python' }
 Plug 'zchee/deoplete-zsh', { 'for': 'zsh' }
 Plug 'ponko2/deoplete-fish', { 'for': 'fish' }
+"}}}
 
-" Linter
+" Linter  {{{
 Plug 'w0rp/ale'
+"}}}
 
-" Snippets
+" Snippets  {{{
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 " Plug 'Shougo/neosnippet-snippets'
 " Plug 'Shougo/neosnippet'
+"}}}
 
-" Coding
+" Coding  {{{
 Plug 'tpope/vim-fugitive'
 Plug 'vim-scripts/gtags.vim'
+Plug 'vim-scripts/vcscommand.vim'
+"}}}
 
-" Launguages
+" Launguages  {{{
 Plug 'dag/vim-fish', { 'for': 'fish' }
 Plug 'freitass/todo.txt-vim', { 'for': 'todo' }
 Plug 'cespare/vim-toml', { 'for': 'toml' }
@@ -123,43 +129,53 @@ Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'aklt/plantuml-syntax', { 'for': 'plantuml' }
 Plug 'pearofducks/ansible-vim', { 'for': 'yaml.ansible' }
 Plug 'aliou/bats.vim'
+"}}}
 
-" Quickrun
-Plug 'thinca/vim-quickrun'
-Plug 'osyo-manga/shabadou.vim'
+" " Quickrun  {{{
+" Plug 'thinca/vim-quickrun'
+" Plug 'osyo-manga/shabadou.vim'
+"}}}
 
-" Preview
+" Preview  {{{
 Plug 'kannokanno/previm'
 Plug 'tyru/open-browser.vim'
+"}}}
 
-" Text format
+" Formating Text  {{{
+Plug 'cohama/lexima.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'godlygeek/tabular'
+Plug 'dhruvasagar/vim-table-mode'
+"}}}
 
-" Per project/tree configuration (lh-vim-lib is the dependent)
+" Per project/tree configuration  {{{
+" (lh-vim-lib is the dependent)
 Plug 'LucHermitte/lh-vim-lib'
 Plug 'LucHermitte/local_vimrc'
+"}}}
 
-" Filer
+" Filer  {{{
 Plug 'scrooloose/nerdtree'
+"}}}
 
-" Color scheme
+" Color scheme  {{{
 Plug 'dracula/vim'
 Plug 'romainl/Apprentice'
 Plug 'tomasr/molokai'
 Plug 'w0ng/vim-hybrid'
+"}}}
 
 call plug#end()
 
 
 
-" Post-install settings for the plugins {{{1
+" Post-install settings for the plug-ins  {{{1
 
-" deoplete {{{2
+" deoplete  {{{2
 let g:deoplete#enable_at_startup = 1
 "}}}2
 
-" vim-submode {{{2
+" vim-submode  {{{2
 call submode#enter_with('undo/redo', 'n', '', 'g-', 'g-')
 call submode#enter_with('undo/redo', 'n', '', 'g+', 'g+')
 call submode#leave_with('undo/redo', 'n', '', '<Esc>')
@@ -192,7 +208,7 @@ call submode#map('tab', 'n', '', 'j', 'gt')
 call submode#map('tab', 'n', '', 'k', 'gT')
 "}}}2
 
-" vim-altr {{{2
+" vim-altr  {{{2
 nmap <F2>   <Plug>(altr-forward)
 nmap <S-F2> <Plug>(altr-back)
 
@@ -206,7 +222,7 @@ call altr#define('tasks/%.yml',
 \                'tests/%.yml')
 " }}}2
 
-" vim-ref {{{2
+" vim-ref  {{{2
 " There settings are basically from
 " https://github.com/thinca/config/blob/master/dotfiles/dot.vim/vimrc , which
 " is written by the author of vim-ref.
@@ -269,7 +285,7 @@ function! g:ref_detect_filetype._(ft)
 endfunction
 "}}}2
 
-" lightline {{{2
+" lightline  {{{2
 " (https://github.com/itchyny/lightline.vim)
 let g:lightline = {}
 
@@ -313,13 +329,13 @@ let g:lightline.component_visible_condition = {
     \ }
 "}}}2
 
-" vim-mark {{{2
+" vim-mark  {{{2
 " Remove the default overriding of * and #:
 nmap <Plug>IgnoreMarkSearchNext <Plug>MarkSearchNext
 nmap <Plug>IgnoreMarkSearchPrev <Plug>MarkSearchPrev
 " }}}2
 
-" incsearch {{{2
+" incsearch  {{{2
 " Replace default search commands
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
@@ -338,7 +354,7 @@ map g* <Plug>(incsearch-nohl-g*)
 map g# <Plug>(incsearch-nohl-g#)
 "}}}2
 
-" ale "{{{2
+" ale  {{{2
 let g:ale_sign_column_always = 1
 
 let g:ale_c_gcc_options = '-Wall -Wcast-qual -Wmissing-prototypes -Wpointer-arith -Wshadow -Wstrict-prototypes'
@@ -359,7 +375,7 @@ nmap <silent> [ALE]k <Plug>(ale_previous_wrap)
 nmap <silent> [ALE]j <Plug>(ale_next_wrap)
 "}}}2
 
-" ultisnips "{{{2
+" ultisnips  {{{2
 " Trigger configuration. Do not use <tab> if you use
 " https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<C-k>"
@@ -372,7 +388,7 @@ let g:UltiSnipsSnippetDirectories=["UltiSnips", "UltiSnips-local"]
 set runtimepath+=$HOME/Documents/vim
 "}}}2
 
-" gtags "{{{2
+" gtags  {{{2
 " for GNU GLOBAL (gtags)
 nnoremap [GnuGlobal] <nop>
 nmap <Space>g [GnuGlobal]
@@ -408,12 +424,12 @@ nnoremap <silent> [GnuGlobal]k     :Gtags -r <C-r><C-w><CR>
 """ nnoremap <C-k>  :cp<CR>  " ==> I should use '[q' from unimpaired.
 "}}}2
 
-" nerdtree "{{{2
+" nerdtree  {{{2
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
 let g:NERDTreeBookmarksFile=$HOME . '/.config/vim/nerdtree/NERDTreeBookmarks'
 "}}}2
 
-" vim-markdown "{{{2
+" vim-markdown  {{{2
 
 " Set header folding level
 let g:vim_markdown_folding_level = 6
@@ -433,4 +449,10 @@ let g:vim_markdown_no_extensions_in_markdown = 1
 let g:vim_markdown_autowrite = 1
 
 "}}}2
-"}}}1 " Post-install settings for the plugins
+
+" vim-table-mode  {{{2
+" For Markdown-compatible tables use
+let g:table_mode_corner='|'
+"}}}2
+"
+"}}}1 " Post-install settings for the plug-ins
