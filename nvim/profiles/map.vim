@@ -7,8 +7,8 @@
 nnoremap j gj
 nnoremap k gk
 
-" 変更があれば保存: "<Leader><Leader>" started conflicting with easy-motion
-""" noremap <Leader><Leader> :up<CR>
+" Save when something is changed:
+" I used to define <Leader><Leader> for this, but it conflicts with easy-motion
 noremap \\ :up<CR>
 
 " Edit .vimrc
