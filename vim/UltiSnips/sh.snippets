@@ -1,3 +1,15 @@
+#
+# Definitions
+#
+
+snippet     copyright
+#
+#   Copyright (c) ${1:Year} ${2:Organization}
+#     All rights reserved.
+#
+${0}
+endsnippet
+
 snippet myname "Define SCRIPT_* variables"
 SCRIPT_NAME="$(basename "${BASH_SOURCE:-${(%):-%N}}")"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE:-${(%):-%N}}")"; pwd)"
@@ -8,4 +20,600 @@ snippet myhere "here document (here)"
 <<-${2:'${1:TOKEN}'}
     $0
 ${1/['"`](.+)['"`]/$1/}
+endsnippet
+
+snippet     shellcheck_disable
+# shellcheck disable=SC${1:2034}
+endsnippet
+
+snippet     color
+# Define ANSI colors and formatting
+if [ "${TERM:-dumb}" != "dumb" ]; then
+    TXTUNDERLINE="\e[4m"
+    TXTBOLD="\e[1m"
+    TXTRED="\e[41m\e[37m"
+    TXTGREEN="\e[42m\e[30m"
+    TXTYELLOW="\e[43m\e[30m"
+    TXTBLUE="\e[44m\e[37m"
+    TXTMAGENTA="\e[45m\e[37m"
+    TXTCYAN="\e[46m\e[30m"
+    TXTDARKGRAY="\e[100m\e[37m"
+    TXTRESET="\e[0m"
+else
+    # shellcheck disable=SC2034
+    TXTUNDERLINE=""
+    # shellcheck disable=SC2034
+    TXTBOLD=""
+    # shellcheck disable=SC2034
+    TXTRED=""
+    # shellcheck disable=SC2034
+    TXTGREEN=""
+    # shellcheck disable=SC2034
+    TXTYELLOW=""
+    # shellcheck disable=SC2034
+    TXTBLUE=""
+    # shellcheck disable=SC2034
+    TXTMAGENTA=""
+    # shellcheck disable=SC2034
+    TXTCYAN=""
+    # shellcheck disable=SC2034
+    TXTDARKGRAY=""
+    # shellcheck disable=SC2034
+    TXTRESET=""
+fi
+endsnippet
+
+snippet     header_definitions
+#==============================================================================
+# Definitions
+#==============================================================================
+endsnippet
+
+snippet     header_subroutines
+#==============================================================================
+# Sub routines
+#==============================================================================
+endsnippet
+
+snippet     header_mainroutine
+#==============================================================================
+# Main routines
+#==============================================================================
+endsnippet
+
+
+
+
+
+
+
+#
+# Handy functions
+#
+snippet     func_show_help
+show_help()
+{
+    cat <<__EOT__
+Usage:
+  ${SCRIPT_NAME} <arg1>
+    - TBD
+
+Argument:
+  <arg1>    Explanation of arg1
+
+Option:
+  -h        Display this help and exit.
+  -v        Verbose mode. Can be used multiple times for increased verbosity.
+  -V        Show version.
+__EOT__
+}
+endsnippet
+
+snippet     func_show_version
+show_version()
+{
+    echo "${SCRIPT_NAME}: version ${SCRIPT_VERSION}"
+}
+endsnippet
+
+snippet     func_is_numeric
+### @fn is_numeric value
+### @brief Check if the given argument is a number or not.
+### @param value a value to be tested if a number of not.
+### @return 0 if it is a number, 1 if something else.
+is_numeric()
+{
+    # "'a" should be judged as not a number
+    local num=$(printf '%s' "$1" | sed "s/'/^/")
+    test "${num}" && printf "%x" "${num}" > /dev/null 2>&1
+    if [ $? -eq 0 ]; then
+        return 0
+    else
+        return 1
+    fi
+}
+endsnippet
+
+snippet     func_is_decimal
+is_decimal()
+{
+    case "$@" in
+        ''|*[!0-9]*)
+            return 1
+            ;;
+        *)
+            return 0
+            ;;
+    esac
+}
+endsnippet
+
+snippet     func_now
+now()
+{
+    date --rfc-3339=ns
+}
+endsnippet
+
+snippet     func_log
+LOG_DIR="${SCRIPT_DIR}"
+LOG_FILE="${SCRIPT_NAME%.sh}-$(date '+%Y%m%d_%H%M%S'.log)"
+LOG_PATH="${LOG_DIR}/${LOG_FILE}"
+
+init_log()
+{
+    mkdir -p "${LOG_DIR}" || return 1
+    touch "${LOG_PATH}" || return 2
+}
+
+log()
+{
+    if [ -w "${LOG_PATH}" ]; then
+        echo "$*" >> "${LOG_PATH}"
+    fi
+}
+endsnippet
+
+snippet     func_get_funcname
+get_funcname()
+{
+    echo "${FUNCNAME[1]}"
+}
+endsnippet
+
+snippet     func_get_caller_line
+get_caller_line()
+{
+    echo "${BASH_SOURCE[2]##*/}@${BASH_LINENO[1]}"
+}
+endsnippet
+
+snippet     func_warn
+warn()
+{
+    echo -e "${TXTYELLOW} WARN ${TXTRESET} $*" 1>&2
+    log "$(now) | WARN  | $(get_caller_line) | $*"
+}
+endsnippet
+
+snippet     func_error
+err()
+{
+    echo -e "${TXTRED} ERROR ${TXTRESET} $*" 1>&2
+    log "$(now) | ERROR | $(get_caller_line) | $*"
+}
+endsnippet
+
+snippet     func_abort
+abort()
+{
+    err "$*"
+    exit 1
+}
+endsnippet
+
+snippet     func_info
+info()
+{
+    echo -e "${TXTBLUE} INFO ${TXTRESET} $*"
+    log "$(now) | INFO  | $(get_caller_line) | $*"
+}
+endsnippet
+
+snippet     func_debug
+### @fn is_numeric value
+### @brief Echo if verbosity meets. Also log it regardless of verbosity.
+### @param level a number of the verbosity of the given message
+### @param msg strings of the message to be echo'ed and logged
+### @return 0 always
+debug()
+{
+    level="\$1"
+    shift
+    msg="$*"
+
+    is_decimal "${level}"
+    if [ $? -ne 0 ]; then
+        # Oops, no number is given in the arguments. Restore the 1st argument in ${msg}
+        msg="${level} ${msg}"
+        # set default value: it will be output by default
+        level=0
+    fi
+
+    if [ "${level}" -le "${OPTS[verbosity]:-0}" ]; then
+        echo -e "${TXTGREEN} DEBUG ${TXTRESET} ${msg}"
+    fi
+
+    # All messages are saved into the log file regardless of verbosity
+    log "$(now) | DEBUG | $(get_caller_line) | ${msg}"
+}
+endsnippet
+
+snippet     func_is_root
+is_root()
+{
+    if [ ${EUID:-99999} -ne 0 ]; then
+        err "You need to be root to perform this program."
+        return 1
+    fi
+}
+endsnippet
+
+snippet     func_confirm
+confirm()
+{
+    local message="\${1:Do you really want to proceed? (y/[n]):} "
+    local response
+
+    read -p "${message}" response
+    case "${response}" in
+        [yY][eE][sS]|[yY])
+            return 0
+            ;;
+        *)
+            return 1
+            ;;
+    esac
+}
+
+# Usage
+confirm || exit 1
+endsnippet
+
+snippet     func_parse_args
+declare -A ARGS
+declare -A OPTS
+
+parse_args()
+{
+    declare -a all_args=( "$@" )
+    declare -a args=""  # set after all the options are parsed.
+
+    # Initialize our own variables:
+    OPTS[verbosity]=0
+
+    # Parse options
+    OPTIND=1 # Reset is necessary if getopts was used previously in the script.
+             # It is a good idea to make this local in a function.
+    while getopts "a:fhvV" opt; do
+        case "${opt}" in
+            a)
+                OPTS[a]="${OPTARG}"
+                ;;
+            f)
+                OPTS[force]=1
+                ;;
+            h)
+                show_help
+                exit 0
+                ;;
+            v)
+                (( OPTS[verbosity] += 1 ))
+                ;;
+            V)
+                show_version
+                exit 0
+                ;;
+            '?')
+                show_help >&2
+                exit 1
+                ;;
+        esac
+    done
+    shift "$((OPTIND - 1))" # Shift off the options and optional --.
+
+    debug 1 "verbosity=${OPTS[verbosity]}"
+
+    # Dump arguments
+    debug 1 "all_args=" "${all_args[@]}"
+    args=( "$@" )
+    debug 1 "args=" "${args[@]}"
+
+    # Parse positional arguments
+    ARGS[sample]=\$1
+    if [ x"${ARGS[sample]}" = x"" ]; then
+        err "No argument is specified"
+        show_help >&2
+        exit 1
+    fi
+    if [ ! -e "${ARGS[sample]}" ]; then
+        err "Given name of file does not exist (${ARGS[sample]})"
+        exit 1
+    fi
+    if [ ! -r "${ARGS[sample]}" ]; then
+        err "Given name of file is not readable (${ARGS[sample]})"
+        exit 1
+    fi
+}
+
+parse_args "$@"
+endsnippet
+
+
+snippet     func_parse_args_long
+declare -A ARGS
+declare -A OPTS
+
+parse_args()
+{
+    declare -a all_args=( "$@" )
+    declare -a args=""  # set after all the options are parsed.
+
+    # Initialize our own variables:
+    OPTS[verbosity]=0
+
+    # Parse options
+    OPTIND=1 # Reset is necessary if getopts was used previously in the script.
+             # It is a good idea to make this local in a function.
+    while getopts "ft:hvV-:" opt; do
+        case "${opt}" in
+            f)
+                OPTS[force]=1
+                ;;
+            t)
+                OPTS[target]="${OPTARG}"
+                ;;
+            h)
+                show_help
+                exit 0
+                ;;
+            v)
+                (( OPTS[verbosity] += 1 ))
+                ;;
+            V)
+                show_version
+                exit 0
+                ;;
+            -)  # Long options are in the form of "--opt=arg" or "--opt"
+                LONG_OPTARG="${OPTARG#*=}"
+                case "${OPTARG}" in
+                    force )
+                        OPTS[force]=1
+                        ;;
+                    target=?* )
+                        OPTS[target]="${LONG_OPTARG}"
+                        ;;
+                    target* )
+                        echo "--${OPTARG} requires an argument" >&2
+                        show_help >&2
+                        exit 1
+                        ;;
+                    help)
+                        show_help
+                        exit 0
+                        ;;
+                    verbose)
+                        (( OPTS[verbosity] += 1 ))
+                        ;;
+                    version)
+                        show_version
+                        exit 0
+                        ;;
+                    '' )  # "--" Denotes the end of the options.
+                        break
+                        ;;
+                    * )
+                        echo "Illegal option --${OPTARG}" >&2
+                        show_help >&2
+                        exit 1
+                        ;;
+                esac
+                ;;
+            '?')
+                show_help >&2
+                exit 1
+                ;;
+        esac
+    done
+    shift "$((OPTIND - 1))" # Shift off the options and optional --.
+
+    debug 1 "verbosity=${OPTS[verbosity]}"
+
+    # Dump arguments
+    debug 1 "all_args=" "${all_args[@]}"
+    args=( "$@" )
+    debug 1 "args=" "${args[@]}"
+
+    # Parse positional arguments
+    ARGS[sample]=\$1
+    if [ x"${ARGS[sample]}" = x"" ]; then
+        err "No argument is specified"
+        show_help >&2
+        exit 2
+    fi
+    if [ ! -e "${ARGS[sample]}" ]; then
+        err "Given name of file does not exist (${ARGS[sample]})"
+        exit 2
+    fi
+    if [ ! -r "${ARGS[sample]}" ]; then
+        err "Given name of file is not readable (${ARGS[sample]})"
+        exit 2
+    fi
+}
+
+parse_args "$@"
+endsnippet
+
+snippet     func_logging_all
+enable_logging_all()
+{
+    local log_file="\$1"
+
+    if [ x"${log_file}" = x"" ]; then
+        echo "The log file location is not specified"
+        return 1
+    fi
+    if [ ! -w "${log_file}" ]; then
+        echo "The log file is not writable: ${log_file}"
+        return 2
+    fi
+
+    # Save the original stdout/stderr to #6 and #7 so that we can restore the
+    # originals later.
+    exec 6>&1
+    exec 7>&2
+
+    # Then redirect stdout/stderr to tee processes
+    exec 1> >(tee -a "${log_file}")
+    exec 2> >(tee -a "${log_file}" 1>&2)
+
+    return 0
+}
+
+disable_logging_all()
+{
+    # Restore the original stdout/stderr and close the file descriptor 6 and 7
+    exec 1>&6 6>&-
+    exec 2>&7 7>&-
+}
+endsnippet
+
+snippet     func_choose_from_list
+# Show the list, let user choose one from the list, and update the variable
+# ${TMP_CHOSEN_ITEM} with the selection. Be sure ${TMP_CHOSEN_ITEM} is parsed
+# after calling this routine.
+choose_from_list()
+{
+    local list=( $@ )
+    local entry_count=${#list[@]}
+    local idx=0
+    local choice=
+
+    if [ ${entry_count} -lt 1 ]; then
+        err "No entry is found in the given list."
+        return 1
+    fi
+
+    # Show the list
+    for entry in "${list[@]}"
+    do
+        printf "%2d: %s\n" $(( idx + 1 )) "${entry}"
+        (( idx += 1 ))
+    done
+
+    # Let user select
+    echo
+    echo "Which item would you like to pick?"
+    while true
+    do
+        read -p \
+            "Type in a number [1-${entry_count}] or [q] to quit: " \
+            choice
+        echo "Your choice is ${choice}"
+        if [ x"${choice}" = x"q" ]; then
+            echo "Quitting..."
+            exit 0
+        fi
+        if is_decimal "${choice}"; then
+            if (( 1 <= choice && choice <= entry_count )); then
+                # Okay, choice is in the valid range.
+                # Set the chosen file path into the global variable
+                TMP_CHOSEN_ITEM="${list[$((choice - 1))]}"
+                break
+            fi
+        fi
+        echo "Oops, the given choice is not a valid number. Try again..."
+    done
+
+    return 0
+}
+endsnippet
+
+snippet     func_put_divider
+put_divider()
+{
+    local char="\${1:--}"
+    local tty_size="$(stty size 2>/dev/null)"
+    local col="${tty_size#* }"
+
+    : "${col:=0}"
+
+    while [ "${col}" -gt 0 ]; do
+        echo -n "${char}"
+        (( col -= 1 ))
+    done
+
+    echo
+    return 0
+}
+endsnippet
+
+snippet     func_calc
+calc()
+{
+    local scale="\$1"
+    shift
+    local exp="$*"
+
+    echo "scale=${scale} ${exp}" | bc -l
+}
+endsnippet
+
+snippet     func_is_os
+is_os()
+{
+    local family="Unknown"
+    local distribution="Unknown"
+    local version="Unknown"
+
+    # if ! type uname >/dev/null 2>&1; then
+    #     # We cannot determin the OS
+    #     return 1
+    # fi
+
+    # local r_uname="$(uname -o)"
+
+    case "${OSTYPE}" in
+        linux*)
+            if [ -f /etc/redhat-release ]; then
+                family="redhat"
+            else [ -f /etc/SuSE-release ]; then
+                family="suse"
+            fi
+            # if [ -f /etc/os-release ]; then
+            #     . /etc/os-release
+            #     family="${NAME}"
+            #     # NAME="CentOS Linux"
+            #     # VERSION="7 (Core)"
+            #     # ID="centos"
+            #     # ID_LIKE="rhel fedora"
+            #     # VERSION_ID="7"
+            #     # PRETTY_NAME="CentOS Linux 7 (Core)"
+            #     # ANSI_COLOR="0;31"
+            #     # CPE_NAME="cpe:/o:centos:centos:7"
+            #     # HOME_URL="https://www.centos.org/"
+            #     # BUG_REPORT_URL="https://bugs.centos.org/"
+            # fi
+            ;;
+        darwin*)
+            # Unsupported OS
+            ;;
+        freebsd*)
+            # Unsupported OS
+            ;;
+        *)
+            # Unsupported OS
+            ;;
+    esac
+}
 endsnippet
