@@ -412,3 +412,8 @@ end
 # if test -f (brew --prefix)/etc/brew-wrap
 #     source (brew --prefix)/etc/brew-wrap
 # end
+
+# Source local fish configuration
+if test -f $XDG_CONFIG_HOME/fish/config-local.fish
+    source $XDG_CONFIG_HOME/fish/config-local.fish
+end
