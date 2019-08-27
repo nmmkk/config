@@ -386,17 +386,23 @@ end
 # For balias, make sure balias plugin is installed:
 #   `fisher oh-my-fish/plugin-balias`
 if type git >/dev/null ^/dev/null
-    balias g git
+    if type balias >/dev/null ^/dev/null
+        balias g git
+    end
 end
 
 if type todo.sh >/dev/null ^/dev/null
-    balias t todo.sh
+    if type balias >/dev/null ^/dev/null
+        balias t todo.sh
+    end
     set -gx TODOTXT_DEFAULT_ACTION list
     set -gx TODOTXT_SORT_COMMAND 'env LC_COLLATE=C sort -k 2,2 -k 1,1n'
 end
 
 if type jrnl >/dev/null ^/dev/null
-    balias j jrnl
+    if type balias >/dev/null ^/dev/null
+        balias j jrnl
+    end
 end
 
 # Automatically update Brewfile.
