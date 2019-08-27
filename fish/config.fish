@@ -18,6 +18,16 @@ end
 # Environment variables
 #
 
+if not set -q EDITOR
+    if type nvim >/dev/null ^/dev/null
+        set -gx EDITOR nvim
+    else if type vim >/dev/null ^/dev/null
+        set -gx EDITOR vim
+    else
+        set -gx EDITOR vi
+    end
+end
+
 if not set -q XDG_DATA_HOME
     set -gx XDG_DATA_HOME $HOME/.local/share
 end
