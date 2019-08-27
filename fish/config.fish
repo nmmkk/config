@@ -15,6 +15,22 @@ case '*'
 end
 
 #
+# Environment variables
+#
+
+if not set -q XDG_DATA_HOME
+    set -gx XDG_DATA_HOME $HOME/.local/share
+end
+if not set -q XDG_CONFIG_HOME
+    set -gx XDG_CONFIG_HOME $HOME/.config
+end
+# set -gx XDG_DATA_DIRS /usr/local/share/:/usr/share/
+# set -gx XDG_CONFIG_DIRS /etc/xdg
+if not set -q XDG_CACHE_HOME
+    set -gx XDG_CACHE_HOME $HOME/.cache
+end
+
+#
 # PATH
 #
 
@@ -122,22 +138,6 @@ case Linux
 
     set -gx HOMEBREW_NO_ANALYTICS 1
     set -gx HOMEBREW_NO_EMOJI 1
-end
-
-#
-# Environment variables
-#
-
-if set -q XDG_DATA_HOME
-    set -gx XDG_DATA_HOME $HOME/.local/share
-end
-if set -q XDG_CONFIG_HOME
-    set -gx XDG_CONFIG_HOME $HOME/.config
-end
-# set -gx XDG_DATA_DIRS /usr/local/share/:/usr/share/
-# set -gx XDG_CONFIG_DIRS /etc/xdg
-if set -q XDG_CACHE_HOME
-    set -gx XDG_CACHE_HOME $HOME/.cache
 end
 
 #
