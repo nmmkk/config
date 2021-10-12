@@ -19,9 +19,9 @@ end
 #
 
 if not set -q EDITOR
-    if type nvim >/dev/null ^/dev/null
+    if type nvim >/dev/null 2>/dev/null
         set -gx EDITOR nvim
-    else if type vim >/dev/null ^/dev/null
+    else if type vim >/dev/null 2>/dev/null
         set -gx EDITOR vim
     else
         set -gx EDITOR vi
@@ -45,44 +45,40 @@ end
 #
 
 # For nodebrew
-if type nodebrew >/dev/null ^/dev/null
+if type nodebrew >/dev/null 2>/dev/null
     set -gx PATH $HOME/.nodebrew/current/bin $PATH
 end
 
-if test -d /Library/TeX/texbin >/dev/null ^/dev/null
+if test -d /Library/TeX/texbin >/dev/null 2>/dev/null
     set -gx PATH /Library/TeX/texbin $PATH
 end
 
-# For stow
-set -gx STOW_TOP $XDG_DATA_HOME/stow-get/usr/local
-set -gx PATH $STOW_TOP/bin $PATH
-set -gx LD_LIBRARY_PATH $STOW_TOP/lib64 $STOW_TOP/lib $LD_LIBRARY_PATH
-set -gx PYTHONPATH $STOW_TOP/lib64:$STOW_TOP/lib:$PYTHONPATH
-if [ x"$os" = x"Darwin" ]
-    if type -q pip3
-        set __EXTRA_PPATH (pip3 show neovim | grep Location | awk '{print $2}')
-        if [ x"$__EXTRA_PPATH" != x"" ]
-            set -gx PYTHONPATH $PYTHONPATH:$__EXTRA_PPATH
-        end
-        unset __EXTRA_PPATH
-    end
-end
-
 # For cargo
-if test -d ~/.cargo/bin >/dev/null ^/dev/null
+if test -d ~/.cargo/bin >/dev/null 2>/dev/null
     set -gx PATH ~/.cargo/bin $PATH
 end
 
 # For pyenv and virtualenv
 set -gx PATH "$HOME/.pyenv/bin" $PATH
-if type pyenv >/dev/null ^/dev/null
+if type pyenv >/dev/null 2>/dev/null
     status --is-interactive; and source (pyenv init -|psub)
 end
-if type pyenv-virtualenv-init >/dev/null ^/dev/null
+if type pyenv-virtualenv-init >/dev/null 2>/dev/null
     status --is-interactive; and source (pyenv virtualenv-init -|psub)
 end
 
-switch $os
+# For my own stuffs
+if test -d ~/Applications/custom/bin >/dev/null 2>/dev/null
+    set -gx PATH ~/Applications/custom/bin $PATH
+end
+
+# For GNOME Keyring
+if test -n "$DESKTOP_SESSION"
+    set -x (gnome-keyring-daemon --start | string split "=")
+end
+
+# For linuxbrew
+switch "$os"
 case Linux
     # Take a backup of environment variables so that we can restore it later.
     # Be warn that bash might have already enabled linuxbrew. So rather take a
@@ -159,8 +155,8 @@ end
 set FISH_CLIPBOARD_CMD "cat" # Stop that.
 
 # omf::theme::bobthefish
-set -gx theme_powerline_fonts no
-set -gx theme_color_scheme solarized
+set -gx theme_powerline_fonts yes
+set -gx theme_color_scheme dracula
 
 set -gx theme_display_git yes
 set -gx theme_display_git_dirty yes
@@ -193,7 +189,7 @@ function enable_linuxbrew
 end
 
 function disable_linuxbrew
-    if [ $os != "Linux" ]
+    if [ "$os" != "Linux" ]
         echo "You are not on a Linux"
         return 0
     end
@@ -238,9 +234,9 @@ end
 # cdg -- bookmarked directory selector
 # https://dmitryfrank.com/articles/shell_shortcuts
 function fuzzy_finder
-    if type fzf >/dev/null ^/dev/null
+    if type fzf >/dev/null 2>/dev/null
         fzf $argv
-    else if type peco >/dev/null ^/dev/null
+    else if type peco >/dev/null 2>/dev/null
         peco --layout=bottom-up $argv
     end
 end
@@ -266,8 +262,8 @@ function cdscuts_glob_echo
 end
 
 function cdg -d 'Bookmarked directory selector'
-    if not type fuzzy_finder >/dev/null ^/dev/null
-        echo "No fuzzy finder is available" ^&1
+    if not type fuzzy_finder >/dev/null 2>/dev/null
+        echo "No fuzzy finder is available" >&2
         return 1
     end
 
@@ -365,8 +361,8 @@ function fcoc -d "Fuzzy-find and checkout a commit"
   git log --pretty=oneline --abbrev-commit --reverse | fzf --tac +s -e | awk '{print $1;}' | read -l result; and git checkout "$result"
 end
 
-function fssh -d "Fuzzy-find ssh host via ag and ssh into it"
-  ag --ignore-case '^host [^*]' ~/.ssh/config | cut -d ' ' -f 2 | fzf | read -l result; and ssh "$result"
+function fssh -d "Fuzzy-find ssh host via rg and ssh into it"
+  rg --ignore-case '^host [^*]' ~/.ssh/config | cut -d ' ' -f 2 | fzf | read -l result; and ssh "$result"
 end
 
 function fs -d "Switch tmux session"
@@ -379,12 +375,6 @@ end
 function fish_user_key_bindings
     bind ! bind_bang
     bind '$' bind_dollar
-
-    # Ctrl-G conflicts with fzf. Assign ghq to Ctrl-G.
-    bind \cg '__ghq_crtl_g'
-    if bind -M insert >/dev/null 2>/dev/null
-        bind -M insert \cg '__ghq_crtl_g'
-    end
 end
 
 
@@ -395,25 +385,34 @@ end
 #
 # For balias, make sure balias plugin is installed:
 #   `fisher oh-my-fish/plugin-balias`
-if type git >/dev/null ^/dev/null
-    if type balias >/dev/null ^/dev/null
+if type git >/dev/null 2>/dev/null
+    if type balias >/dev/null 2>/dev/null
         balias g git
     end
 end
 
-if type todo.sh >/dev/null ^/dev/null
-    if type balias >/dev/null ^/dev/null
+if type todo.sh >/dev/null 2>/dev/null
+    if type balias >/dev/null 2>/dev/null
         balias t todo.sh
     end
     set -gx TODOTXT_DEFAULT_ACTION list
     set -gx TODOTXT_SORT_COMMAND 'env LC_COLLATE=C sort -k 2,2 -k 1,1n'
 end
 
-if type jrnl >/dev/null ^/dev/null
-    if type balias >/dev/null ^/dev/null
+if type jrnl >/dev/null 2>/dev/null
+    if type balias >/dev/null 2>/dev/null
         balias j jrnl
     end
 end
+
+# switch "$os"
+# case Linux
+#     if type xdg-open >/dev/null 2>/dev/null
+#         if type xdg-open >/dev/null 2>/dev/null
+#             balias open xdg-open
+#         end
+#     end
+# end
 
 # Automatically update Brewfile.
 # Unfortunately fish is not supported, and the following lines are commented out.
@@ -422,6 +421,23 @@ end
 # if test -f (brew --prefix)/etc/brew-wrap
 #     source (brew --prefix)/etc/brew-wrap
 # end
+
+# For fish-pipenv plugin
+# -- set if your term supports `pipenv shell --fancy`
+set pipenv_fish_fancy yes
+
+# Hook for desk activation
+test -n "$DESK_ENV"; and . "$DESK_ENV"; or true
+
+# direnv
+if type direnv >/dev/null 2>/dev/null
+    direnv hook fish | source
+end
+
+# jump
+if type jump >/dev/null 2>/dev/null
+    status --is-interactive; and source (jump shell fish | psub)
+end
 
 # Source local fish configuration
 if test -f $XDG_CONFIG_HOME/fish/config-local.fish
