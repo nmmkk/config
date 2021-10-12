@@ -24,17 +24,6 @@ export PERL_LOCAL_LIB_ROOT="${PERL_LOCAL_LIB_ROOT:-${HOME}/perl5}"
 export PERL5LIB="${PERL5LIB:-${PERL_LOCAL_LIB_ROOT}/lib/perl5}"
 
 #------------------------------------------------------------------------------
-# stow-get
-#------------------------------------------------------------------------------
-
-export STOW_TOP="${XDG_DATA_HOME}/stow-get/usr/local"
-export PATH="${STOW_TOP}/bin:${PATH}"
-export LD_LIBRARY_PATH="${STOW_TOP}/lib64:${STOW_TOP}/lib:${LD_LIBRARY_PATH}"
-__EXTRA_PPATH="${STOW_TOP}/lib64:${STOW_TOP}/lib"
-export PYTHONPATH="${__EXTRA_PPATH}${PYTHONPATH:+:${PYTHONPATH}}"
-unset __EXTRA_PPATH
-
-#------------------------------------------------------------------------------
 # Linuxbrew
 #------------------------------------------------------------------------------
 

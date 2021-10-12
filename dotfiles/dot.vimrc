@@ -132,9 +132,6 @@ augroup END
 
 " Source settings {{{1
 " First, source plugin manager {{{2
-"   I used to stick with NeoBundle, which does not require pyhon3. As my
-"   recent environment installs both vim and python3 via stow-get, I don't
-"   have to worry about requirement about python3 anymore. So use dein.
 call s:source_profile('dein')
 "}}}2
 " Then, source profiles defined above {{{2
