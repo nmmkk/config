@@ -7,22 +7,22 @@ FISH_CONFIG_DIR := $(XDG_CONFIG_HOME)/fish
 
 default: linux
 
-linux: fisherman-setup
+linux: fisher-setup
 
-fisherman-setup: fisherman-fishfile
+fisher-setup: fisher-fish_plugins
 
-fisherman-fishfile:
+fisher-fish_plugins:
 	@if [ ! -d $(FISH_CONFIG_DIR) ]; then \
 	    mkdir -p $(FISH_CONFIG_DIR); \
 	fi
-	@if [ ! -L $(FISH_CONFIG_DIR)/fishfile ]; then \
-	    if [ -f $(FISH_CONFIG_DIR)/fishfile ]; then \
-	        echo 'fisherman: fishfile is a file. Making a backup of it. ($(FISH_CONFIG_DIR)/fishfile)'; \
-	        mv -v $(FISH_CONFIG_DIR)/fishfile $(FISH_CONFIG_DIR)/fishfile-$(shell date '+%Y%m%d_%H%M%S'); \
+	@if [ ! -L $(FISH_CONFIG_DIR)/fish_plugins ]; then \
+	    if [ -f $(FISH_CONFIG_DIR)/fish_plugins ]; then \
+	        echo 'fisher: fish_plugins is a file. Making a backup of it. ($(FISH_CONFIG_DIR)/fish_plugins)'; \
+	        mv -v $(FISH_CONFIG_DIR)/fish_plugins $(FISH_CONFIG_DIR)/fish_plugins-$(shell date '+%Y%m%d_%H%M%S'); \
 	    fi; \
-	    echo 'fisherman: Makeing a symlink of fishfile. ($(FISH_CONFIG_DIR)/fishfile)'; \
-	    ln -sfv $(CURDIR)/fishfile $(FISH_CONFIG_DIR)/fishfile; \
+	    echo 'fisher: Makeing a symlink of fish_plugins. ($(FISH_CONFIG_DIR)/fish_plugins)'; \
+	    ln -sfv $(CURDIR)/fish_plugins $(FISH_CONFIG_DIR)/fish_plugins; \
 	else \
-	    echo 'fisherman: fishfile is already a symlink. Skip to set it up. ($(FISH_CONFIG_DIR)/fishfile)'; \
+	    echo 'fisher: fish_plugins is already a symlink. Skip to set it up. ($(FISH_CONFIG_DIR)/fish_plugins)'; \
 	fi
 

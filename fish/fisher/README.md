@@ -11,12 +11,13 @@ fisherman, the fish-shell plugin manager
 # Install
 
 ```
-curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs https://git.io/fisher
+curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
 ```
 
 
 
-# My Fishfile
+# My fish_plugins file
 
-My fishfile is found in this directory. A symbolic link is set up by the Makefile.
-The link is from `$XDG_CONFIG_HOME/fish/fishfile` to `/path/to/here/fishfile`.
+My `fish_plugins` is found in this directory. A symbolic link is set up by the
+Makefile.  The link is from `$XDG_CONFIG_HOME/fish/fish_plugins` to
+`/path/to/here/_plugins`.
