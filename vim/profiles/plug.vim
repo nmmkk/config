@@ -130,6 +130,7 @@ Plug 'aklt/plantuml-syntax', { 'for': 'plantuml' }
 Plug 'pearofducks/ansible-vim', { 'for': 'yaml.ansible' }
 Plug 'aliou/bats.vim'
 Plug 'ollykel/v-vim'
+Plug 'PProvost/vim-ps1'
 "}}}
 
 " " Quickrun  {{{
